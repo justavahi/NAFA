@@ -1,2 +1,9 @@
-# News-AI-Financial-Assistant
-Financial assistant for AlfaBank made by The Great New Alliance :3
+# justavahi
+There is a branch for justavahi 
+
+# Tasks
+- check business analyst's technical task for parsing
+- think how to collect all data - DB & Overall Architecture
+- setting DB
+- parse everything
+- make a documentation file for data analyst 
