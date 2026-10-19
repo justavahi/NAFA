@@ -1,13 +1,13 @@
-# Nickolai
-There is a branch for Nickolai
+# poluektovnikolai07
+There is a branch for poluektovnikolai07
 
 # Tasks
-- think about the Alfa Bank's business model and business logic of NAFA(AI assistant)
+- think about the Alfa Bank's *business model* and *business logic of NAFA(AI assistant)*
 - What metrics should the team collect
-- Where to collect all metrics(sources)
-- What graphs and mathematical dependencies shall the team implement into the analize Написать какие графики и зависимости строить
-- What formulas and analize methods should The Great New Aliance use
-- Make 3 pdf/md/html files with all technical task for others
+- Where to collect all metrics(and from what sources)
+- What *graphs* and *mathematical dependencies* shall the team implement into the analize 
+- What *formulas* and *analize methods* should *The Great New Alliance* use
+- Make 3 pdf/md/html files with all *technical tasks* for others
 - Commit & Push documents (or ask [justavahi](https://github.com/justavahi) to help commit & push it)
 
 # Files information
