@@ -6,4 +6,5 @@ There is a branch for justavahi
 - think how to collect all data - DB & Overall Architecture
 - setting DB
 - parse everything
+- commit & push all scripts 
 - make a documentation file for data analyst 
