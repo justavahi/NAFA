@@ -8,7 +8,7 @@ There is a branch for Nickolai
 - What graphs and mathematical dependencies shall the team implement into the analize Написать какие графики и зависимости строить
 - What formulas and analize methods should The Great New Aliance use
 - Make 3 pdf/md/html files with all technical task for others
-- Put documents in commit(or ask [justavahi](https://github.com/justavahi) to help commit & push it)
+- Commit & Push documents (or ask [justavahi](https://github.com/justavahi) to help commit & push it)
 
 # Files information
 |    Backend & Parsing    |                Data Analyst               |                                     Prompt Engineer                                      |
