@@ -1,19 +1,14 @@
-# Nickolai
-There is a branch for Nickolai
+# PhantasmT
+There is a branch for PhantasmT
 
 # Tasks
-- think about the Alfa Bank's business model and business logic of NAFA(AI assistant)
-- What metrics should the team collect
-- Where to collect all metrics(sources)
-- What graphs and mathematical dependencies shall the team implement into the analize Написать какие графики и зависимости строить
-- What formulas and analize methods should The Great New Aliance use
-- Make 3 pdf/md/html files with all technical task for others
-- Put documents in commit(or ask [justavahi](https://github.com/justavahi) to help commit & push it)
+- Check business analyst's technical task for data analyzing
+- Make all scripts for each *graph*, *metric*, *formula*
+- Make a pdf/md/html file with all explanations of scripts for analyzing *graphs*, *metrics* & *formulas* (or explain it to Prompt Engeener personally)
+- Commit & push the document with explanations (if it was made) and all scripts in *data-analysis branch* (or ask [justavahi](https://github.com/justavahi) to help commit & push it)
 
-# Files information
-|    Backend & Parsing    |                Data Analyst               |                                     Prompt Engineer                                      |
-|-------------------------|-------------------------------------------|------------------------------------------------------------------------------------------|
-|   Parsing Sources       |       Descriptions of metrics             |                   Describe what LLMs to use for what processed data                      |
-| Descriptions of sources |  Necessary *formulas* & *calculations*    |          Explain what *metrics* & *formulas* & *graps* did Data Analyst process          |
-|      Metrics            | Necessary *graphics*(savein image format) | Give some examples of basic prompts for LLM for each *metric* OR *formula* OR *graph*    |
-
+# Задачи (на русском)
+- Проверить тех задание бизнес аналитика для анализа данных
+- Создать все скрипты для каждого *графика*, *метрики*, *формулы* 
+- Создать файл pdf/md/html с объяснением всех скриптов для анализа графиков, метрик, формул (или объяснить это лично)
+- Закомитить & запушить документ с объяснениями (если был сделан) и все скрипты в ветку *data-analysis* (или попросить [justavahi](https://github.com/justavahi) помочь с коммитом и пушем)
