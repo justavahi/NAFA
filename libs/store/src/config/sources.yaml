@@ -1,0 +1,121 @@
+# Source-specific URLs, local paths, parsing rules and field maps live here,
+# not in Python. Check usage terms/robots.txt before enabling any source.
+settings:
+  database: ../data/nafa.sqlite3
+  user_agent: "${NAFA_USER_AGENT}"
+  timeout_seconds: 25
+  retries: 5
+  retry_backoff_seconds: 0.7
+  default_timezone: Europe/Moscow
+  tracking_parameters:
+    - fbclid
+    - gclid
+    - yclid
+    - from
+  tracking_prefixes:
+    - utm_
+
+sources:
+  - id: SRC-01
+    name: Bank of Russia press releases
+    type: rss
+    url: https://www.cbr.ru/rss/RssPress
+    enabled: true
+    tier_weight: 1.0
+    update_frequency: 15m
+    # Optional RSS field overrides; defaults are conventional RSS fields.
+    fields:
+      title: title
+      url: link
+      published_at: published
+      snippet: summary
+
+  - id: SRC-02
+    name: Bank of Russia exchange rates
+    type: xml
+    url: https://www.cbr.ru/scripts/XML_daily.asp
+    enabled: true
+    tier_weight: 1.0
+    update_frequency: 1d
+    record_type: macro_series
+    macro:
+      items_xpath: /ValCurs/Valute
+      date_xpath: /ValCurs/@Date
+      date_format: "%d.%m.%Y"
+      series_field_xpath: ./CharCode/text()
+      series_map:
+        USD: M-03
+        CNY: M-04
+        EUR: M-05
+      value_xpath: ./Value/text()
+      nominal_xpath: ./Nominal/text()
+      decimal_separator: ","
+      unit: RUB per unit
+
+  - id: SRC-03
+    name: Interfax news RSS
+    type: rss
+    url: https://www.interfax.ru/rss.asp
+    enabled: true
+    tier_weight: 0.85
+    update_frequency: 15m
+    fields:
+      title: title
+      url: link
+      published_at: published
+      snippet: summary
+
+  - id: SRC-04
+    name: RBC news RSS
+    type: rss
+    url: https://rssexport.rbc.ru/rbcnews/news/30/full.rss
+    enabled: true
+    tier_weight: 0.85
+    update_frequency: 15m
+    # Do not set extract_text=true unless the source's terms permit full-text storage.
+    fields:
+      title: title
+      url: link
+      published_at: published
+      snippet: summary
+
+  - id: SRC-16
+    name: Bank of Russia key rate history
+    type: html
+    url: https://www.cbr.ru/hd_base/KeyRate/
+    enabled: false  # Verify selectors against the live page before enabling.
+    tier_weight: 1.0
+    update_frequency: 1d
+    record_type: macro_series
+    item_selector: "table.dataTable tbody tr"
+    macro:
+      series_id: M-01
+      date_selector: "td:nth-of-type(1)"
+      value_selector: "td:nth-of-type(2)"
+      date_format: "%d.%m.%Y"
+      decimal_separator: ","
+      unit: percent
+
+  # The exact filenames/columns are case-file dependent, so CSV sources are
+  # disabled until the actual files are placed in these folders.
+  - id: SRC-CLIENTS
+    name: Client profile CSV files
+    type: csv
+    path_glob: ../data/input/clients/*.csv
+    dataset_name: clients
+    enabled: false
+
+  - id: SRC-PAYMENTS
+    name: Client payment CSV files
+    type: csv
+    path_glob: ../data/input/payments/*.csv
+    dataset_name: payments
+    enabled: false
+
+  - id: SRC-ALFA-PDF
+    name: Alfa analytical PDF files
+    type: pdf
+    path_glob: ../data/input/alfa/*.pdf
+    enabled: false
+    tier_weight: 1.0
+    kind: analytical_pdf
