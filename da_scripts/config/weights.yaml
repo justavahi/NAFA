@@ -1,0 +1,80 @@
+# Конфигурация весов и порогов (WP-D6, WP-D8).
+# Правило из ТЗ: все пороги и веса хранятся в конфигурации, а не в коде.
+# Стартовые значения — из справочника 05 (раздел 8.1). Калибровка FM-18 обновит fm13.
+
+fm13:                      # итоговый скор карточки и отбор
+  weights:                 # стартовые веса (допущение BA, калибруются в WP-D8)
+    Rel: 0.40
+    Imp: 0.25
+    Urg: 0.10
+    Nov: 0.10
+    Cred: 0.15
+  rel_threshold: 0.25      # порог релевантности: ниже — событие не показываем
+  top_k: 5                 # лента = максимум 5 карточек
+  mmr_lambda: 0.7          # жадный MMR против пяти одинаковых карточек
+
+fm24:                      # линейная базовая линия для сравнения при калибровке
+  weights:
+    IndustryMatch: 0.35
+    ScaleFactor: 0.15
+    ProductRelevance: 0.30
+    SupplyChainRisk: 0.20
+
+fm14:                      # правило знака эффекта
+  rate_threshold: 0.15     # |rate_net| ниже порога -> две ветви
+
+fm16:                      # версии позиции банка: конфликт, если |дельта| >= порога
+  conflict_delta:
+    RATE: 0.25             # п.п.
+    default: 0.0
+
+fm08_half_life_days:       # период полураспада свежести по типу документа
+  news: 3
+  macro_release: 14
+  alfa_weekly: 30
+  alfa_strategy: 60
+
+fm09_tau_days: 7           # срочность: экспоненциальное затухание до даты решения
+
+fm10_source_tiers:         # достоверность источника по уровню
+  regulator: 1.0
+  federal_media: 0.85
+  business_media: 0.6
+  social: 0.4
+  indep_bonus: 0.1         # за каждое независимое подтверждение сверх первого
+
+fm11_window_days: 14       # новизна: окно уже показанных событий
+
+fm17_dedup:                # дедупликация (FM-17)
+  jaccard_shingles: 0.8    # почти-дубликаты по 5-шинглам
+  tfidf_cosine: 0.6        # одно событие по TF-IDF
+  min_shared_entities: 2
+  dt_hours: 48
+
+fm20_confidence:           # уверенность вывода
+  high: 0.75
+  mid: 0.50
+
+fm22_shock:                # распространение шока по цепочке контрагентов
+  gamma: 0.5
+  depth: 2
+
+fm23_group_delta: 0.5      # распространение по группе компаний
+
+fm18_calibration:
+  step: 0.05               # шаг перебора по симплексу
+  lambda_reg: 0.01         # штраф за уход от стартовых весов
+  bootstrap_iters: 1000
+
+f13_completeness:          # веса полноты данных клиента (F-13)
+  REVENUE_COMPANY: 3
+  MAINOKVED_CODE: 3
+  REGION: 2
+  FTS_FLAG: 2
+  CL_TYPE: 2
+  CITY: 1
+  ECO_MARK_LABEL: 1
+  COMPANY_AGE_YEARS_GRADATION: 1
+  AMOUNT_WORKERS_FNS_GRADATION: 1
+  OKFS_NAME: 1
+  GROUP_ID: 1

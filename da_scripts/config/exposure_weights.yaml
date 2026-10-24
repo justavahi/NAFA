@@ -1,0 +1,59 @@
+# Стартовые веса экспозиций (WP-D5). Всё — гипотезы BA, подлежат калибровке.
+# Сюда же вынесены параметры сценарных калькуляторов (WP-D13).
+
+e01_debt:                  # собственная процентная нагрузка (noisy-OR, FM-03)
+  LOA: 0.6
+  LEA: 0.3
+  FACTORING: 0.3
+
+e02_dep: 0.6               # собственная депозитная выгода
+
+e03_fx: 0.8                # собственная валютная экспозиция = 0.8 * FTS_FLAG
+
+e08_labor:
+  base: 0.7
+  zpp_bonus: 0.3           # +0.3, если есть зарплатный проект
+
+e09_credit:
+  growth_flag: 0.4
+  LOA: 0.3
+  LEA: 0.2
+  FACTORING: 0.1
+  clip: 1.0
+
+e10_budget:
+  GAR: 0.5
+  state_related: 0.3
+  prior_norm: 0.2          # 0.2 * prior_BUDGET/3
+
+e12_geopol:
+  fx_factor: 0.8           # own_geopol = 0.8 * FTS_FLAG * risk_tier(страна)
+  risk_tiers:
+    high: 1.0
+    elevated: 0.7
+    moderate: 0.4
+    low: 0.2
+  country_tier:            # стартовый справочник (допущение, расширять по данным)
+    КИТАЙ: elevated
+    CHINA: elevated
+    ТУРЦИЯ: elevated
+    ИНДИЯ: moderate
+    ОАЭ: moderate
+    ГЕРМАНИЯ: low
+    США: high
+    БЕЛАРУСЬ: moderate
+    КАЗАХСТАН: low
+    УЗБЕКИСТАН: moderate
+
+e13_cpty:
+  hhi_in: 0.6
+  hhi_out: 0.4
+  small_counterparty_threshold: 5   # если n_cust+n_sup ниже — риск усиливается
+  small_boost_per_missing: 0.05     # до +25% при 0 контрагентов (допущение, OQ к BA)
+
+e14_alpha:                 # веса blend собственных / отраслевых / цепочечных
+  own: 0.4
+  prior: 0.4
+  chain: 0.2
+
+fm15_scenario: {}          # вводные приходят от пользователя, параметров нет

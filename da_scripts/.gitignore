@@ -1,0 +1,10 @@
+# Артефакты прогонов и тяжёлые данные в репозиторий не попадают
+out/
+demo_data/
+demo_out/
+real_data/
+data_raw/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
