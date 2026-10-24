@@ -1,153 +1,101 @@
-from __future__ import annotations
-
-import glob
-from datetime import datetime, timezone
+import hashlib, json, time, uuid
 from pathlib import Path
-from typing import Any
-
 from .config import load_config
-from .fetch import fetch_url, make_session, read_local_file
-from .normalize import utc_now
-from .parsers import parse_csv, parse_html, parse_json, parse_pdf, parse_rss, parse_xml
-from .storage import database, init_db, store_dataset_rows, store_documents, store_macro_series, upsert_source
+from .fetch import fetch_url
+from .parsers import parse_rss, parse_html, parse_xml_series, parse_csv_file, parse_pdf
+from .storage import initialize_database, connect, upsert_document, save_macro, import_frame
+from .normalize import now_iso
 
+def _source_file(source, base):
+    return (base / source["path"]).resolve()
 
-def _absolute_config_path(source: dict[str, Any], field: str) -> Path:
-    path = Path(source[field]).expanduser()
-    if not path.is_absolute():
-        path = Path(source["_config_dir"]) / path
-    return path.resolve()
-
-
-def _source_files(source: dict[str, Any], config_dir: Path) -> list[Path]:
-    if source.get("path_glob"):
-        pattern = Path(source["path_glob"]).expanduser()
-        if not pattern.is_absolute():
-            pattern = config_dir / pattern
-        return [Path(item).resolve() for item in sorted(glob.glob(str(pattern)))]
-    if source.get("path"):
-        path = Path(source["path"]).expanduser()
-        if not path.is_absolute():
-            path = config_dir / path
-        return [path.resolve()]
-    return []
-
-
-def _parse_payload(source: dict[str, Any], payload: bytes, settings: dict[str, Any], *, fetched_at: str, url: str) -> tuple[list[dict], list[dict], list[dict]]:
-    source_type = source["type"].lower()
-    if source_type == "rss":
-        return parse_rss(payload, source, settings, fetched_at=fetched_at, base_url=url), [], []
-    if source_type == "html":
-        parsed = parse_html(payload, source, settings, fetched_at=fetched_at, base_url=url)
-    elif source_type == "json":
-        parsed = parse_json(payload, source, settings, fetched_at=fetched_at, base_url=url)
-    elif source_type == "xml":
-        parsed = parse_xml(payload, source, settings, fetched_at=fetched_at, base_url=url)
-    elif source_type == "pdf":
-        parsed = parse_pdf(payload, source, settings, fetched_at=fetched_at, document_url=url)
-    else:
-        raise ValueError(f"Unsupported remote source type: {source_type}")
-
-    if source.get("record_type") == "macro_series":
-        return [], parsed, []
-    return parsed, [], []
-
-
-def ingest_source(source: dict[str, Any], settings: dict[str, Any], *, database_path: str | Path, config_dir: str | Path | None = None) -> dict[str, Any]:
-    """Fetch, parse, normalize and store one configured source.
-
-    Example:
-        settings, sources, config_dir = load_config("config/sources.yaml")
-        result = ingest_source(sources[0], settings,
-                               database_path=settings["database_path"],
-                               config_dir=config_dir)
-    """
-    source = dict(source)
-    config_dir = Path(config_dir or source.get("_config_dir") or Path.cwd()).resolve()
-    started_at = utc_now()
-    parsed_count = 0
-    saved_count = 0
-    status = "success"
-    error_type = None
-    error_message = None
-    init_db(database_path)
-
+def ingest_source(source, settings, database_path, config_dir):
+    run_id=str(uuid.uuid4()); started=time.perf_counter(); fetched=now_iso()
+    initialize_database(database_path)
+    headers={"User-Agent":settings["user_agent"]}
     try:
-        with database(database_path) as db:
-            upsert_source(db, source)
-            db.execute("UPDATE sources SET last_attempt = ? WHERE source_id = ?", (started_at, source["id"]))
-
-        source_type = source["type"].lower()
-        if source_type == "csv":
-            files = _source_files(source, config_dir)
-            if not files:
-                raise FileNotFoundError(f"No CSV files matched configured path for {source['id']}")
-            for path in files:
-                rows = parse_csv(path, source)
-                parsed_count += len(rows)
-                with database(database_path) as db:
-                    saved_count += store_dataset_rows(db, rows)
-        elif source_type == "pdf" and (source.get("path") or source.get("path_glob")):
-            files = _source_files(source, config_dir)
-            if not files:
-                raise FileNotFoundError(f"No PDF files matched configured path for {source['id']}")
-            for path in files:
-                per_file_source = {**source, "path": str(path)}
-                payload = read_local_file(path)
-                fetched_at = utc_now()
-                docs = parse_pdf(payload, per_file_source, settings, fetched_at=fetched_at, document_url=path.as_uri())
-                parsed_count += len(docs)
-                with database(database_path) as db:
-                    saved_count += store_documents(db, docs)
-        elif source_type in {"rss", "html", "json", "xml", "pdf"}:
-            if not source.get("url"):
-                raise ValueError(f"Source {source['id']} needs a URL or a local path")
-            with make_session(settings) as session:
-                payload, final_url, _ = fetch_url(source["url"], settings, session=session)
-            fetched_at = utc_now()
-            docs, macro, rows = _parse_payload(source, payload, settings, fetched_at=fetched_at, url=final_url)
-            parsed_count += len(docs) + len(macro) + len(rows)
-            with database(database_path) as db:
-                saved_count += store_documents(db, docs)
-                saved_count += store_macro_series(db, macro)
-                saved_count += store_dataset_rows(db, rows)
-        else:
-            raise ValueError(f"Unsupported source type: {source_type}")
-
+        kind=source["type"].lower()
+        if kind in {"rss","xml","html"}:
+            payload, final_url, content_type=fetch_url(source["url"],headers=headers,
+                timeout=settings.get("timeout_seconds",20),retries=settings.get("retries",4))
+            if kind=="rss": records, parse_meta=parse_rss(payload,source)
+            elif kind=="xml": records=parse_xml_series(payload,source); parse_meta={}
+            else: records=parse_html(payload,source,final_url); parse_meta={}
+            with connect(database_path) as db:
+                if kind=="xml": save_macro(db,records); written=len(records); duplicates=0
+                else:
+                    written=0; duplicates=0
+                    for rec in records:
+                        duplicate=upsert_document(db,rec)
+                        duplicates += int(duplicate); written += int(not duplicate)
+                        db.execute("""INSERT INTO ingestion_log(run_id,source_id,doc_id,published_at,
+                            fetched_at,ready_at,status,is_duplicate,rows_seen,rows_written,duration_ms)
+                            VALUES(?,?,?,?,?,?,?,?,?,?,?)""",
+                            (run_id,source["id"],rec["doc_id"],rec.get("published_at"),fetched,
+                             now_iso(),"success",int(duplicate),1,int(not duplicate),
+                             (time.perf_counter()-started)*1000))
+                db.execute("""INSERT INTO ingestion_log(run_id,source_id,fetched_at,ready_at,status,
+                    rows_seen,rows_written,duration_ms) VALUES(?,?,?,?,?,?,?,?)""",
+                    (run_id,source["id"],fetched,now_iso(),"success",len(records),written,
+                     (time.perf_counter()-started)*1000))
+            return {"source_id":source["id"],"status":"success","seen":len(records),
+                    "written":written,"duplicates":duplicates}
+        if kind in {"csv","client_csv","payment_csv"}:
+            path=_source_file(source,config_dir)
+            df, report=parse_csv_file(path,source)
+            table="payment_rows" if kind=="payment_csv" else "client_rows"
+            with connect(database_path) as db:
+                written=import_frame(db,df,source["id"],table)
+                db.execute("""INSERT INTO ingestion_log(run_id,source_id,fetched_at,ready_at,status,
+                    rows_seen,rows_written,duration_ms) VALUES(?,?,?,?,?,?,?,?)""",
+                    (run_id,source["id"],fetched,now_iso(),"success",len(df),written,
+                     (time.perf_counter()-started)*1000))
+            report.update({"source_id":source["id"],"status":"success","written":written})
+            return report
+        if kind in {"pdf","image"}:
+            path=_source_file(source,config_dir)
+            pages=parse_pdf(path) if kind=="pdf" else [{"page":1,"text":""}]
+            file_hash=hashlib.sha256(path.read_bytes()).hexdigest()
+            with connect(database_path) as db:
+                doc_id=source.get("doc_id",source["id"])
+                title=source.get("name",path.name)
+                url="file://"+str(path)
+                # Document canonical URL is unique; store local file reference for traceability.
+                db.execute("""INSERT OR IGNORE INTO documents
+                    (doc_id,source_id,kind,title,url,canonical_url,published_at,fetched_at,language,
+                    category,snippet,text,tier_weight,content_hash,cluster_id,stale)
+                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                    (doc_id,source["id"],"alfa_analytics",title,url,url,source.get("as_of_date"),
+                     fetched,"ru",None,None,None,float(source.get("tier_weight",1.0)),file_hash,None,0))
+                for p in pages:
+                    chunk_id=f"{doc_id}-p{p['page']}"
+                    db.execute("""INSERT OR REPLACE INTO chunks(chunk_id,doc_id,page,block_type,text,
+                      numbers_json,as_of_date,extraction_model,extraction_confidence,needs_manual_check)
+                      VALUES(?,?,?,?,?,?,?,?,?,?)""",
+                      (chunk_id,doc_id,p["page"],"text",p["text"],"[]",source.get("as_of_date"),
+                       "pymupdf-text",None,1))
+                db.execute("""INSERT INTO ingestion_log(run_id,source_id,fetched_at,ready_at,status,
+                  rows_seen,rows_written,duration_ms) VALUES(?,?,?,?,?,?,?,?)""",
+                  (run_id,source["id"],fetched,now_iso(),"success",len(pages),len(pages),
+                   (time.perf_counter()-started)*1000))
+            return {"source_id":source["id"],"status":"success","pages":len(pages),
+                    "file_sha256":file_hash,"needs_vlm_extraction":True}
+        return {"source_id":source["id"],"status":"unsupported","type":kind}
     except Exception as exc:
-        status = "error"
-        error_type = type(exc).__name__
-        # Avoid logging downloaded text or CSV row data into the error table.
-        error_message = str(exc)[:500]
+        with connect(database_path) as db:
+            db.execute("""INSERT INTO ingestion_log(run_id,source_id,fetched_at,status,error_type,
+              duration_ms) VALUES(?,?,?,?,?,?)""",
+              (run_id,source["id"],fetched,"error",type(exc).__name__,
+               (time.perf_counter()-started)*1000))
+        return {"source_id":source["id"],"status":"error","error_type":type(exc).__name__}
 
-    finished_at = utc_now()
-    with database(database_path) as db:
-        upsert_source(db, source)
-        db.execute("""
-            INSERT INTO ingestion_runs(source_id, started_at, finished_at, status,
-                                       parsed_count, saved_count, error_type, error_message)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        """, (source["id"], started_at, finished_at, status, parsed_count, saved_count, error_type, error_message))
-        if status == "success":
-            db.execute("UPDATE sources SET last_success = ? WHERE source_id = ?", (finished_at, source["id"]))
-
-    return {
-        "source_id": source["id"], "status": status,
-        "parsed": parsed_count, "saved_or_updated": saved_count,
-        "error_type": error_type, "error": error_message,
-    }
-
-
-def ingest_all(config_path: str | Path, *, source_ids: set[str] | None = None, include_disabled: bool = False) -> list[dict[str, Any]]:
-    """Ingest configured sources, optionally limiting to source IDs."""
-    settings, sources, config_dir = load_config(config_path)
-    database_path = settings["database_path"]
-    init_db(database_path)
-    results = []
+def ingest_all(config_path="config/sources.yaml", source_id=None):
+    settings,sources,config_dir=load_config(config_path)
+    database_path=settings["database_path"]
+    initialize_database(database_path)
+    results=[]
     for source in sources:
-        if source_ids and source["id"] not in source_ids:
-            continue
-        if not source.get("enabled", True) and not include_disabled:
-            continue
-        results.append(ingest_source(source, settings, database_path=database_path, config_dir=config_dir))
+        if not source.get("enabled",False): continue
+        if source_id and source["id"]!=source_id: continue
+        results.append(ingest_source(source,settings,database_path,config_dir))
     return results

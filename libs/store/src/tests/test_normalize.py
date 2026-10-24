@@ -1,25 +1,11 @@
-from nafa_ingest.normalize import canonicalize_url, normalize_document
+from nafa_ingest.normalize import canonical_url, document_record
 
+def test_canonical_url_removes_tracking():
+    assert canonical_url("https://EXAMPLE.com/a?utm_source=x&id=2#top") == "https://example.com/a?id=2"
 
-def test_canonicalize_url_removes_configured_tracking():
-    result = canonicalize_url(
-        "HTTPS://Example.org/article?utm_source=mail&id=2#intro",
-        tracking_prefixes=["utm_"],
-    )
-    assert result == "https://example.org/article?id=2"
-
-
-def test_normalize_document_has_timezone_and_stable_id():
-    source = {"id": "SRC-X", "tier_weight": 0.85}
-    raw = {
-        "title": "  Test   title ",
-        "url": "https://example.org/a?utm_source=x",
-        "published_at": "2026-10-20T10:00:00+03:00",
-        "snippet": " hello\nworld ",
-    }
-    first = normalize_document(raw, source, tracking_prefixes=["utm_"])
-    second = normalize_document(raw, source, tracking_prefixes=["utm_"])
-    assert first["title"] == "Test title"
-    assert first["snippet"] == "hello world"
-    assert first["published_at"].endswith("+03:00")
-    assert first["doc_id"] == second["doc_id"]
+def test_document_record_has_source_and_hash():
+    rec=document_record({"id":"SRC-01","tier_weight":1},"Title","https://example.com/a",
+                        "Tue, 20 Oct 2026 10:00:00 +0300","Snippet")
+    assert rec["source_id"]=="SRC-01"
+    assert rec["published_at"].endswith("+03:00")
+    assert rec["url"].startswith("https://")

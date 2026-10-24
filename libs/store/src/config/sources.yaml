@@ -1,121 +1,107 @@
-# Source-specific URLs, local paths, parsing rules and field maps live here,
-# not in Python. Check usage terms/robots.txt before enabling any source.
 settings:
-  database: ../data/nafa.sqlite3
-  user_agent: "${NAFA_USER_AGENT}"
-  timeout_seconds: 25
-  retries: 5
-  retry_backoff_seconds: 0.7
-  default_timezone: Europe/Moscow
-  tracking_parameters:
-    - fbclid
-    - gclid
-    - yclid
-    - from
-  tracking_prefixes:
-    - utm_
+  database_path: data/nafa.sqlite3
+  timeout_seconds: 20
+  retries: 4
 
 sources:
   - id: SRC-01
     name: Bank of Russia press releases
+    owner: Bank of Russia
     type: rss
     url: https://www.cbr.ru/rss/RssPress
     enabled: true
-    tier_weight: 1.0
     update_frequency: 15m
-    # Optional RSS field overrides; defaults are conventional RSS fields.
-    fields:
-      title: title
-      url: link
-      published_at: published
-      snippet: summary
-
+    tier_weight: 1.0
+    legal: "Verify robots.txt and terms before deployment; store title/snippet/source link by default."
+  - id: SRC-03
+    name: Interfax RSS
+    owner: Interfax
+    type: rss
+    url: https://www.interfax.ru/rss.asp
+    enabled: true
+    update_frequency: 15m
+    tier_weight: 0.85
+    legal: "Verify current feed URL, robots.txt, terms and content retention before deployment."
+  - id: SRC-04
+    name: RBC full RSS
+    owner: RBC
+    type: rss
+    url: https://rssexport.rbc.ru/rbcnews/news/30/full.rss
+    enabled: true
+    update_frequency: 15m
+    tier_weight: 0.85
+    legal: "Verify current feed URL, robots.txt, terms and content retention before deployment."
   - id: SRC-02
-    name: Bank of Russia exchange rates
+    name: CBR daily exchange rates
+    owner: Bank of Russia
     type: xml
     url: https://www.cbr.ru/scripts/XML_daily.asp
     enabled: true
-    tier_weight: 1.0
     update_frequency: 1d
-    record_type: macro_series
-    macro:
-      items_xpath: /ValCurs/Valute
-      date_xpath: /ValCurs/@Date
-      date_format: "%d.%m.%Y"
-      series_field_xpath: ./CharCode/text()
+    tier_weight: 1.0
+    legal: "Official XML; verify terms and data policy."
+    xml:
+      row_xpath: /ValCurs/Valute
+      fields:
+        date: ../@Date
+        series_id: CharCode/text()
+        value: Value/text()
+        nominal: Nominal/text()
       series_map:
         USD: M-03
         CNY: M-04
         EUR: M-05
-      value_xpath: ./Value/text()
-      nominal_xpath: ./Nominal/text()
       decimal_separator: ","
       unit: RUB per unit
-
-  - id: SRC-03
-    name: Interfax news RSS
-    type: rss
-    url: https://www.interfax.ru/rss.asp
-    enabled: true
-    tier_weight: 0.85
-    update_frequency: 15m
-    fields:
-      title: title
-      url: link
-      published_at: published
-      snippet: summary
-
-  - id: SRC-04
-    name: RBC news RSS
-    type: rss
-    url: https://rssexport.rbc.ru/rbcnews/news/30/full.rss
-    enabled: true
-    tier_weight: 0.85
-    update_frequency: 15m
-    # Do not set extract_text=true unless the source's terms permit full-text storage.
-    fields:
-      title: title
-      url: link
-      published_at: published
-      snippet: summary
-
   - id: SRC-16
-    name: Bank of Russia key rate history
+    name: CBR key rate
+    owner: Bank of Russia
     type: html
     url: https://www.cbr.ru/hd_base/KeyRate/
-    enabled: false  # Verify selectors against the live page before enabling.
-    tier_weight: 1.0
+    enabled: false
     update_frequency: 1d
-    record_type: macro_series
-    item_selector: "table.dataTable tbody tr"
-    macro:
-      series_id: M-01
-      date_selector: "td:nth-of-type(1)"
-      value_selector: "td:nth-of-type(2)"
-      date_format: "%d.%m.%Y"
-      decimal_separator: ","
-      unit: percent
-
-  # The exact filenames/columns are case-file dependent, so CSV sources are
-  # disabled until the actual files are placed in these folders.
-  - id: SRC-CLIENTS
-    name: Client profile CSV files
-    type: csv
-    path_glob: ../data/input/clients/*.csv
-    dataset_name: clients
-    enabled: false
-
-  - id: SRC-PAYMENTS
-    name: Client payment CSV files
-    type: csv
-    path_glob: ../data/input/payments/*.csv
-    dataset_name: payments
-    enabled: false
-
-  - id: SRC-ALFA-PDF
-    name: Alfa analytical PDF files
-    type: pdf
-    path_glob: ../data/input/alfa/*.pdf
-    enabled: false
     tier_weight: 1.0
-    kind: analytical_pdf
+    selectors:
+      title: "h1"
+      table: "table"
+    legal: "Disabled until HTML selectors and current terms are verified."
+  - id: SRC-CLIENTS
+    name: Participant client CSV
+    type: client_csv
+    path: data/input/clients/df_Uid_data_hack.csv
+    enabled: false
+    update_frequency: manual
+    tier_weight: 1.0
+    legal: "Local case data; restricted; do not commit."
+  - id: SRC-CLIENT-LINKS
+    name: Client-person links CSV
+    type: client_csv
+    path: data/input/clients/client_person_links.csv
+    enabled: false
+    update_frequency: manual
+    tier_weight: 1.0
+    legal: "Local case data; restricted; do not commit."
+  - id: SRC-PAYMENTS
+    name: Payments CSV
+    type: payment_csv
+    path: data/input/payments/payments.csv
+    enabled: false
+    update_frequency: manual
+    tier_weight: 1.0
+    legal: "Local case data; restricted; do not commit."
+  - id: SRC-ALFA-DOC-01
+    name: Alfa slide screenshots
+    type: image
+    path: data/input/alfa/DOC-01
+    enabled: false
+    doc_id: DOC-01
+    tier_weight: 1.0
+    legal: "Local case material; verify redistribution permissions."
+  - id: SRC-ALFA-DOC-02
+    name: Alfa analytical PDF DOC-02
+    type: pdf
+    path: data/input/alfa/DOC-02.pdf
+    enabled: false
+    doc_id: DOC-02
+    tier_weight: 1.0
+    legal: "Local case material; verify redistribution permissions."
