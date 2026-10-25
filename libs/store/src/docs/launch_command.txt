@@ -1,1 +1,0 @@
-uv run --env-file .env python -m nafa_ingest.cli --config config/sources.yaml

@@ -1,0 +1,33 @@
+NAFA backend-parsing: third-party software notices
+==================================================
+
+This project depends on third-party software. Retain the notices and licenses below
+with any redistribution. This is an inventory, not legal advice; verify the license
+and version of every installed binary/package before external publication.
+
+Python dependencies (versions pinned in requirements.txt / pyproject.toml):
+- FastAPI: MIT License
+- Uvicorn: BSD-3-Clause License
+- HTTPX: BSD-3-Clause License
+- Pydantic: MIT License
+- APScheduler: MIT License
+- PyYAML: MIT License
+- lxml: BSD-3-Clause License
+- Beautiful Soup 4: MIT License
+- pandas: BSD-3-Clause License
+- NumPy: BSD-3-Clause License (transitive dependency)
+- scikit-learn: BSD-3-Clause License
+- pymorphy3 and pymorphy3-dicts-ru: check the corresponding package metadata and
+  bundled dictionary license notices for the exact installed release.
+- PyMuPDF: GNU AGPL v3.0 unless a commercial license applies. A deployment that
+  distributes or offers PyMuPDF as part of a proprietary/closed-source service must
+  obtain a licensing review and, where needed, a commercial license.
+- pytest (development dependency): MIT License
+
+Optional system dependency for the offline scanned-PDF fallback:
+- Tesseract OCR and the Russian/English language data packages. Tesseract is
+  distributed under Apache License 2.0; language data has its own upstream notices.
+
+This ZIP also contains three PDF reports supplied by the user under data/input/alpha.
+They are input data, not third-party code. The user/project owner is responsible for
+ensuring that their use, storage, and redistribution complies with the source terms.

@@ -1,0 +1,6 @@
+indicator,horizon,value,unit,stance,as_of,doc_id,page,quote_span,extraction_method,verified_by,note
+key_rate,end_2026,13.5,% p.a.,,2026-07-31,DOC-02,,,text,seed,"Superseded forecast; date from golden set GS-16 (31.07). doc_id inferred from document date - VERIFY against the page image"
+key_rate,end_2026,13.5,% p.a.,,2026-09-07,DOC-05,,,text,seed,"Superseded forecast; date from GS-16 (07.09). doc_id inferred from document date - VERIFY"
+key_rate,end_2026,14.0,% p.a.,,2026-09-11,DOC-07,,,text,seed,"Active forecast per WP-B7 acceptance. Page number/quote unknown - VERIFY and upgrade to verified_by=manual"
+key_rate,end_2027,12.0,% p.a.,,2026-09-11,DOC-07,,,text,seed,"From golden set GS-01 (DOC-07). Page unknown - VERIFY"
+fx_cny_rub,end_2026,13.0,RUB,,2026-09-11,DOC-07,,,text,seed,"From golden set GS-12 (DOC-07). Page unknown - VERIFY"

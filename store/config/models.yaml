@@ -1,0 +1,9 @@
+# Allowed models only (Appendix 3 of the case). `api_name` is what the organisers' endpoint expects - confirm it.
+# Prices are RUB per 1000 tokens and are UNKNOWN until OQ-05 is answered; 0.0 means "not priced yet".
+roles:
+  vlm:        {model: Qwen3-VL-30B-A3B-Instruct, api_name: Qwen3-VL-30B-A3B-Instruct, p_in_rub_per_1k: 0.0, p_out_rub_per_1k: 0.0}
+  extract:    {model: Gemma 4 26B A4B,            api_name: gemma-4-26b-a4b,           p_in_rub_per_1k: 0.0, p_out_rub_per_1k: 0.0}
+  general:    {model: Qwen3.6 35B A3B,            api_name: qwen3.6-35b-a3b,           p_in_rub_per_1k: 0.0, p_out_rub_per_1k: 0.0}
+  reasoning:  {model: GLM-5.3-Flash,              api_name: glm-5.3-flash,             p_in_rub_per_1k: 0.0, p_out_rub_per_1k: 0.0}
+  synthesis:  {model: DeepSeek-V4.1-Flash,        api_name: deepseek-v4.1-flash,       p_in_rub_per_1k: 0.0, p_out_rub_per_1k: 0.0}
+  judge:      {model: Kimi-K2.6,                  api_name: kimi-k2.6,                 p_in_rub_per_1k: 0.0, p_out_rub_per_1k: 0.0}

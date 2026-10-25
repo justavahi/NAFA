@@ -1,0 +1,17 @@
+{
+  "_meta": {"doc_id": "DOC-09", "page": 3, "file_hash": "64b55bd09cad36e7c37fc0a6862cc0b145e88925836d55e79335e43a505eeaf1"},
+  "page_title": "Сравнительные мультипликаторы глобальных производителей стали",
+  "as_of_date": "2021-04-15",
+  "blocks": [
+    {
+      "block_type": "table",
+      "text": "Сравнительные мультипликаторы глобальных производителей стали | Price,$ | MarCap,$mn | EV/Sales FY20 | FY21e | FY22e | EV/EBITDA FY20 | FY21e | FY22e | PE FY20 | FY21e | FY22e\nRussia: Severstal | 21,2 | 17 760 | 1,9x | 2,3x | 2,2x | 5,5x | 5,2x | 5,7x | 9,9x | 6,9x | 9,4x\nNLMK | 33,1 | 19 838 | 1,6x | 1,9x | 1,8x | 5,6x | 5,5x | 6,1x | 10,1x | 7,5x | 10,3x\nMMK | 11,1 | 9 524 | 1,0x | 1,1x | 1,2x | 4,3x | 4,2x | 4,6x | 9,6x | 7,0x | 8,5x\nEVRAZ | 8,6 | 12 553 | 1,0x | 1,3x | 1,1x | 4,5x | 4,6x | 4,5x | 6,0x | 6,8x | 8,7x\nRussia weighted average | | | 1,5x | 1,8x | 1,7x | 5,0x | 4,9x | 5,2x | 9,3x | 7,1x | 9,4x\nTurkey weighted average | | | 0,8x | 1,2x | 1,3x | 3,9x | 4,2x | 5,4x | 15,1x | 6,9x | 8,7x\nLATAM weighted average | | | 1,0x | 1,4x | 1,2x | 3,9x | 4,8x | 5,1x | 9,9x | 9,1x | 11,2x\nAsia weighted average | | | 0,8x | 1,1x | 0,7x | 7,4x | 8,2x | 4,3x | 8,1x | 11,3x | 11,1x\nEU/US weighted average | | | 0,6x | 0,7x | 0,6x | 6,1x | 4,9x | 5,4x | 5,7x | 6,2x | 14,6x\nИсточники: Bloomberg, Альфа-Банк",
+      "numbers": [
+        {"value": 21.2, "unit": "$", "subject": "цена акции Северстали", "date": "2021-04-14"},
+        {"value": 33.1, "unit": "$", "subject": "цена акции НЛМК", "date": "2021-04-14"},
+        {"value": 11.1, "unit": "$", "subject": "цена акции ММК", "date": "2021-04-14"},
+        {"value": 8.6, "unit": "$", "subject": "цена акции EVRAZ", "date": "2021-04-14"}
+      ]
+    }
+  ]
+}

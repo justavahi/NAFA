@@ -1,0 +1,19 @@
+# api = HTTP endpoints; worker = scheduled collection. They share one SQLite file (WAL) through the volume.
+services:
+  api:
+    build: .
+    env_file: .env
+    environment: &paths            # override .env: inside containers the DB must live on the shared volume
+      NAFA_DATA_DIR: /data
+      NAFA_DB_PATH: /data/nafa.db
+    ports: ["8000:8000"]
+    volumes: ["nafa-data:/data"]
+  worker:
+    build: .
+    command: ["python", "-m", "app.cli", "worker"]
+    env_file: .env
+    environment: *paths
+    volumes: ["nafa-data:/data"]
+    depends_on: [api]
+volumes:
+  nafa-data:

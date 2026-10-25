@@ -1,0 +1,9 @@
+# Macro series catalogue (ids from metrics_catalog.csv). Connectors fill them; manual/fallback points are allowed.
+series:
+  M-01: {name: "Key rate of the Bank of Russia", unit: "% p.a.", source_id: SRC-16, frequency: daily, priority: P0}
+  M-03: {name: "USD/RUB official CBR rate",      unit: "RUB",    source_id: SRC-02, frequency: daily, priority: P0}
+  M-04: {name: "CNY/RUB official CBR rate",      unit: "RUB",    source_id: SRC-02, frequency: daily, priority: P0}
+  M-05: {name: "EUR/RUB official CBR rate",      unit: "RUB",    source_id: SRC-02, frequency: daily, priority: P1}
+  M-11.weekly:  {name: "CPI week-on-week (fallback from DOC-04 until a Rosstat connector exists)", unit: "%", source_id: DOC-04, frequency: weekly, priority: P0}
+  M-11.mom:     {name: "CPI month-on-month (fallback from DOC-04)", unit: "% m/m", source_id: DOC-04, frequency: monthly, priority: P0}
+  M-11.yoy:     {name: "CPI year-on-year (fallback from DOC-04)", unit: "% y/y", source_id: DOC-04, frequency: weekly, priority: P0}

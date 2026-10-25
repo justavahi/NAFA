@@ -1,0 +1,55 @@
+# All thresholds and weights live here, not in code (README of the case package).
+# Values marked "assumption" must be calibrated (see docs 13.3).
+timezone_offset_hours: 3          # Moscow, no DST since 2014; avoids a tzdata dependency in slim images
+
+http:
+  user_agent_template: "NAFA-prototype/0.1 (Changellenge x Alfa-Bank case; The Great New Alliance; contact: {contact})"
+  robots_token: "NAFA-prototype"
+  timeout_s: 20
+  max_retries: 5                  # spec WP-B3/4.9: not more than 5
+  backoff_base_s: 2.0
+  backoff_max_s: 60
+  min_interval_s: 1.0             # politeness: min pause between requests to one host
+  max_redirects: 3
+  max_bytes: 10000000
+  robots:
+    enabled: true
+    on_unreachable: allow         # allow | deny  (when robots.txt cannot be fetched)
+    ttl_s: 3600
+
+news:
+  snippet_max_chars: 500
+  stale_after_days: 14            # assumption; DA's freshness decay (FM-09) is separate
+  tracking_params: [utm_source, utm_medium, utm_campaign, utm_term, utm_content, yclid, gclid, fbclid, _openstat, from, ref]
+  parse_failure_tolerance: 0.01   # run is "ok" if <=1% of feed items failed (WP-B3 acceptance: >=99% parsed)
+  dedup:
+    window_hours: 72
+    near_exact_threshold: 0.85    # assumption: calibrate on DA-labelled pairs (Q-11)
+    same_event_threshold: 0.50    # assumption
+    min_tokens: 3
+
+latency:
+  max_window_hours: 24            # Q-24: items older than this at first fetch are treated as backfill and excluded
+
+byo:
+  max_text_chars: 20000
+  allowed_domains: [cbr.ru, interfax.ru, rbc.ru, tass.ru, kommersant.ru, vedomosti.ru, minfin.gov.ru, government.ru, rosstat.gov.ru, moex.com, acra-ratings.ru, raexpert.ru]
+
+corpus:
+  dpi: 150
+  max_side_px: 2200
+  ocr_timeout_s: 60
+  pages_dir: corpus_pages          # relative to NAFA_DATA_DIR
+  extraction_dir: corpus_extraction  # relative to NAFA_DATA_DIR; per-page cached VLM JSON (offline, by file hash)
+  stale_after_days: 365            # DOC-09 (2021) must come out stale=1
+  needs_check_confidence: 0.8
+  extraction_model_role: vlm
+
+budget:
+  daily_limit_rub: 500
+  soft_ratio: 0.8
+  hard_ratio: 1.0
+  daily_token_limit: null          # optional extra limit while token prices are unknown (OQ-05)
+
+search:
+  default_k: 10

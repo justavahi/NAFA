@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+data/*.db*
+data/corpus_pages/
+data/synthetic/
+data/corpus_raw/
+.pytest_cache/
+
+# Local Python environments and generated caches
+.venv/
+venv/
