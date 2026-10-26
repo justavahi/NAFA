@@ -1,0 +1,42 @@
+{
+  "da_revision": "a623ed3e3c73315d2d94d70f11fd37324452dd95",
+  "raw_clients": 85525,
+  "unique_clients": 85514,
+  "duplicate_extra_rows": 11,
+  "conflicting_duplicate_groups": 1,
+  "ambiguous_clients_excluded_from_llm_sampling": true,
+  "client_type_missing_before": 48826,
+  "client_type_missing_after": 6858,
+  "dictionary_adapter": {
+    "CLIENT": "existing",
+    "PROSPECT": "potential",
+    "CLOSE_CLIENT": "unknown_pending_business_confirmation"
+  },
+  "units_revenue_confirmed": false,
+  "raw_identifiers_exported_to_llm": false,
+  "demo_quality_disabled": true,
+  "artifacts": {
+    "client_features": {
+      "rows": 85514,
+      "columns": 50,
+      "sha256": "79949aa789a4f0479df8b592ae7aa6fc13dafaa3eb0d0f75d9e7a508887f4bff"
+    },
+    "payment_features": {
+      "rows": 85514,
+      "columns": 11,
+      "sha256": "6c14eee7490ce43b577f8e54642e09f92192a76c72a3e5c977c8be501cd59910"
+    },
+    "exposures": {
+      "rows": 85514,
+      "columns": 14,
+      "sha256": "26a647918015211edcbb06bfc83d673d34a4ca1cd7690d209034afbb093dd979"
+    }
+  },
+  "invalid_exposure_cells": 0,
+  "missing_exposure_cells": 0,
+  "input_hashes": {
+    "df_Fid_Uid_link_hack.csv": "3d9c718e2a87304f48bbc7447607116bb8e4bd61dded70b0a1d0558f086a1b58",
+    "df_Uid_data_hack.csv": "cb48983806ce7ca0ae045a40c9627ccbe47cc72bfb54058db04df2386da4a983",
+    "df_Uid_payment_hack.csv": "30095f75bead1a1dac0d7232b0da09a326b7ef643ee3b77b36ad3b4458a1cab3"
+  }
+}

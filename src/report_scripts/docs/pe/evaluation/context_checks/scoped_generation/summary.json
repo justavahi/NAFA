@@ -1,0 +1,50 @@
+{
+  "independent_events": 1,
+  "independent_clients": 1,
+  "production_promoted": false,
+  "scores": {
+    "DeepSeek-V4.1-Flash": {
+      "status": "error",
+      "mean": null,
+      "error": "experiment allowance reached; no automatic increase",
+      "calls": [
+        {
+          "prompt_id": "PRM-16",
+          "version": "2",
+          "attempt": 0,
+          "prompt_hash": "8bd1649aa7a34e7dc50ab810120bca7aac55b45f08c5bae15a1b8eaf11103360",
+          "requested_model": "DeepSeek-V4.1-Flash",
+          "status": "error",
+          "input_hash": "7acfb43ff3fe56e54af3ebc64172e52fb17940b367d03f793a68e879f6410f29",
+          "max_tokens": 4096,
+          "elapsed_ms": 0
+        }
+      ]
+    }
+  },
+  "generation": {
+    "status": "evaluated",
+    "partial": false,
+    "issues": [],
+    "check_history": [
+      {
+        "cycle": 0,
+        "issues": [
+          "core_f1: critic cited unreferenced evidence"
+        ]
+      },
+      {
+        "cycle": 1,
+        "issues": []
+      }
+    ],
+    "end_to_end_seconds": 96.83950025006197
+  },
+  "budget": {
+    "id": 1,
+    "calls": 7,
+    "tokens": 39015,
+    "reserved": 0,
+    "stopped": null
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "currency": "RUB",
+  "source": null,
+  "models": {
+    "GLM-5.3-Flash": {"input_per_1k": null, "output_per_1k": null},
+    "Qwen3.6 35B A3B": {"input_per_1k": null, "output_per_1k": null}
+  }
+}

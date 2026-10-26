@@ -1,0 +1,389 @@
+{
+  "mode": "evaluation",
+  "trace_id": "context_pdf_review",
+  "publishable": false,
+  "status": "evaluated",
+  "calls": [
+    {
+      "prompt_id": "PRM-05",
+      "version": "2",
+      "attempt": 0,
+      "prompt_hash": "0494cc380de46f02a290d4bc0761da62f65bbeed0aa59e5eb91a6f509d4b48a5",
+      "requested_model": "GLM-5.3-Flash",
+      "status": "ok",
+      "input_hash": "dff06f677e4b62f0038a7357e71d7fb0b4c128df4885e719b9fd02b682745346",
+      "max_tokens": 4096,
+      "executed_model": "GLM-5.3-Flash",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "cost_rub": null,
+      "cache_hit": true,
+      "response_hash": "3ecbc01b0f5c12302bc18e78cb3ad1ee0cf6f339119da22f1e86401acad3ec34",
+      "elapsed_ms": 2
+    },
+    {
+      "prompt_id": "PRM-06",
+      "version": "7",
+      "attempt": 0,
+      "prompt_hash": "319006c73cd3f999457d683e1caf30de015fc99f4b20c72039d2875d6de1a6cf",
+      "requested_model": "GLM-5.3-Flash",
+      "status": "invalid_schema",
+      "input_hash": "07613dc41156022d474fb90c70f4b72a8a586c1c7e87e3bf7af38588fcf829dc",
+      "max_tokens": 4096,
+      "executed_model": "GLM-5.3-Flash",
+      "tokens_in": 4783,
+      "tokens_out": 688,
+      "cost_rub": null,
+      "cache_hit": false,
+      "response_hash": "9c811253c598cb34639e159136f59f318682b3babe73962a15fce1aa21e5a096",
+      "elapsed_ms": 11023
+    },
+    {
+      "prompt_id": "PRM-06",
+      "version": "7",
+      "attempt": 1,
+      "prompt_hash": "319006c73cd3f999457d683e1caf30de015fc99f4b20c72039d2875d6de1a6cf",
+      "requested_model": "GLM-5.3-Flash",
+      "status": "ok",
+      "input_hash": "07613dc41156022d474fb90c70f4b72a8a586c1c7e87e3bf7af38588fcf829dc",
+      "max_tokens": 8192,
+      "executed_model": "GLM-5.3-Flash",
+      "tokens_in": 4846,
+      "tokens_out": 655,
+      "cost_rub": null,
+      "cache_hit": false,
+      "response_hash": "f8e6fed3f3c895aab54dcf0724e6bb947e16cba1e0fea23b9b46ea2641419654",
+      "elapsed_ms": 9421
+    },
+    {
+      "prompt_id": "PRM-07",
+      "version": "4",
+      "attempt": 0,
+      "prompt_hash": "093d7315ab69b10b75c211846a811eed48ca019e70164bb0716fa54ce464b74b",
+      "requested_model": "Qwen3.6 35B A3B",
+      "status": "ok",
+      "input_hash": "b38e01df0d277db85d5b63bf063e9fb6c4880922238a1542599e70ac397db4e3",
+      "max_tokens": 6144,
+      "executed_model": "Qwen3.6 35B A3B",
+      "tokens_in": 4791,
+      "tokens_out": 4673,
+      "cost_rub": null,
+      "cache_hit": false,
+      "response_hash": "54f03f97de5be2d8614403644d85ce76bcb572c8bc6e67ed8efaa35c136a1170",
+      "bound_claim_hashes": {
+        "core_f1": "4b7cd2d43c50d84af59d5e1e8575079ee9001787d4490fe483e9062fb6b9ae34",
+        "core_f2": "49f9431bec521d978ce3eb53e0bfd9994ba984a01226d9967acf04c6e99ac3c5",
+        "core_bv1": "4a93de80253df9b946d7061358ad2c020ef2418a30610e76aff4198788f27546",
+        "core_bv2": "af6f8eb3983e25af1e18b25724ae3a3667c5a0d9b63a48d0ac5e9e21bc9e0e62",
+        "personal_w2": "138dc28e9bd09568ca5919fae01f53c2dd711dd9c7e78dcf068482e8efbe5a39",
+        "personal_i1": "6159f9d19b4d344eabcf17d9870cd125bee1850f0e5f446ebe8ac74ffc1437d8",
+        "personal_r1": "dbb30f08e0b62db165204f46a97dc0161a4b7e90177bb84ebb001915fcf7ac3c",
+        "personal_o1": "de13224d5c70a34a91a8421b79aca4524b1f4468e24df6c7983fb23c6d4ff457",
+        "personal_a1": "8fa3d88b974d97c986802365663ee702538e213f1ab08b02939733c5e3dd1c90",
+        "personal_a2": "f59a55c7c4d459b52c4b0256bc7e029e5a40c2a9f27941aae25c8ae435c68acb"
+      },
+      "elapsed_ms": 14379
+    }
+  ],
+  "issues": [],
+  "unknowns": [
+    "Отсутствует подтверждение решения ЦБ по ставке на заседании 23 октября — это прогноз, а не свершившийся факт.",
+    "Нет данных о фактическом решении ЦБ и его обосновании на момент публикации.",
+    "Неизвестно, как пересмотр прогноза повлияет на конкретные продукты или условия банков для компаний.",
+    "Решение ЦБ на заседании 23 октября — прогноз банка, а не свершившийся факт.",
+    "Суммы, сроки и тип ставки обязательств не заданы; нулевые флаги продуктов не доказывают отсутствие обязательств в других банках.",
+    "Влияние накопленного дефицита бюджета на решения ЦБ — гипотеза публикации, не подтверждённое следствие.",
+    "Доступен только один доказанный фактор (RATE), поэтому цепочка влияния ограничена ставкой."
+  ],
+  "card": {
+    "confirmed_facts": [
+      {
+        "id": "core_f1",
+        "text": "В августе федеральный бюджет сведен с профицитом 0,7 трлн руб., накопленный дефицит остается 5,8 трлн руб., что существенно выше прогнозов.",
+        "source_ids": [
+          "N1",
+          "FR_aa6b6e906581ccec895a"
+        ]
+      },
+      {
+        "id": "core_f2",
+        "text": "Банк пересмотрел прогноз по ключевой ставке: ожидается сохранение ставки на уровне 14,0% до конца 2026 года вместо прежнего прогноза 13,5%.",
+        "source_ids": [
+          "N1",
+          "FR_956c5cc14210f671223b"
+        ]
+      }
+    ],
+    "why_you": [
+      {
+        "id": "personal_w2",
+        "text": "Для вашей компании это значимо, так как в продуктовом флаге есть РКО и лизинг, а расчётный знак влияния по ставке отрицательный; при этом данные о кредитах и суммах обязательств отсутствуют.",
+        "source_ids": [
+          "C_PRODUCTS",
+          "D_RATE",
+          "C_LIMITS"
+        ]
+      }
+    ],
+    "bank_view_status": "available",
+    "bank_view_items": [
+      {
+        "id": "core_bv1",
+        "text": "Позиция банка (документ BANK_ORIGINAL, от 2026-09-11, стр. 1): ожидается сохранение ключевой ставки на уровне 14,0% годовых до конца 2026 года.",
+        "source_ids": [
+          "B1"
+        ]
+      },
+      {
+        "id": "core_bv2",
+        "text": "Позиция банка (документ BANK_ORIGINAL, от 2026-09-11, стр. 1): прогноз по ставке на конец 2027 года остается на уровне 12,0% годовых.",
+        "source_ids": [
+          "B2"
+        ]
+      }
+    ],
+    "model_inference": {
+      "impact_chain": [
+        {
+          "id": "personal_i1",
+          "text": "Событие: пересмотр прогноза ставки вверх относительно прежнего ожидания → канал: стоимость финансирования до конца 2026 года → известный признак: отрицательный расчётный знак по ставке при наличии лизинга в продуктах → условное следствие: возможное давление на расходы, если есть обязательства с плавающей ставкой или предстоящее рефинансирование.",
+          "source_ids": [
+            "D_RATE",
+            "FR_956c5cc14210f671223b",
+            "C_PRODUCTS",
+            "B1"
+          ]
+        }
+      ],
+      "risks": [
+        {
+          "id": "personal_r1",
+          "text": "Риск: более длительное сохранение ставки 14,0% может удорожить новое финансирование или пролонгацию, если у группы есть долговые обязательства, что неизвестно из данных.",
+          "source_ids": [
+            "B1",
+            "C_LIMITS",
+            "D_RATE"
+          ]
+        }
+      ],
+      "opportunities": [
+        {
+          "id": "personal_o1",
+          "text": "Возможность: при сохранении высокой ставки депозиты и ликвидность могут размещаться под более высокий доход, но флаг DEP в выгрузке нулевой, а наличие продуктов в других банках неизвестно.",
+          "source_ids": [
+            "B1",
+            "C_PRODUCTS"
+          ]
+        }
+      ],
+      "actions_or_questions": [
+        {
+          "id": "personal_a1",
+          "text": "Есть ли у группы долговые обязательства (кредиты, лизинг) в других банках и какова доля плавающей ставки в них?",
+          "source_ids": [
+            "C_PRODUCTS",
+            "C_LIMITS"
+          ]
+        },
+        {
+          "id": "personal_a2",
+          "text": "Какие планы по привлечению финансирования или размещению свободной ликвидности на горизонте до конца 2026 года, с учётом ожидаемой ставки 14,0%?",
+          "source_ids": [
+            "B1",
+            "C_PRODUCTS"
+          ]
+        }
+      ],
+      "confidence": 0.5
+    },
+    "provenance_labels": {
+      "core_f1": "fact",
+      "core_f2": "fact",
+      "core_bv1": "bank_view",
+      "core_bv2": "bank_view",
+      "personal_w2": "ai_inference",
+      "personal_i1": "ai_inference",
+      "personal_r1": "ai_inference",
+      "personal_o1": "ai_inference",
+      "personal_a1": "ai_inference",
+      "personal_a2": "ai_inference"
+    },
+    "relevance": 0.3383333333333334,
+    "offer": null,
+    "disclaimer": "Не является индивидуальной инвестиционной рекомендацией",
+    "trace_id": "context_pdf_review"
+  },
+  "critic": {
+    "claims": [
+      {
+        "id": "core_f1",
+        "text": "В августе федеральный бюджет сведен с профицитом 0,7 трлн руб., накопленный дефицит остается 5,8 трлн руб., что существенно выше прогнозов.",
+        "layer": "fact",
+        "verdict": "supported",
+        "evidence_ids": [
+          "N1",
+          "FR_aa6b6e906581ccec895a"
+        ]
+      },
+      {
+        "id": "core_f2",
+        "text": "Банк пересмотрел прогноз по ключевой ставке: ожидается сохранение ставки на уровне 14,0% до конца 2026 года вместо прежнего прогноза 13,5%.",
+        "layer": "fact",
+        "verdict": "supported",
+        "evidence_ids": [
+          "N1",
+          "FR_956c5cc14210f671223b"
+        ]
+      },
+      {
+        "id": "personal_w2",
+        "text": "Для вашей компании это значимо, так как в продуктовом флаге есть РКО и лизинг, а расчётный знак влияния по ставке отрицательный; при этом данные о кредитах и суммах обязательств отсутствуют.",
+        "layer": "ai_inference",
+        "verdict": "supported",
+        "evidence_ids": [
+          "C_PRODUCTS",
+          "D_RATE",
+          "C_LIMITS"
+        ]
+      },
+      {
+        "id": "core_bv1",
+        "text": "Позиция банка (документ BANK_ORIGINAL, от 2026-09-11, стр. 1): ожидается сохранение ключевой ставки на уровне 14,0% годовых до конца 2026 года.",
+        "layer": "bank_view",
+        "verdict": "supported",
+        "evidence_ids": [
+          "B1"
+        ]
+      },
+      {
+        "id": "core_bv2",
+        "text": "Позиция банка (документ BANK_ORIGINAL, от 2026-09-11, стр. 1): прогноз по ставке на конец 2027 года остается на уровне 12,0% годовых.",
+        "layer": "bank_view",
+        "verdict": "supported",
+        "evidence_ids": [
+          "B2"
+        ]
+      },
+      {
+        "id": "personal_i1",
+        "text": "Событие: пересмотр прогноза ставки вверх относительно прежнего ожидания → канал: стоимость финансирования до конца 2026 года → известный признак: отрицательный расчётный знак по ставке при наличии лизинга в продуктах → условное следствие: возможное давление на расходы, если есть обязательства с плавающей ставкой или предстоящее рефинансирование.",
+        "layer": "ai_inference",
+        "verdict": "supported",
+        "evidence_ids": [
+          "D_RATE",
+          "FR_956c5cc14210f671223b",
+          "C_PRODUCTS",
+          "B1"
+        ]
+      },
+      {
+        "id": "personal_r1",
+        "text": "Риск: более длительное сохранение ставки 14,0% может удорожить новое финансирование или пролонгацию, если у группы есть долговые обязательства, что неизвестно из данных.",
+        "layer": "ai_inference",
+        "verdict": "supported",
+        "evidence_ids": [
+          "B1",
+          "C_LIMITS",
+          "D_RATE"
+        ]
+      },
+      {
+        "id": "personal_o1",
+        "text": "Возможность: при сохранении высокой ставки депозиты и ликвидность могут размещаться под более высокий доход, но флаг DEP в выгрузке нулевой, а наличие продуктов в других банках неизвестно.",
+        "layer": "ai_inference",
+        "verdict": "supported",
+        "evidence_ids": [
+          "B1",
+          "C_PRODUCTS"
+        ]
+      },
+      {
+        "id": "personal_a1",
+        "text": "Есть ли у группы долговые обязательства (кредиты, лизинг) в других банках и какова доля плавающей ставки в них?",
+        "layer": "ai_inference",
+        "verdict": "supported",
+        "evidence_ids": [
+          "C_PRODUCTS",
+          "C_LIMITS"
+        ]
+      },
+      {
+        "id": "personal_a2",
+        "text": "Какие планы по привлечению финансирования или размещению свободной ликвидности на горизонте до конца 2026 года, с учётом ожидаемой ставки 14,0%?",
+        "layer": "ai_inference",
+        "verdict": "supported",
+        "evidence_ids": [
+          "B1",
+          "C_PRODUCTS"
+        ]
+      }
+    ],
+    "numbers_check": [],
+    "coverage_6_questions": {
+      "what_happened": true,
+      "why_you": true,
+      "implications": true,
+      "actions": true,
+      "bank_view": true,
+      "basis": true
+    },
+    "overall": "pass",
+    "fix_instructions": []
+  },
+  "repairs": 0,
+  "check_history": [
+    {
+      "cycle": 0,
+      "issues": []
+    }
+  ],
+  "discarded_claims": [
+    {
+      "id": "personal_w1",
+      "reason": "not_personalised"
+    }
+  ],
+  "context_ablation": {
+    "role_card": {
+      "persona": "PER-01",
+      "name": "Собственник",
+      "jtbd": "Защитить стоимость бизнеса и репутацию; понять риски для группы и ключевых контрагентов",
+      "key_topics": "Стратегические риски, структура группы, геополитика, контрагенты",
+      "horizon": "месяцы-годы",
+      "weights": {
+        "RATE": 0.8,
+        "FX": 0.7,
+        "INFL": 0.6,
+        "ENERGY": 0.5,
+        "COMMOD": 0.7,
+        "DEMAND": 0.7,
+        "LABOR": 0.5,
+        "CREDIT": 0.7,
+        "BUDGET": 0.6,
+        "REG": 0.7,
+        "GEOPOL": 0.9,
+        "CPTY": 0.8
+      },
+      "reference_sha256": "af1b8cf838c9991384d8d7769ef6c99d17fd5433bdb436d69021ab7d93224606"
+    },
+    "selected_news_ids": null,
+    "semantic_selection_verified": false
+  },
+  "impacts": [
+    {
+      "id": "personal_i1",
+      "text": "Событие: пересмотр прогноза ставки вверх относительно прежнего ожидания → канал: стоимость финансирования до конца 2026 года → известный признак: отрицательный расчётный знак по ставке при наличии лизинга в продуктах → условное следствие: возможное давление на расходы, если есть обязательства с плавающей ставкой или предстоящее рефинансирование.",
+      "source_ids": [
+        "D_RATE",
+        "FR_956c5cc14210f671223b",
+        "C_PRODUCTS",
+        "B1"
+      ],
+      "factor": "RATE",
+      "effect": "negative"
+    }
+  ],
+  "partial": true,
+  "end_to_end_seconds": 34.83770141704008,
+  "protocol_hash": "334a02a8e5fab8c59589b46d16dee5ae06c8099955e8f57d8af050494dac07c7"
+}

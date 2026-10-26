@@ -1,0 +1,59 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "coverage": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Coverage",
+      "type": "integer"
+    },
+    "mechanisms": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Mechanisms",
+      "type": "integer"
+    },
+    "personalization": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Personalization",
+      "type": "integer"
+    },
+    "actions": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Actions",
+      "type": "integer"
+    },
+    "grounding": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Grounding",
+      "type": "integer"
+    },
+    "overall": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Overall",
+      "type": "number"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "coverage",
+    "mechanisms",
+    "personalization",
+    "actions",
+    "grounding",
+    "overall",
+    "notes"
+  ],
+  "title": "JudgeScore",
+  "type": "object"
+}

@@ -1,0 +1,23 @@
+[project]
+name = "nafa-prompt-engineering"
+version = "0.1.0"
+description = "Prompt contracts and evaluation tools for NAFA"
+requires-python = ">=3.11"
+dependencies = ["pydantic>=2.12,<3"]
+
+[project.optional-dependencies]
+backend = ["httpx>=0.28,<1", "PyYAML>=6,<7"]
+da = [
+    "matplotlib>=3.8,<4",
+    "numpy>=1.26,<3",
+    "pandas>=2.2,<3",
+    "pyyaml>=6,<7",
+    "tabulate>=0.9,<1",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<10"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

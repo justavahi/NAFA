@@ -1,0 +1,16 @@
+{
+  "confirmed_facts": [
+    {
+      "id": "core_fact",
+      "text": "Учебное событие: регулятор повысил ключевую ставку.",
+      "source_ids": [
+        "N1"
+      ]
+    }
+  ],
+  "bank_view_items": [],
+  "common_effects": [],
+  "unknowns": [
+    "Позиция банка в примере отсутствует"
+  ]
+}

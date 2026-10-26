@@ -1,0 +1,33 @@
+{
+  "currency": "RUB",
+  "pricing_source": null,
+  "target_rub_per_day": "400",
+  "cost_card_rub": null,
+  "cards_per_day": null,
+  "operations": [
+    {
+      "prompt_id": "PRM-05",
+      "model": "GLM-5.3-Flash",
+      "calls_per_card": 1,
+      "estimated_rub": null
+    },
+    {
+      "prompt_id": "PRM-06",
+      "model": "GLM-5.3-Flash",
+      "calls_per_card": 1,
+      "estimated_rub": null
+    },
+    {
+      "prompt_id": "PRM-07",
+      "model": "Qwen3.6 35B A3B",
+      "calls_per_card": 1,
+      "estimated_rub": null
+    }
+  ],
+  "missing": [
+    "PRM-05:GLM-5.3-Flash",
+    "PRM-06:GLM-5.3-Flash",
+    "PRM-07:Qwen3.6 35B A3B"
+  ],
+  "scope": "Estimate from mean uncached tokens and explicit call counts; retries, ingestion and variability need separate allowance. Not a spend guarantee."
+}

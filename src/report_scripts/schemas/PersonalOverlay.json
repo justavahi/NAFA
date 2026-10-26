@@ -1,0 +1,146 @@
+{
+  "$defs": {
+    "Claim": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "source_ids"
+      ],
+      "title": "Claim",
+      "type": "object"
+    },
+    "ImpactClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Ids",
+          "type": "array"
+        },
+        "factor": {
+          "enum": [
+            "RATE",
+            "FX",
+            "INFL",
+            "ENERGY",
+            "COMMOD",
+            "DEMAND",
+            "LABOR",
+            "CREDIT",
+            "BUDGET",
+            "REG",
+            "GEOPOL",
+            "CPTY"
+          ],
+          "title": "Factor",
+          "type": "string"
+        },
+        "effect": {
+          "enum": [
+            "negative",
+            "positive",
+            "neutral",
+            "two_branches"
+          ],
+          "title": "Effect",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "source_ids",
+        "factor",
+        "effect"
+      ],
+      "title": "ImpactClaim",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "why_you": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Why You",
+      "type": "array"
+    },
+    "impact_chain": {
+      "items": {
+        "$ref": "#/$defs/ImpactClaim"
+      },
+      "title": "Impact Chain",
+      "type": "array"
+    },
+    "risks": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Risks",
+      "type": "array"
+    },
+    "opportunities": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Opportunities",
+      "type": "array"
+    },
+    "actions_or_questions": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "maxItems": 4,
+      "title": "Actions Or Questions",
+      "type": "array"
+    },
+    "unknowns": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unknowns",
+      "type": "array"
+    }
+  },
+  "required": [
+    "why_you",
+    "impact_chain",
+    "risks",
+    "opportunities",
+    "actions_or_questions",
+    "unknowns"
+  ],
+  "title": "PersonalOverlay",
+  "type": "object"
+}

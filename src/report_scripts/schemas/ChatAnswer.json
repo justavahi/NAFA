@@ -1,0 +1,95 @@
+{
+  "$defs": {
+    "ChatClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Ids",
+          "type": "array"
+        },
+        "layer": {
+          "enum": [
+            "fact",
+            "bank_view",
+            "ai_inference"
+          ],
+          "title": "Layer",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "source_ids",
+        "layer"
+      ],
+      "title": "ChatClaim",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "answer": {
+      "title": "Answer",
+      "type": "string"
+    },
+    "layers": {
+      "items": {
+        "enum": [
+          "fact",
+          "bank_view",
+          "ai_inference"
+        ],
+        "type": "string"
+      },
+      "title": "Layers",
+      "type": "array"
+    },
+    "citations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Citations",
+      "type": "array"
+    },
+    "out_of_scope": {
+      "title": "Out Of Scope",
+      "type": "boolean"
+    },
+    "follow_up_suggestions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Follow Up Suggestions",
+      "type": "array"
+    },
+    "claims": {
+      "items": {
+        "$ref": "#/$defs/ChatClaim"
+      },
+      "title": "Claims",
+      "type": "array"
+    }
+  },
+  "required": [
+    "answer",
+    "layers",
+    "citations",
+    "out_of_scope",
+    "follow_up_suggestions"
+  ],
+  "title": "ChatAnswer",
+  "type": "object"
+}

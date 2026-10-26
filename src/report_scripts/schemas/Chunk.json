@@ -1,0 +1,144 @@
+{
+  "$defs": {
+    "PageBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "block_type": {
+          "enum": [
+            "text",
+            "table",
+            "chart_caption",
+            "chart_estimate"
+          ],
+          "title": "Block Type",
+          "type": "string"
+        },
+        "text": {
+          "maxLength": 300,
+          "title": "Text",
+          "type": "string"
+        },
+        "numbers": {
+          "items": {
+            "$ref": "#/$defs/PageNumber"
+          },
+          "title": "Numbers",
+          "type": "array"
+        },
+        "needs_manual_check": {
+          "default": false,
+          "title": "Needs Manual Check",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "block_type",
+        "text",
+        "numbers"
+      ],
+      "title": "PageBlock",
+      "type": "object"
+    },
+    "PageNumber": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Value"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Unit"
+        },
+        "subject": {
+          "title": "Subject",
+          "type": "string"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Date"
+        }
+      },
+      "required": [
+        "value",
+        "unit",
+        "subject"
+      ],
+      "title": "PageNumber",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "doc_id": {
+      "title": "Doc Id",
+      "type": "string"
+    },
+    "page": {
+      "minimum": 1,
+      "title": "Page",
+      "type": "integer"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "as_of_date": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "As Of Date"
+    },
+    "blocks": {
+      "items": {
+        "$ref": "#/$defs/PageBlock"
+      },
+      "maxItems": 6,
+      "title": "Blocks",
+      "type": "array"
+    },
+    "needs_manual_check": {
+      "title": "Needs Manual Check",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "doc_id",
+    "page",
+    "title",
+    "as_of_date",
+    "blocks",
+    "needs_manual_check"
+  ],
+  "title": "Chunk",
+  "type": "object"
+}

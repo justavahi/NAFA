@@ -1,0 +1,273 @@
+{
+  "date": "2026-10-26",
+  "synthetic_seed_clients": true,
+  "evidence_sources": {
+    "matrix": "out/pe_final_verified",
+    "cards": "out/pe_complete",
+    "critics": "out/pe_final",
+    "critic-controls": "out/pe_final",
+    "attacks": "out/pe_complete",
+    "judge": "out/pe_complete"
+  },
+  "revalidated_matrix_answers": 51,
+  "active_prompt_versions": {
+    "PRM-01": "1",
+    "PRM-02": "1",
+    "PRM-03": "4",
+    "PRM-04": "1",
+    "PRM-05": "2",
+    "PRM-06": "4",
+    "PRM-07": "4",
+    "PRM-08": "2",
+    "PRM-09": "1",
+    "PRM-10": "1",
+    "PRM-11": "1",
+    "PRM-12": "2",
+    "PRM-13": "1",
+    "PRM-14": "1",
+    "PRM-15": "1",
+    "PRM-16": "1",
+    "PRM-17": "1"
+  },
+  "matrix_matches_active_versions": true,
+  "matrix": {
+    "PRM-01": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-02": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-03": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-04": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-05": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-06": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-07": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-08": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-09": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-10": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-11": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-12": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-13": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-14": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-15": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-16": {
+      "tested": 3,
+      "passed": 3
+    },
+    "PRM-17": {
+      "tested": 3,
+      "passed": 3
+    }
+  },
+  "generators": {
+    "GLM-5.3-Flash": {
+      "cards_tested": 12,
+      "cards_accepted": 12,
+      "partial_cards": 1,
+      "faithfulness_critic_proxy": 1.0,
+      "q29_unsupported_critic_proxy": 0.0,
+      "fact_error_critic_proxy": 0.0,
+      "q08_model_judge": 4.125,
+      "q08_judge_bootstrap_95ci": [
+        3.9583333333333335,
+        4.291666666666667
+      ],
+      "acceptance_bootstrap_95ci": [
+        1,
+        1
+      ],
+      "q08_judged_cards": 12,
+      "q08_expert": null,
+      "cost_rub": null,
+      "generation_call_latency_p50_ms": 8677,
+      "generation_latency_observations": 35
+    },
+    "DeepSeek-V4.1-Flash": {
+      "cards_tested": 12,
+      "cards_accepted": 12,
+      "partial_cards": 0,
+      "faithfulness_critic_proxy": 1.0,
+      "q29_unsupported_critic_proxy": 0.0,
+      "fact_error_critic_proxy": 0.0,
+      "q08_model_judge": 3.8636363636363638,
+      "q08_judge_bootstrap_95ci": [
+        3.6818181818181817,
+        4.045454545454546
+      ],
+      "acceptance_bootstrap_95ci": [
+        1,
+        1
+      ],
+      "q08_judged_cards": 11,
+      "q08_expert": null,
+      "cost_rub": null,
+      "generation_call_latency_p50_ms": 16570,
+      "generation_latency_observations": 51
+    }
+  },
+  "critics": {
+    "Qwen3.6 35B A3B": {
+      "defects_tested": 10,
+      "defects_found": 9,
+      "controls_tested": 3,
+      "controls_claim_support": 1.0,
+      "critic_call_latency_p50_ms": 41067,
+      "critic_latency_observations": 97
+    },
+    "Kimi-K2.6": {
+      "defects_tested": 10,
+      "defects_found": 8,
+      "controls_tested": 3,
+      "controls_claim_support": 1.0,
+      "critic_call_latency_p50_ms": 30555,
+      "critic_latency_observations": 11
+    }
+  },
+  "attacks": {
+    "tested": 20,
+    "passed": 19
+  },
+  "external_acceptance": {
+    "expert_q08": "pending",
+    "real_client_end_to_end": "pending",
+    "rub_tariffs": "not_provided",
+    "daily_400_rub_capacity": "not_computable_without_tariffs",
+    "vlm_human_number_review": "pending; assistant review found errors, raw VLM quarantined"
+  },
+  "failures": [
+    {
+      "phase": "critics",
+      "task": "Kimi-K2.6",
+      "case_id": "6",
+      "status": "error",
+      "defect": null,
+      "issues": [],
+      "error": "ValidationError: 1 validation error for CriticVerdict\n  Invalid JSON: EOF while parsing a value at line 1 column 0 [type=json_invalid, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/json_invalid"
+    },
+    {
+      "phase": "critics",
+      "task": "Kimi-K2.6",
+      "case_id": "7",
+      "status": "error",
+      "defect": null,
+      "issues": [],
+      "error": "ValidationError: 1 validation error for CriticVerdict\n  Invalid JSON: EOF while parsing a value at line 1 column 0 [type=json_invalid, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/json_invalid"
+    },
+    {
+      "phase": "critics",
+      "task": "Qwen3.6 35B A3B",
+      "case_id": "7",
+      "status": "failed",
+      "defect": "missing_source",
+      "issues": [],
+      "error": null
+    },
+    {
+      "phase": "attacks",
+      "task": "system_role",
+      "case_id": "1",
+      "status": "failed",
+      "defect": null,
+      "issues": [
+        "critic requested corrections or further search"
+      ],
+      "error": null
+    },
+    {
+      "phase": "judge",
+      "task": "DeepSeek-V4.1-Flash",
+      "case_id": "GS-14",
+      "status": "error",
+      "defect": null,
+      "issues": [],
+      "error": "RuntimeError: Gateway stopped: ReadTimeout: The read operation timed out"
+    }
+  ],
+  "calls_observed": 301,
+  "recovered_token_measurements": [
+    {
+      "prompt_id": "PRM-01",
+      "case_id": "GS-01",
+      "request_hash": "8da302068ecb419bf0423505069bb6ce4aa8aa1fc3e5c08cddf675bcbf1a5e29",
+      "source": "shared DB exact request hash"
+    },
+    {
+      "prompt_id": "PRM-01",
+      "case_id": "GS-04",
+      "request_hash": "b3829fdaf535e6dfd60e38eb828984959bd3fa20e260a758de44a6b33da5062b",
+      "source": "shared DB exact request hash"
+    },
+    {
+      "prompt_id": "PRM-01",
+      "case_id": "GS-06",
+      "request_hash": "66f23a5da0a17b17fd21f814d0d1d508dd56659c1952c59125bf57b9a342c925",
+      "source": "shared DB exact request hash"
+    }
+  ],
+  "token_measurement_runs": [
+    "out/pe_complete",
+    "out/pe_acceptance",
+    "out/pe_acceptance_v2",
+    "out/pe_acceptance_v3",
+    "out/pe_final",
+    "out/pe_release",
+    "out/pe_handover",
+    "out/pe_verified",
+    "out/chart_v2",
+    "out/graph_evidence_v2"
+  ],
+  "uncached_calls_observed": 150,
+  "n01_seed_accuracy": {
+    "tested": 3,
+    "correct": 3
+  },
+  "paired_q08_glm_minus_deepseek": {
+    "cases": 11,
+    "mean": 0.2727272727272727,
+    "bootstrap_95ci": [
+      0.0,
+      0.5454545454545454
+    ]
+  }
+}

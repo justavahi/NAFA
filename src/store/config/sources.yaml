@@ -1,0 +1,89 @@
+# Source registry (WP-B3, C07). A new source = a new entry here + a connector class (or reuse of `rss`).
+# `legal.robots` / `legal.terms` are filled by `python -m app.cli check-sources` (fact, not "ok").
+# `legal.store`: metadata | snippet | full_text  - what we are allowed to persist. Default is conservative: snippet.
+sources:
+  SRC-01:
+    name: "Bank of Russia press releases"
+    owner: "Bank of Russia"
+    type: RSS
+    url: "https://www.cbr.ru/rss/RssPress"
+    priority: P0
+    tier_weight: 1.0              # official / regulator
+    parser: rss
+    enabled: true
+    schedule_minutes: 10
+    legal: {store: snippet, terms_url: "https://www.cbr.ru/", robots_checked_at: null, terms_checked_at: null}
+    quirks: "RSS 2.0, 12 items, pubDate with +0300"
+
+  SRC-02:
+    name: "Bank of Russia daily exchange rates"
+    owner: "Bank of Russia"
+    type: XML
+    url: "https://www.cbr.ru/scripts/XML_daily.asp"
+    priority: P0
+    tier_weight: 1.0
+    parser: cbr_daily
+    enabled: true
+    schedule_minutes: 180
+    series: {USD: M-03, CNY: M-04, EUR: M-05}
+    legal: {store: full_text, terms_url: "https://www.cbr.ru/", robots_checked_at: null, terms_checked_at: null}
+    quirks: "windows-1251, decimal comma, optional ?date_req=DD/MM/YYYY"
+
+  SRC-03:
+    name: "Interfax general feed"
+    owner: "Interfax"
+    type: RSS
+    url: "https://www.interfax.ru/rss.asp"
+    priority: P0
+    tier_weight: 0.85             # tier-1 media
+    parser: rss
+    enabled: true
+    schedule_minutes: 5
+    legal: {store: snippet, terms_url: null, robots_checked_at: null, terms_checked_at: null}
+    quirks: "General feed with lots of noise (filter downstream); atom namespace via https; asks to identify the caller (OQ-11): identifying User-Agent is sent"
+
+  SRC-04:
+    name: "RBC news feed"
+    owner: "RBC"
+    type: RSS
+    url: "https://rssexport.rbc.ru/rbcnews/news/30/full.rss"
+    priority: P0
+    tier_weight: 0.85
+    parser: rss
+    enabled: true
+    schedule_minutes: 5
+    legal: {store: snippet, terms_url: null, robots_checked_at: null, terms_checked_at: null}   # full-text extension exists, but license NOT verified -> do not store
+    quirks: "RSS 2.0 with full-text extension; response may be truncated (unclosed tags) -> recovering XML parser"
+
+  SRC-16:
+    name: "Bank of Russia key rate"
+    owner: "Bank of Russia"
+    type: HTML
+    url: "https://www.cbr.ru/hd_base/KeyRate/"
+    priority: P0
+    tier_weight: 1.0
+    parser: cbr_keyrate
+    enabled: true
+    schedule_minutes: 360
+    series: {key_rate: M-01}
+    legal: {store: full_text, terms_url: "https://www.cbr.ru/", robots_checked_at: null, terms_checked_at: null}
+    quirks: "HTML table date -> rate (decimal comma). Query params UniDbQuery.From/To are UNVERIFIED in the case docs: check-sources tests them. DailyInfoWebServ is an alternative."
+
+  SRC-14:
+    name: "User-pasted news (text or URL) and synthetic news"
+    owner: "internal"
+    type: internal
+    url: null
+    priority: P0
+    tier_weight: 0.4              # unknown
+    parser: internal
+    enabled: true
+    legal: {store: full_text, terms_url: null, robots_checked_at: null, terms_checked_at: null}
+
+  # ---- P1/P2: declared so the registry is complete; connectors NOT implemented yet. URLs deliberately null: not verified. ----
+  SRC-05: {name: "TASS RSS",             owner: TASS,            type: RSS,  url: null, priority: P1, tier_weight: 0.85, parser: rss,  enabled: false, legal: {store: snippet}}
+  SRC-06: {name: "Kommersant RSS",       owner: Kommersant,      type: RSS,  url: null, priority: P1, tier_weight: 0.85, parser: rss,  enabled: false, legal: {store: snippet}}
+  SRC-07: {name: "Vedomosti RSS",        owner: Vedomosti,       type: RSS,  url: null, priority: P2, tier_weight: 0.85, parser: rss,  enabled: false, legal: {store: snippet}}
+  SRC-08: {name: "Ministry of Finance",  owner: "MinFin RF",     type: HTML, url: null, priority: P1, tier_weight: 1.0,  parser: none, enabled: false, legal: {store: snippet}}
+  SRC-09: {name: "Rosstat",              owner: Rosstat,         type: HTML, url: null, priority: P1, tier_weight: 1.0,  parser: none, enabled: false, legal: {store: snippet}}
+  SRC-10: {name: "MOEX ISS API",         owner: MOEX,            type: JSON, url: "https://iss.moex.com", priority: P1, tier_weight: 1.0, parser: none, enabled: false, legal: {store: metadata}, quirks: "robots.txt restricts API access - verify terms before enabling"}

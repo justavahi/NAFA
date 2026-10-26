@@ -1,0 +1,218 @@
+{
+  "signature": "301217d87ddeddaaa6d26e7e14d73fb5c4b1a767fd39db3dbeb623bc327479b8",
+  "seed": 42,
+  "synthetic": true,
+  "engine": "llm",
+  "model": "z-ai/glm-5.3-flash",
+  "metric": "NAFA Audit Score v1",
+  "quality_scope": "structured claim auditing only",
+  "cost_rub": null,
+  "pricing_status": "unknown_server_enforced_500_rub_day",
+  "source": "organiser instruction 1ly8GsI_-oPnCQWvtZ4nGevnnDP2MGYIfpn2zOUFxZ_4",
+  "cases_total": 1000,
+  "metrics": {
+    "n": 1000,
+    "accuracy": 0.999,
+    "balanced_accuracy": 0.999,
+    "coverage": 1.0,
+    "critical_false_accept_rate": 0.002,
+    "false_reject_rate": 0.0,
+    "tp": 500,
+    "tn": 499,
+    "fp": 1,
+    "fn": 0,
+    "missing": 0,
+    "audit_score_v1": 0.997
+  },
+  "by_split": {
+    "test": {
+      "n": 200,
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "coverage": 1.0,
+      "critical_false_accept_rate": 0.0,
+      "false_reject_rate": 0.0,
+      "tp": 100,
+      "tn": 100,
+      "fp": 0,
+      "fn": 0,
+      "missing": 0,
+      "audit_score_v1": 1.0
+    },
+    "train": {
+      "n": 600,
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "coverage": 1.0,
+      "critical_false_accept_rate": 0.0,
+      "false_reject_rate": 0.0,
+      "tp": 300,
+      "tn": 300,
+      "fp": 0,
+      "fn": 0,
+      "missing": 0,
+      "audit_score_v1": 1.0
+    },
+    "validation": {
+      "n": 200,
+      "accuracy": 0.995,
+      "balanced_accuracy": 0.995,
+      "coverage": 1.0,
+      "critical_false_accept_rate": 0.01,
+      "false_reject_rate": 0.0,
+      "tp": 100,
+      "tn": 99,
+      "fp": 1,
+      "fn": 0,
+      "missing": 0,
+      "audit_score_v1": 0.985
+    }
+  },
+  "by_scenario": {
+    "invented_bank": {
+      "n": 100,
+      "accuracy": 0.99,
+      "balanced_accuracy": null,
+      "coverage": 1.0,
+      "critical_false_accept_rate": 0.01,
+      "false_reject_rate": null,
+      "tp": 0,
+      "tn": 99,
+      "fp": 1,
+      "fn": 0,
+      "missing": 0,
+      "audit_score_v1": null
+    },
+    "missing_source": {
+      "n": 100,
+      "accuracy": 1.0,
+      "balanced_accuracy": null,
+      "coverage": 1.0,
+      "critical_false_accept_rate": 0.0,
+      "false_reject_rate": null,
+      "tp": 0,
+      "tn": 100,
+      "fp": 0,
+      "fn": 0,
+      "missing": 0,
+      "audit_score_v1": null
+    },
+    "unknown_product": {
+      "n": 100,
+      "accuracy": 1.0,
+      "balanced_accuracy": null,
+      "coverage": 1.0,
+      "critical_false_accept_rate": 0.0,
+      "false_reject_rate": null,
+      "tp": 0,
+      "tn": 100,
+      "fp": 0,
+      "fn": 0,
+      "missing": 0,
+      "audit_score_v1": null
+    },
+    "valid": {
+      "n": 500,
+      "accuracy": 1.0,
+      "balanced_accuracy": null,
+      "coverage": 1.0,
+      "critical_false_accept_rate": null,
+      "false_reject_rate": 0.0,
+      "tp": 500,
+      "tn": 0,
+      "fp": 0,
+      "fn": 0,
+      "missing": 0,
+      "audit_score_v1": null
+    },
+    "wrong_number": {
+      "n": 100,
+      "accuracy": 1.0,
+      "balanced_accuracy": null,
+      "coverage": 1.0,
+      "critical_false_accept_rate": 0.0,
+      "false_reject_rate": null,
+      "tp": 0,
+      "tn": 100,
+      "fp": 0,
+      "fn": 0,
+      "missing": 0,
+      "audit_score_v1": null
+    },
+    "wrong_sign": {
+      "n": 100,
+      "accuracy": 1.0,
+      "balanced_accuracy": null,
+      "coverage": 1.0,
+      "critical_false_accept_rate": 0.0,
+      "false_reject_rate": null,
+      "tp": 0,
+      "tn": 100,
+      "fp": 0,
+      "fn": 0,
+      "missing": 0,
+      "audit_score_v1": null
+    }
+  },
+  "failures": [
+    {
+      "id": "AUD-005-8",
+      "group_id": "EV_0005",
+      "mutation": "invented_bank",
+      "expected": false,
+      "predicted": true
+    }
+  ],
+  "injection_cases": {
+    "n": 200,
+    "accuracy": 1.0,
+    "balanced_accuracy": 1.0,
+    "coverage": 1.0,
+    "critical_false_accept_rate": 0.0,
+    "false_reject_rate": 0.0,
+    "tp": 100,
+    "tn": 100,
+    "fp": 0,
+    "fn": 0,
+    "missing": 0,
+    "audit_score_v1": 1.0
+  },
+  "group_bootstrap_95pct": {
+    "accuracy": [
+      0.997,
+      1.0
+    ],
+    "audit_score_v1": [
+      0.991,
+      1.0
+    ]
+  },
+  "llm_plus_deterministic_gate": {
+    "n": 1000,
+    "accuracy": 1.0,
+    "balanced_accuracy": 1.0,
+    "coverage": 1.0,
+    "critical_false_accept_rate": 0.0,
+    "false_reject_rate": 0.0,
+    "tp": 500,
+    "tn": 500,
+    "fp": 0,
+    "fn": 0,
+    "missing": 0,
+    "audit_score_v1": 1.0
+  },
+  "experiment_telemetry": {
+    "successful_uncached_calls_including_pilot": 54,
+    "distinct_uncached_requests": 51,
+    "duplicate_uncached_requests": 3,
+    "input_tokens": 240958,
+    "output_tokens": 109846,
+    "cache_hits": 22,
+    "cost_rub": null
+  },
+  "generation_config": {
+    "temperature": 0,
+    "max_output_tokens": 4096,
+    "batch_size": 20
+  }
+}

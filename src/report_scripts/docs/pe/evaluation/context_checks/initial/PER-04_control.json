@@ -1,0 +1,351 @@
+{
+  "mode": "evaluation",
+  "trace_id": "context_pdf_review",
+  "publishable": false,
+  "status": "evaluated",
+  "calls": [
+    {
+      "prompt_id": "PRM-05",
+      "version": "2",
+      "attempt": 0,
+      "prompt_hash": "0494cc380de46f02a290d4bc0761da62f65bbeed0aa59e5eb91a6f509d4b48a5",
+      "requested_model": "GLM-5.3-Flash",
+      "status": "ok",
+      "input_hash": "dff06f677e4b62f0038a7357e71d7fb0b4c128df4885e719b9fd02b682745346",
+      "max_tokens": 4096,
+      "executed_model": "GLM-5.3-Flash",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "cost_rub": null,
+      "cache_hit": true,
+      "response_hash": "3ecbc01b0f5c12302bc18e78cb3ad1ee0cf6f339119da22f1e86401acad3ec34",
+      "elapsed_ms": 3
+    },
+    {
+      "prompt_id": "PRM-06",
+      "version": "7",
+      "attempt": 0,
+      "prompt_hash": "319006c73cd3f999457d683e1caf30de015fc99f4b20c72039d2875d6de1a6cf",
+      "requested_model": "GLM-5.3-Flash",
+      "status": "ok",
+      "input_hash": "dc749c46dce57342dc9240b940c892a1e0ea3ffad926ebcf10ab9c7fbe92cba6",
+      "max_tokens": 4096,
+      "executed_model": "GLM-5.3-Flash",
+      "tokens_in": 4546,
+      "tokens_out": 672,
+      "cost_rub": null,
+      "cache_hit": false,
+      "response_hash": "002c7b4adff971ca2a1af82fcebea09ebe26e258b1dcc31c1e673d0e4de0faa8",
+      "elapsed_ms": 9954
+    },
+    {
+      "prompt_id": "PRM-07",
+      "version": "4",
+      "attempt": 0,
+      "prompt_hash": "093d7315ab69b10b75c211846a811eed48ca019e70164bb0716fa54ce464b74b",
+      "requested_model": "Qwen3.6 35B A3B",
+      "status": "ok",
+      "input_hash": "a9758aff2390f8d4ccd4a492dac30dc21d92373ac49e777f434e53799666eb4b",
+      "max_tokens": 6144,
+      "executed_model": "Qwen3.6 35B A3B",
+      "tokens_in": 4814,
+      "tokens_out": 5282,
+      "cost_rub": null,
+      "cache_hit": false,
+      "response_hash": "1a9605641f1a43c66f9d93376c0c188b1b75b78bd765983cbe43a031d573901a",
+      "bound_claim_hashes": {
+        "core_f1": "4b7cd2d43c50d84af59d5e1e8575079ee9001787d4490fe483e9062fb6b9ae34",
+        "core_f2": "49f9431bec521d978ce3eb53e0bfd9994ba984a01226d9967acf04c6e99ac3c5",
+        "core_bv1": "4a93de80253df9b946d7061358ad2c020ef2418a30610e76aff4198788f27546",
+        "core_bv2": "af6f8eb3983e25af1e18b25724ae3a3667c5a0d9b63a48d0ac5e9e21bc9e0e62",
+        "personal_w2": "c70c29a105b4e43a1b005b203ae42ae5c889f486eaa67f585bc53fbe14f6503d",
+        "personal_i1": "11b717eb4761c18fddf1b8f68ee250d350ee078772a8f402f0bf2ef265e6e839",
+        "personal_r1": "ab814b8e0ada0d04805d38cde3ca83c597aea5f930ebf939bd517f3c0204f808",
+        "personal_o1": "a08f4fa40d7633cf4bcf4189c8c2232b1d6989b43995f28f946a2efa34c13c08",
+        "personal_a1": "9bc6d877a29cf7e6ccac71616a586eee61c007f3a4cd90cad3b027d79ee9dca6",
+        "personal_a2": "b35e44b41a5876563d1157edc1e7533a6aae50477aabed295fe73493fdb937ce"
+      },
+      "elapsed_ms": 32883
+    }
+  ],
+  "issues": [],
+  "unknowns": [
+    "Отсутствует подтверждение решения ЦБ по ставке на заседании 23 октября — это прогноз, а не свершившийся факт.",
+    "Нет данных о фактическом решении ЦБ и его обосновании на момент публикации.",
+    "Неизвестно, как пересмотр прогноза повлияет на конкретные продукты или условия банков для компаний.",
+    "Решение ЦБ на заседании 23 октября — прогноз, а не свершившийся факт.",
+    "Суммы, сроки и тип ставки по обязательствам компании неизвестны; нулевой флаг LOA не доказывает отсутствие кредитов в других банках.",
+    "Влияние накопленного дефицита бюджета на решения ЦБ не подтверждено.",
+    "Доступен только один доказанный фактор (RATE), поэтому оценка ограничена этим каналом."
+  ],
+  "card": {
+    "confirmed_facts": [
+      {
+        "id": "core_f1",
+        "text": "В августе федеральный бюджет сведен с профицитом 0,7 трлн руб., накопленный дефицит остается 5,8 трлн руб., что существенно выше прогнозов.",
+        "source_ids": [
+          "N1",
+          "FR_aa6b6e906581ccec895a"
+        ]
+      },
+      {
+        "id": "core_f2",
+        "text": "Банк пересмотрел прогноз по ключевой ставке: ожидается сохранение ставки на уровне 14,0% до конца 2026 года вместо прежнего прогноза 13,5%.",
+        "source_ids": [
+          "N1",
+          "FR_956c5cc14210f671223b"
+        ]
+      }
+    ],
+    "why_you": [
+      {
+        "id": "personal_w2",
+        "text": "Для компании с отрицательным агрегированным признаком E-15 и продуктовой выгрузкой без флага кредитов (LOA=0) длительное сохранение высокой ставки может влиять на стоимость и доступность нового финансирования, хотя суммы и тип ставки по договорам неизвестны.",
+        "source_ids": [
+          "C_NET",
+          "C_PRODUCTS",
+          "C_LIMITS",
+          "D_RATE"
+        ]
+      }
+    ],
+    "bank_view_status": "available",
+    "bank_view_items": [
+      {
+        "id": "core_bv1",
+        "text": "Позиция банка (документ BANK_ORIGINAL, от 2026-09-11, стр. 1): ожидается сохранение ключевой ставки на уровне 14,0% годовых до конца 2026 года.",
+        "source_ids": [
+          "B1"
+        ]
+      },
+      {
+        "id": "core_bv2",
+        "text": "Позиция банка (документ BANK_ORIGINAL, от 2026-09-11, стр. 1): прогноз по ставке на конец 2027 года остается на уровне 12,0% годовых.",
+        "source_ids": [
+          "B2"
+        ]
+      }
+    ],
+    "model_inference": {
+      "impact_chain": [
+        {
+          "id": "personal_i1",
+          "text": "Событие: пересмотр прогноза ставки вверх (14,0% до конца 2026) → канал: стоимость заемного финансирования → известный признак: отрицательный E-15 и отсутствие флага LOA в выгрузке → условное последствие: при потребности в новых кредитах условия могут быть менее выгодными; знак эффекта по расчёту — negative.",
+          "source_ids": [
+            "D_RATE",
+            "N1",
+            "FR_956c5cc14210f671223b",
+            "C_NET",
+            "C_PRODUCTS"
+          ]
+        }
+      ],
+      "risks": [
+        {
+          "id": "personal_r1",
+          "text": "Риск: более длительный период высокой ставки может удорожить потенциальное новое финансирование для компании; расчёт по FM-14 даёт отрицательный знак, но суммы и структура обязательств неизвестны.",
+          "source_ids": [
+            "D_RATE",
+            "C_LIMITS",
+            "B1"
+          ]
+        }
+      ],
+      "opportunities": [
+        {
+          "id": "personal_o1",
+          "text": "Возможность: при обсуждении условий с банком можно заранее уточнить планы финансирования и варианты фиксации ставки, пока прогноз на 2027 год предполагает её снижение до 12,0%.",
+          "source_ids": [
+            "B2",
+            "C_PRODUCTS"
+          ]
+        }
+      ],
+      "actions_or_questions": [
+        {
+          "id": "personal_a1",
+          "text": "Есть ли у компании планы по привлечению нового финансирования или рефинансированию, учитывая отсутствие флага LOA в текущей выгрузке?",
+          "source_ids": [
+            "C_PRODUCTS",
+            "C_LIMITS"
+          ]
+        },
+        {
+          "id": "personal_a2",
+          "text": "Какая доля обязательств (если они есть в других банках) приходится на плавающую ставку, чтобы оценить чувствительность к сохранению ставки 14,0%?",
+          "source_ids": [
+            "C_LIMITS",
+            "B1"
+          ]
+        }
+      ],
+      "confidence": 0.5
+    },
+    "provenance_labels": {
+      "core_f1": "fact",
+      "core_f2": "fact",
+      "core_bv1": "bank_view",
+      "core_bv2": "bank_view",
+      "personal_w2": "ai_inference",
+      "personal_i1": "ai_inference",
+      "personal_r1": "ai_inference",
+      "personal_o1": "ai_inference",
+      "personal_a1": "ai_inference",
+      "personal_a2": "ai_inference"
+    },
+    "relevance": 0.3383333333333334,
+    "offer": null,
+    "disclaimer": "Не является индивидуальной инвестиционной рекомендацией",
+    "trace_id": "context_pdf_review"
+  },
+  "critic": {
+    "claims": [
+      {
+        "id": "core_f1",
+        "text": "В августе федеральный бюджет сведен с профицитом 0,7 трлн руб., накопленный дефицит остается 5,8 трлн руб., что существенно выше прогнозов.",
+        "layer": "fact",
+        "verdict": "supported",
+        "evidence_ids": [
+          "N1",
+          "FR_aa6b6e906581ccec895a"
+        ]
+      },
+      {
+        "id": "core_f2",
+        "text": "Банк пересмотрел прогноз по ключевой ставке: ожидается сохранение ставки на уровне 14,0% до конца 2026 года вместо прежнего прогноза 13,5%.",
+        "layer": "fact",
+        "verdict": "supported",
+        "evidence_ids": [
+          "N1",
+          "FR_956c5cc14210f671223b"
+        ]
+      },
+      {
+        "id": "personal_w2",
+        "text": "Для компании с отрицательным агрегированным признаком E-15 и продуктовой выгрузкой без флага кредитов (LOA=0) длительное сохранение высокой ставки может влиять на стоимость и доступность нового финансирования, хотя суммы и тип ставки по договорам неизвестны.",
+        "layer": "ai_inference",
+        "verdict": "supported",
+        "evidence_ids": [
+          "C_NET",
+          "C_PRODUCTS",
+          "C_LIMITS",
+          "D_RATE"
+        ]
+      },
+      {
+        "id": "core_bv1",
+        "text": "Позиция банка (документ BANK_ORIGINAL, от 2026-09-11, стр. 1): ожидается сохранение ключевой ставки на уровне 14,0% годовых до конца 2026 года.",
+        "layer": "bank_view",
+        "verdict": "supported",
+        "evidence_ids": [
+          "B1"
+        ]
+      },
+      {
+        "id": "core_bv2",
+        "text": "Позиция банка (документ BANK_ORIGINAL, от 2026-09-11, стр. 1): прогноз по ставке на конец 2027 года остается на уровне 12,0% годовых.",
+        "layer": "bank_view",
+        "verdict": "supported",
+        "evidence_ids": [
+          "B2"
+        ]
+      },
+      {
+        "id": "personal_i1",
+        "text": "Событие: пересмотр прогноза ставки вверх (14,0% до конца 2026) → канал: стоимость заемного финансирования → известный признак: отрицательный E-15 и отсутствие флага LOA в выгрузке → условное последствие: при потребности в новых кредитах условия могут быть менее выгодными; знак эффекта по расчёту — negative.",
+        "layer": "ai_inference",
+        "verdict": "supported",
+        "evidence_ids": [
+          "D_RATE",
+          "N1",
+          "FR_956c5cc14210f671223b",
+          "C_NET",
+          "C_PRODUCTS"
+        ]
+      },
+      {
+        "id": "personal_r1",
+        "text": "Риск: более длительный период высокой ставки может удорожить потенциальное новое финансирование для компании; расчёт по FM-14 даёт отрицательный знак, но суммы и структура обязательств неизвестны.",
+        "layer": "ai_inference",
+        "verdict": "supported",
+        "evidence_ids": [
+          "D_RATE",
+          "C_LIMITS",
+          "B1"
+        ]
+      },
+      {
+        "id": "personal_o1",
+        "text": "Возможность: при обсуждении условий с банком можно заранее уточнить планы финансирования и варианты фиксации ставки, пока прогноз на 2027 год предполагает её снижение до 12,0%.",
+        "layer": "ai_inference",
+        "verdict": "supported",
+        "evidence_ids": [
+          "B2",
+          "C_PRODUCTS"
+        ]
+      },
+      {
+        "id": "personal_a1",
+        "text": "Есть ли у компании планы по привлечению нового финансирования или рефинансированию, учитывая отсутствие флага LOA в текущей выгрузке?",
+        "layer": "ai_inference",
+        "verdict": "supported",
+        "evidence_ids": [
+          "C_PRODUCTS",
+          "C_LIMITS"
+        ]
+      },
+      {
+        "id": "personal_a2",
+        "text": "Какая доля обязательств (если они есть в других банках) приходится на плавающую ставку, чтобы оценить чувствительность к сохранению ставки 14,0%?",
+        "layer": "ai_inference",
+        "verdict": "supported",
+        "evidence_ids": [
+          "C_LIMITS",
+          "B1"
+        ]
+      }
+    ],
+    "numbers_check": [],
+    "coverage_6_questions": {
+      "what_happened": true,
+      "why_you": true,
+      "implications": true,
+      "actions": true,
+      "bank_view": true,
+      "basis": true
+    },
+    "overall": "pass",
+    "fix_instructions": []
+  },
+  "repairs": 0,
+  "check_history": [
+    {
+      "cycle": 0,
+      "issues": []
+    }
+  ],
+  "discarded_claims": [
+    {
+      "id": "personal_w1",
+      "reason": "not_personalised"
+    }
+  ],
+  "impacts": [
+    {
+      "id": "personal_i1",
+      "text": "Событие: пересмотр прогноза ставки вверх (14,0% до конца 2026) → канал: стоимость заемного финансирования → известный признак: отрицательный E-15 и отсутствие флага LOA в выгрузке → условное последствие: при потребности в новых кредитах условия могут быть менее выгодными; знак эффекта по расчёту — negative.",
+      "source_ids": [
+        "D_RATE",
+        "N1",
+        "FR_956c5cc14210f671223b",
+        "C_NET",
+        "C_PRODUCTS"
+      ],
+      "factor": "RATE",
+      "effect": "negative"
+    }
+  ],
+  "partial": true,
+  "end_to_end_seconds": 42.85231437499169,
+  "protocol_hash": "334a02a8e5fab8c59589b46d16dee5ae06c8099955e8f57d8af050494dac07c7"
+}

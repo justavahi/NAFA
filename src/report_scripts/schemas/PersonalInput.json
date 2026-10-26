@@ -1,0 +1,425 @@
+{
+  "$defs": {
+    "Claim": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "source_ids"
+      ],
+      "title": "Claim",
+      "type": "object"
+    },
+    "CompanyFeature": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "COMPANY_FEATURE",
+          "title": "Kind",
+          "type": "string"
+        },
+        "client_id": {
+          "title": "Client Id",
+          "type": "string"
+        },
+        "feature_id": {
+          "minLength": 1,
+          "title": "Feature Id",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "source_record_id": {
+          "minLength": 1,
+          "title": "Source Record Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "client_id",
+        "feature_id",
+        "value",
+        "source_record_id"
+      ],
+      "title": "CompanyFeature",
+      "type": "object"
+    },
+    "ComputedEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "COMPUTED_VALUE",
+          "title": "Kind",
+          "type": "string"
+        },
+        "formula_id": {
+          "pattern": "^FM-(0[1-9]|1[0-9]|2[0-4])$",
+          "title": "Formula Id",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "input_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Input Ids",
+          "type": "array"
+        },
+        "calculation_ref": {
+          "minLength": 1,
+          "title": "Calculation Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "formula_id",
+        "value",
+        "input_ids",
+        "calculation_ref"
+      ],
+      "title": "ComputedEvidence",
+      "type": "object"
+    },
+    "Document": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "news",
+            "bank"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "as_of": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "As Of"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "is_mock": {
+          "default": false,
+          "title": "Is Mock",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "text"
+      ],
+      "title": "Document",
+      "type": "object"
+    },
+    "EventCore": {
+      "additionalProperties": false,
+      "properties": {
+        "confirmed_facts": {
+          "items": {
+            "$ref": "#/$defs/Claim"
+          },
+          "title": "Confirmed Facts",
+          "type": "array"
+        },
+        "bank_view_items": {
+          "items": {
+            "$ref": "#/$defs/Claim"
+          },
+          "title": "Bank View Items",
+          "type": "array"
+        },
+        "common_effects": {
+          "items": {
+            "$ref": "#/$defs/Claim"
+          },
+          "title": "Common Effects",
+          "type": "array"
+        },
+        "unknowns": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unknowns",
+          "type": "array"
+        }
+      },
+      "required": [
+        "confirmed_facts",
+        "bank_view_items",
+        "common_effects",
+        "unknowns"
+      ],
+      "title": "EventCore",
+      "type": "object"
+    },
+    "EvidenceLedger": {
+      "additionalProperties": false,
+      "properties": {
+        "trace_id": {
+          "minLength": 1,
+          "title": "Trace Id",
+          "type": "string"
+        },
+        "client_id": {
+          "minLength": 1,
+          "title": "Client Id",
+          "type": "string"
+        },
+        "event_id": {
+          "minLength": 1,
+          "title": "Event Id",
+          "type": "string"
+        },
+        "documents": {
+          "items": {
+            "$ref": "#/$defs/Document"
+          },
+          "title": "Documents",
+          "type": "array"
+        },
+        "entries": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "BANK_VIEW": "#/$defs/QuotedEvidence",
+                "COMPANY_FEATURE": "#/$defs/CompanyFeature",
+                "COMPUTED_VALUE": "#/$defs/ComputedEvidence",
+                "NEWS_FACT": "#/$defs/QuotedEvidence"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/QuotedEvidence"
+              },
+              {
+                "$ref": "#/$defs/CompanyFeature"
+              },
+              {
+                "$ref": "#/$defs/ComputedEvidence"
+              }
+            ]
+          },
+          "title": "Entries",
+          "type": "array"
+        }
+      },
+      "required": [
+        "trace_id",
+        "client_id",
+        "event_id",
+        "documents",
+        "entries"
+      ],
+      "title": "EvidenceLedger",
+      "type": "object"
+    },
+    "QuotedEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "NEWS_FACT",
+            "BANK_VIEW"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Span"
+        },
+        "number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Number"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "source"
+      ],
+      "title": "QuotedEvidence",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "quote": {
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "start",
+        "end",
+        "quote"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "event_core": {
+      "$ref": "#/$defs/EventCore"
+    },
+    "ledger": {
+      "$ref": "#/$defs/EvidenceLedger"
+    },
+    "persona": {
+      "title": "Persona",
+      "type": "string"
+    },
+    "computed": {
+      "additionalProperties": true,
+      "title": "Computed",
+      "type": "object"
+    }
+  },
+  "required": [
+    "event_core",
+    "ledger",
+    "persona",
+    "computed"
+  ],
+  "title": "PersonalInput",
+  "type": "object"
+}
