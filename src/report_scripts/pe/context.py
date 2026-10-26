@@ -124,7 +124,7 @@ def focused_generation_view(ledger: EvidenceLedger, selected_ids: set[str]) -> d
     deliberately not expanded here, so a coarse parent cannot reintroduce an
     unrelated paragraph. This view must never replace the provenance ledger.
     """
-    from .evidence import CompanyFeature, ComputedEvidence
+    from .evidence import CompanyFeature, ComputedEvidence, UnknownEffect
     docs = {d.id: d for d in ledger.documents}
     entries, spans = [], {}
     for entry in ledger.entries:
@@ -135,7 +135,7 @@ def focused_generation_view(ledger: EvidenceLedger, selected_ids: set[str]) -> d
             spans.setdefault(entry.source.document_id, []).append(entry.source)
         elif isinstance(entry, CompanyFeature):
             entries.append(entry.model_dump(mode="json"))
-        elif isinstance(entry, ComputedEvidence):
+        elif isinstance(entry, (ComputedEvidence, UnknownEffect)):
             entries.append({**entry.model_dump(mode="json", exclude={"input_ids"}),
                             "derivation_in_full_ledger": True})
     documents = []

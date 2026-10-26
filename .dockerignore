@@ -1,0 +1,14 @@
+.git
+.local
+**/.env
+**/.venv
+**/__pycache__
+**/.pytest_cache
+**/*.db*
+**/out
+**/data/input
+**/corpus_raw
+**/corpus_pages
+**/data/synthetic
+**/df_*hack.csv
+data_raw

@@ -66,8 +66,8 @@ def _as_utc(value: str | None) -> datetime:
     try:
         parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
         return parsed.replace(tzinfo=timezone.utc) if parsed.tzinfo is None else parsed.astimezone(timezone.utc)
-    except ValueError:
-        return now_utc()
+    except ValueError as exc:
+        raise ValueError("invalid ISO as_of/publication date") from exc
 
 
 def _event_factors(text: str) -> dict[str, float]:
@@ -166,19 +166,19 @@ def score_event(conn: sqlite3.Connection, doc: sqlite3.Row | dict, client_id: st
             "provisional": True, "provisional_reasons": ["Impact defaulted to neutral 0.5 without calibrated classifier", "Urgency is 0 without a decision-event calendar", "Relevance uses partial FM-03/04 inputs; entity Match and payment-chain exposure are unavailable"]}
 
 
-def _bank_context(conn: sqlite3.Connection, factors: dict[str, float], title: str) -> dict:
+def _bank_context(conn: sqlite3.Connection, factors: dict[str, float], title: str, as_of: str | None = None) -> dict:
     candidates = []
     mapping = [("RATE", "key_rate", "ключевая ставка"), ("INFL", "inflation", "инфляция"), ("FX", "fx", "валютный курс"),
                ("COMMOD", "gold", "золото цены сырья")]
     for factor, indicator, query in mapping:
         if factor not in factors: continue
         try:
-            records = bv.get_bank_view(conn, indicator, None, None)
+            records = bv.get_bank_view(conn, indicator, None, as_of)
         except Exception:
             records = []
         if records:
             candidates.extend([{"indicator": indicator, "record": r} for r in records])
-        hits = search_alfa_analytics(conn, query, k=3)
+        hits = search_alfa_analytics(conn, query, k=3, as_of=as_of)
         candidates.extend([{"indicator": indicator, "chunk": h} for h in hits])
     return {"label": "Позиция Альфа-Банка", "records": candidates[:8],
             "available": bool(candidates), "as_of": None,
@@ -189,7 +189,7 @@ def _build_payload(conn: sqlite3.Connection, doc: sqlite3.Row, client_id: str, p
     title, snippet = doc["title"] or "Без заголовка", doc["snippet"] or ""
     score = score_event(conn, doc, client_id, persona, as_of)
     factors = score["event_factors"]
-    bank = _bank_context(conn, factors, title)
+    bank = _bank_context(conn, factors, title, as_of)
     factor_names = [FACTOR_NAMES.get(f, f) for f in factors]
     client = score["client_profile"]
     why = (f"Для компании {client.get('client_pseudonym')} отраслевой профиль {client.get('sector_profile') or 'не определён'}; "
@@ -209,6 +209,7 @@ def _build_payload(conn: sqlite3.Connection, doc: sqlite3.Row, client_id: str, p
           "text": "Факторы и действия сформированы детерминированными правилами. Это не подтверждённый прогноз и не заменяет анализ риска/финансовую консультацию.",
           "provisional": True, "factor_codes": list(factors)}
     return {"card_id": None, "persona": _persona_code(persona), "client_pseudonym": client.get("client_pseudonym"),
+            "status": "provisional", "publishable": False,
             "score": score, "layers": {"fact": fact, "bank_position": bank, "ai_conclusion": ai},
             "sections": {"what_happened": title, "why_you": why,
                          "possible_implications": [f"Возможная связь: {FACTOR_NAMES.get(f, f)}" for f in factors],
@@ -228,8 +229,9 @@ def generate_card(conn: sqlite3.Connection, *, client_id: str, persona: str | No
                   event_doc_id: str | None = None, query: str | None = None, as_of: str | None = None) -> dict:
     if not get_client_record(conn, client_id): raise KeyError("client not found")
     if not event_doc_id and not query: raise ValueError("provide event_doc_id or query")
+    as_of = _as_utc(as_of).strftime("%Y-%m-%dT%H:%M:%SZ") if as_of else None
     if event_doc_id:
-        doc = conn.execute("SELECT * FROM documents WHERE doc_id=? AND ready_at IS NOT NULL", (event_doc_id,)).fetchone()
+        doc = conn.execute("SELECT * FROM documents WHERE doc_id=? AND ready_at IS NOT NULL AND (? IS NULL OR published_at_utc<=?)", (event_doc_id, as_of, as_of)).fetchone()
     else:
         hits = search_news(conn, query or "", as_of=as_of, k=1)
         doc = conn.execute("SELECT * FROM documents WHERE doc_id=?", (hits[0]["doc_id"],)).fetchone() if hits else None
@@ -255,6 +257,7 @@ def get_card(conn: sqlite3.Connection, card_id: str) -> dict | None:
 
 def feed(conn: sqlite3.Connection, client_id: str, persona: str | None = None, as_of: str | None = None, k: int = 5) -> list[dict]:
     if not get_client_record(conn, client_id): raise KeyError("client not found")
+    as_of = _as_utc(as_of).strftime("%Y-%m-%dT%H:%M:%SZ") if as_of else None
     rows = conn.execute("SELECT * FROM documents WHERE ready_at IS NOT NULL AND (? IS NULL OR published_at_utc<=?) ORDER BY published_at_utc DESC LIMIT 300",
                          (as_of, as_of)).fetchall()
     scored = []
@@ -272,7 +275,7 @@ def ask_card(conn: sqlite3.Connection, card_id: str, question: str, scenario: di
     card = get_card(conn, card_id)
     if not card: raise KeyError("card not found")
     trace_id = card["trace_id"]
-    if scenario:
+    if scenario is not None:
         result = compute_scenario(scenario)
         answer = {"mode": "deterministic_scenario", "question": question, "result": result,
                   "note": "Расчёт использует только введённые числа и формулу; не является прогнозом."}

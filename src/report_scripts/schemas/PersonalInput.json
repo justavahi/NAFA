@@ -278,7 +278,8 @@
                 "BANK_VIEW": "#/$defs/QuotedEvidence",
                 "COMPANY_FEATURE": "#/$defs/CompanyFeature",
                 "COMPUTED_VALUE": "#/$defs/ComputedEvidence",
-                "NEWS_FACT": "#/$defs/QuotedEvidence"
+                "NEWS_FACT": "#/$defs/QuotedEvidence",
+                "UNKNOWN_EFFECT": "#/$defs/UnknownEffect"
               },
               "propertyName": "kind"
             },
@@ -291,6 +292,9 @@
               },
               {
                 "$ref": "#/$defs/ComputedEvidence"
+              },
+              {
+                "$ref": "#/$defs/UnknownEffect"
               }
             ]
           },
@@ -393,6 +397,68 @@
         "quote"
       ],
       "title": "Span",
+      "type": "object"
+    },
+    "UnknownEffect": {
+      "additionalProperties": false,
+      "description": "An explicit missing sign rule, never disguised as a DA formula.",
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "UNKNOWN_EFFECT",
+          "title": "Kind",
+          "type": "string"
+        },
+        "factor": {
+          "enum": [
+            "RATE",
+            "FX",
+            "INFL",
+            "ENERGY",
+            "COMMOD",
+            "DEMAND",
+            "LABOR",
+            "CREDIT",
+            "BUDGET",
+            "REG",
+            "GEOPOL",
+            "CPTY"
+          ],
+          "title": "Factor",
+          "type": "string"
+        },
+        "value": {
+          "const": "two_branches",
+          "default": "two_branches",
+          "title": "Value",
+          "type": "string"
+        },
+        "input_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Input Ids",
+          "type": "array"
+        },
+        "reason": {
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "factor",
+        "input_ids",
+        "reason"
+      ],
+      "title": "UnknownEffect",
       "type": "object"
     }
   },

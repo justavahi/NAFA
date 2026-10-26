@@ -1,0 +1,640 @@
+{
+  "$defs": {
+    "CompanyFeature": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "COMPANY_FEATURE",
+          "title": "Kind",
+          "type": "string"
+        },
+        "client_id": {
+          "title": "Client Id",
+          "type": "string"
+        },
+        "feature_id": {
+          "minLength": 1,
+          "title": "Feature Id",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "source_record_id": {
+          "minLength": 1,
+          "title": "Source Record Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "client_id",
+        "feature_id",
+        "value",
+        "source_record_id"
+      ],
+      "title": "CompanyFeature",
+      "type": "object"
+    },
+    "ComputedEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "COMPUTED_VALUE",
+          "title": "Kind",
+          "type": "string"
+        },
+        "formula_id": {
+          "pattern": "^FM-(0[1-9]|1[0-9]|2[0-4])$",
+          "title": "Formula Id",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "input_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Input Ids",
+          "type": "array"
+        },
+        "calculation_ref": {
+          "minLength": 1,
+          "title": "Calculation Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "formula_id",
+        "value",
+        "input_ids",
+        "calculation_ref"
+      ],
+      "title": "ComputedEvidence",
+      "type": "object"
+    },
+    "Document": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "news",
+            "bank"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "as_of": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "As Of"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "is_mock": {
+          "default": false,
+          "title": "Is Mock",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "text"
+      ],
+      "title": "Document",
+      "type": "object"
+    },
+    "EventExtraction": {
+      "additionalProperties": false,
+      "properties": {
+        "event_type": {
+          "pattern": "^ET-(0[1-9]|1[0-9]|20)$",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "entities": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Entities",
+          "type": "array"
+        },
+        "facts": {
+          "items": {
+            "$ref": "#/$defs/Fact"
+          },
+          "title": "Facts",
+          "type": "array"
+        },
+        "iota": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "propertyNames": {
+            "enum": [
+              "RATE",
+              "FX",
+              "INFL",
+              "ENERGY",
+              "COMMOD",
+              "DEMAND",
+              "LABOR",
+              "CREDIT",
+              "BUDGET",
+              "REG",
+              "GEOPOL",
+              "CPTY"
+            ]
+          },
+          "title": "Iota",
+          "type": "object"
+        },
+        "direction": {
+          "additionalProperties": {
+            "enum": [
+              -1,
+              0,
+              1
+            ],
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "RATE",
+              "FX",
+              "INFL",
+              "ENERGY",
+              "COMMOD",
+              "DEMAND",
+              "LABOR",
+              "CREDIT",
+              "BUDGET",
+              "REG",
+              "GEOPOL",
+              "CPTY"
+            ]
+          },
+          "title": "Direction",
+          "type": "object"
+        },
+        "severity": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Severity",
+          "type": "integer"
+        },
+        "geo_scope": {
+          "enum": [
+            "national",
+            "regional",
+            "global",
+            "unknown"
+          ],
+          "title": "Geo Scope",
+          "type": "string"
+        },
+        "horizon": {
+          "title": "Horizon",
+          "type": "string"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_type",
+        "entities",
+        "facts",
+        "iota",
+        "direction",
+        "severity",
+        "geo_scope",
+        "horizon",
+        "rationale"
+      ],
+      "title": "EventExtraction",
+      "type": "object"
+    },
+    "EvidenceLedger": {
+      "additionalProperties": false,
+      "properties": {
+        "trace_id": {
+          "minLength": 1,
+          "title": "Trace Id",
+          "type": "string"
+        },
+        "client_id": {
+          "minLength": 1,
+          "title": "Client Id",
+          "type": "string"
+        },
+        "event_id": {
+          "minLength": 1,
+          "title": "Event Id",
+          "type": "string"
+        },
+        "documents": {
+          "items": {
+            "$ref": "#/$defs/Document"
+          },
+          "title": "Documents",
+          "type": "array"
+        },
+        "entries": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "BANK_VIEW": "#/$defs/QuotedEvidence",
+                "COMPANY_FEATURE": "#/$defs/CompanyFeature",
+                "COMPUTED_VALUE": "#/$defs/ComputedEvidence",
+                "NEWS_FACT": "#/$defs/QuotedEvidence",
+                "UNKNOWN_EFFECT": "#/$defs/UnknownEffect"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/QuotedEvidence"
+              },
+              {
+                "$ref": "#/$defs/CompanyFeature"
+              },
+              {
+                "$ref": "#/$defs/ComputedEvidence"
+              },
+              {
+                "$ref": "#/$defs/UnknownEffect"
+              }
+            ]
+          },
+          "title": "Entries",
+          "type": "array"
+        }
+      },
+      "required": [
+        "trace_id",
+        "client_id",
+        "event_id",
+        "documents",
+        "entries"
+      ],
+      "title": "EvidenceLedger",
+      "type": "object"
+    },
+    "Fact": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Date"
+        },
+        "subject": {
+          "title": "Subject",
+          "type": "string"
+        },
+        "source_id": {
+          "minLength": 1,
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_span": {
+          "minLength": 1,
+          "title": "Source Span",
+          "type": "string"
+        },
+        "certainty": {
+          "enum": [
+            "confirmed",
+            "forecast",
+            "opinion"
+          ],
+          "title": "Certainty",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "subject",
+        "source_id",
+        "source_span",
+        "certainty"
+      ],
+      "title": "Fact",
+      "type": "object"
+    },
+    "QuotedEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "NEWS_FACT",
+            "BANK_VIEW"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Span"
+        },
+        "number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Number"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "source"
+      ],
+      "title": "QuotedEvidence",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "quote": {
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "start",
+        "end",
+        "quote"
+      ],
+      "title": "Span",
+      "type": "object"
+    },
+    "UnknownEffect": {
+      "additionalProperties": false,
+      "description": "An explicit missing sign rule, never disguised as a DA formula.",
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "UNKNOWN_EFFECT",
+          "title": "Kind",
+          "type": "string"
+        },
+        "factor": {
+          "enum": [
+            "RATE",
+            "FX",
+            "INFL",
+            "ENERGY",
+            "COMMOD",
+            "DEMAND",
+            "LABOR",
+            "CREDIT",
+            "BUDGET",
+            "REG",
+            "GEOPOL",
+            "CPTY"
+          ],
+          "title": "Factor",
+          "type": "string"
+        },
+        "value": {
+          "const": "two_branches",
+          "default": "two_branches",
+          "title": "Value",
+          "type": "string"
+        },
+        "input_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Input Ids",
+          "type": "array"
+        },
+        "reason": {
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "factor",
+        "input_ids",
+        "reason"
+      ],
+      "title": "UnknownEffect",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "ledger": {
+      "$ref": "#/$defs/EvidenceLedger"
+    },
+    "event": {
+      "$ref": "#/$defs/EventExtraction"
+    },
+    "persona": {
+      "minLength": 1,
+      "title": "Persona",
+      "type": "string"
+    },
+    "bank_view_status": {
+      "enum": [
+        "available",
+        "missing",
+        "outdated",
+        "conflict"
+      ],
+      "title": "Bank View Status",
+      "type": "string"
+    },
+    "relevance_id": {
+      "title": "Relevance Id",
+      "type": "string"
+    },
+    "confidence_id": {
+      "title": "Confidence Id",
+      "type": "string"
+    },
+    "effect_source_ids": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "propertyNames": {
+        "enum": [
+          "RATE",
+          "FX",
+          "INFL",
+          "ENERGY",
+          "COMMOD",
+          "DEMAND",
+          "LABOR",
+          "CREDIT",
+          "BUDGET",
+          "REG",
+          "GEOPOL",
+          "CPTY"
+        ]
+      },
+      "title": "Effect Source Ids",
+      "type": "object"
+    }
+  },
+  "required": [
+    "ledger",
+    "event",
+    "persona",
+    "bank_view_status",
+    "relevance_id",
+    "confidence_id",
+    "effect_source_ids"
+  ],
+  "title": "CaseInput",
+  "type": "object"
+}

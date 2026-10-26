@@ -86,8 +86,14 @@ def split_holdout(golden: pd.DataFrame, by: str = "event_id",
     """Отделяет hold-out: пары, отобранные по группам `by` (события/архетипы),
     которые НЕ использовались при настройке весов (WP-D7/WP-D8)."""
     rng = np.random.default_rng(seed)
+    if by not in golden or golden[by].isna().any():
+        raise ValueError("holdout grouping requires a nonmissing group for every row")
+    if not 0 < frac < 1:
+        raise ValueError("holdout fraction must be between zero and one")
     groups = golden[by].dropna().unique()
-    hold_groups = set(rng.choice(groups, size=max(1, int(len(groups) * frac)),
+    if len(groups) < 2:
+        raise ValueError("at least two independent groups required for a holdout")
+    hold_groups = set(rng.choice(groups, size=min(len(groups)-1, max(1, int(len(groups) * frac))),
                                  replace=False))
     mask = golden[by].isin(hold_groups)
     return golden[~mask], golden[mask]
@@ -99,10 +105,14 @@ def save_golden_and_holdout(golden: pd.DataFrame, out_dir: str | Path,
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     dev, hold = split_holdout(golden, by=by)
-    golden.to_csv(out / "golden_set.csv", index=False, encoding="utf-8-sig")
+    # Keep an annotation master, but never give held-out labels to calibration.
+    golden.to_csv(out / "golden_set_all.csv", index=False, encoding="utf-8-sig")
+    dev.to_csv(out / "golden_set.csv", index=False, encoding="utf-8-sig")
     hold.to_csv(out / "holdout_set.csv", index=False, encoding="utf-8-sig")
     return {"golden": str(out / "golden_set.csv"),
+            "all_annotations": str(out / "golden_set_all.csv"),
             "holdout": str(out / "holdout_set.csv"),
+            "n_development": int(len(dev)),
             "n_holdout": int(len(hold))}
 
 

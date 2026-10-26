@@ -1,0 +1,33 @@
+services:
+  init:
+    build: .
+    image: nafa-local
+    command: ["/app/src/store/.venv/bin/python", "scripts/prepare_runtime.py", "--demo", "--output", "/data/runtime", "--reuse-if-ready"]
+    volumes:
+      - runtime:/data
+  nafa:
+    image: nafa-local
+    build: .
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    ports:
+      - "127.0.0.1:${NAFA_PORT:-8000}:8000"
+    env_file:
+      - path: ${NAFA_MODEL_ENV:-.env}
+        required: false
+    environment:
+      NAFA_BACKEND_ROOT: /app/src/store
+      NAFA_ROOT: /app/src/store
+      NAFA_DAILY_TOKEN_LIMIT: ${NAFA_DAILY_TOKEN_LIMIT:-3000000}
+    volumes:
+      - runtime:/data
+      - ./src/store/data/input/alpha:/app/src/store/data/input/alpha:ro
+    healthcheck:
+      test: ["CMD", "/app/src/store/.venv/bin/python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      start_period: 20s
+      retries: 5
+volumes:
+  runtime:

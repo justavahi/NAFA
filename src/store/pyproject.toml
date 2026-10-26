@@ -17,11 +17,11 @@ dependencies = [
     "pymorphy3==2.0.6",
     "pymorphy3-dicts-ru==2.4.417150.4580142",
     "PyMuPDF==2.0",
-    "httpx2>=2.16.0",
 ]
 
 [dependency-groups]
 dev = ["pytest==9.1.1"]
+preparation = ["matplotlib==3.11.2", "tabulate==0.10.0"]
 
 [tool.uv]
 package = false          # an application, not an installable library

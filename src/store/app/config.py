@@ -72,7 +72,14 @@ def _load_yaml(name: str) -> dict:
 
 @lru_cache(maxsize=1)
 def get_config() -> Config:
-    return Config(_load_yaml("settings.yaml"))
+    raw = _load_yaml("settings.yaml")
+    limit = os.getenv("NAFA_DAILY_TOKEN_LIMIT")
+    if limit is not None:
+        parsed = int(limit)
+        if parsed <= 0:
+            raise ValueError("NAFA_DAILY_TOKEN_LIMIT must be positive")
+        raw.setdefault("budget", {})["daily_token_limit"] = parsed
+    return Config(raw)
 
 
 @lru_cache(maxsize=1)

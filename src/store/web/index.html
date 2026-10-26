@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ef3124">
+  <title>Финансовая аналитика · Альфа-Бизнес</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/mark.svg">
+  <link rel="stylesheet" href="/assets/style.css">
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="/" aria-label="Альфа-Бизнес — главная"><span class="brand-mark">А</span><span>Альфа-Бизнес<span class="brand-sub">Финансовый ассистент</span></span></a>
+    <div class="header-right"><span class="prototype-label">Прототип NAFA</span><button class="icon-button" id="about" aria-label="О сервисе"><svg><use href="/assets/icons.svg#info"/></svg></button><button class="quiet-button" id="logout" aria-label="Выйти" hidden><svg><use href="/assets/icons.svg#logout"/></svg><span>Выйти</span></button></div>
+  </header>
+  <div id="notice" role="status" aria-live="polite"></div>
+  <main>
+    <section id="login" aria-labelledby="login-title">
+      <div class="login-copy"><div class="eyebrow"><span class="red-dot"></span> АНАЛИТИКА ДЛЯ ВАШЕГО БИЗНЕСА</div><h1 id="login-title">Большая картина.<br>Ваши решения.</h1><p class="login-description">Важные события и их последствия для вашей компании. С опорой на факты и экспертизу банка.</p>
+        <form id="login-form"><label for="token">Код доступа</label><div class="login-input"><input id="token" type="password" autocomplete="current-password" required maxlength="512" placeholder="Введите ваш код"><button class="primary" type="submit">Войти <span aria-hidden="true">↗</span></button></div><p class="field-hint">Код предоставляет администратор команды.</p></form>
+        <div id="demo-picker" hidden><div class="divider-label">ИЛИ ПОСМОТРИТЕ ДЕМО</div><div id="accounts"></div><p class="field-hint">Синтетические профили компаний. Выберите отрасль.</p></div>
+        <p class="login-footnote">Факт. Позиция банка. Вывод AI.<br>Всегда понятно, на чём основан разбор.</p>
+      </div>
+      <div class="login-art" aria-hidden="true"><div class="art-top">БИЗНЕС В КОНТЕКСТЕ <span>↗</span></div><div class="art-heading">Меньше шума.<br>Больше смысла.</div><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="art-card art-card-back"><span>ПОЗИЦИЯ БАНКА</span><div class="art-line"></div><div class="art-line short"></div></div><div class="art-card art-card-front"><div class="art-card-label"><span class="red-dot"></span> ВЫВОД AI</div><strong>От события<br>к решению</strong><div class="art-arrow">↗</div><div class="art-tags"><span>Компания</span><span>Контекст</span></div></div><div class="art-bottom">Источники открыты.<br>Последствия объяснимы.</div></div>
+    </section>
+    <section id="workspace" hidden aria-label="Финансовая аналитика">
+      <nav class="rail" aria-label="Навигация сервиса"><button class="rail-button active" id="home" aria-label="Финансовая аналитика" aria-current="page"><svg><use href="/assets/icons.svg#grid"/></svg><span>Аналитика</span></button><button class="rail-button" id="add-news-rail" aria-label="Добавить новость"><svg><use href="/assets/icons.svg#plus"/></svg><span>Новость</span></button><div class="rail-bottom"><button class="rail-button" id="admin-open" hidden aria-label="Проверка аналитики банка"><svg><use href="/assets/icons.svg#shield"/></svg><span>Проверка</span></button><button class="rail-button" id="context-open" aria-label="Профиль компании"><svg><use href="/assets/icons.svg#building"/></svg><span>Профиль</span></button></div></nav>
+      <div class="workspace-body">
+        <div class="workspace-heading"><div><div class="eyebrow" id="today"></div><h1>Бизнес в контексте<span class="title-dot">.</span></h1></div><div class="context-controls"><label>Компания<select id="company" aria-label="Компания"></select></label><label>Ваш взгляд<select id="persona" aria-label="Ваша роль"></select></label><button id="refresh" class="icon-button" aria-label="Обновить ленту" title="Обновить ленту"><svg><use href="/assets/icons.svg#refresh"/></svg></button></div></div>
+        <div class="board" id="board" data-mobile="feed">
+          <aside class="feed-panel panel" aria-label="Персональная лента"><div class="feed-heading"><div><h2>Важное для вас</h2><p>С учётом компании и вашей роли</p></div><span id="feed-count" class="count-badge">0</span></div><div class="feed-tabs"><span>Персональная лента</span><span class="live-dot" aria-label="Подборка по данным профиля"></span></div><div id="feed" aria-live="polite"></div><div class="feed-bottom"><button id="add-news" class="secondary"><svg><use href="/assets/icons.svg#plus"/></svg>Разобрать свою новость</button><p>Вставьте текст или ссылку на событие</p></div></aside>
+          <article class="reader panel" id="reader" aria-label="Разбор события"><div class="reader-topline"><button id="back-feed" class="quiet-button"><svg><use href="/assets/icons.svg#back"/></svg>К ленте</button><div class="reader-kicker"><span class="red-dot"></span><span id="reader-label">ПЕРСОНАЛЬНЫЙ РАЗБОР</span></div><span id="card-status" class="status-badge">Обзор события</span></div><div id="card" aria-live="polite"></div></article>
+        </div>
+        <footer><span>Учебный прототип · Не является инвестиционной рекомендацией</span><button id="runtime-open"><span class="status-dot" id="runtime-dot"></span><span id="runtime-label">Демо</span></button></footer>
+      </div>
+    </section>
+  </main>
+  <dialog id="news-dialog" aria-labelledby="news-title"><div class="dialog-heading"><div><div class="eyebrow">НОВОЕ СОБЫТИЕ</div><h2 id="news-title">Что разберём?</h2></div><button class="icon-button" data-close aria-label="Закрыть"><svg><use href="/assets/icons.svg#close"/></svg></button></div><p class="dialog-description">Добавьте новость. Ассистент свяжет её с профилем вашей компании и проверит выводы.</p><form id="news-form"><label for="news-text">Текст новости</label><textarea id="news-text" rows="6" maxlength="50000" placeholder="Вставьте текст публикации…"></textarea><div class="divider-label">ИЛИ ССЫЛКА НА ИСТОЧНИК</div><label class="sr-only" for="news-url">Ссылка на новость</label><input id="news-url" type="url" placeholder="https://…"><details><summary>Указать дату публикации</summary><label for="news-date" class="sr-only">Дата публикации</label><input id="news-date" type="datetime-local"></details><p class="field-hint">Новость будет доступна только вашей компании.</p><button class="primary" type="submit">Разобрать влияние <span aria-hidden="true">↗</span></button></form></dialog>
+  <dialog id="info-dialog" aria-labelledby="info-title"><div class="dialog-heading"><h2 id="info-title">О сервисе</h2><button class="icon-button" data-close aria-label="Закрыть"><svg><use href="/assets/icons.svg#close"/></svg></button></div><div id="info-content"></div></dialog>
+  <dialog id="profile-dialog" aria-labelledby="profile-title"><div class="dialog-heading"><h2 id="profile-title">Контекст компании</h2><button class="icon-button" data-close aria-label="Закрыть"><svg><use href="/assets/icons.svg#close"/></svg></button></div><div id="profile-content"></div></dialog>
+  <dialog id="admin-dialog" aria-labelledby="admin-title"><div class="dialog-heading"><h2 id="admin-title">Проверка аналитики банка</h2><button class="icon-button" data-close aria-label="Закрыть"><svg><use href="/assets/icons.svg#close"/></svg></button></div><p class="dialog-description">Откройте оригинал, сверьте текст и числа. Подтверждение означает ручную проверку фрагмента.</p><button id="load-review" class="secondary">Обновить очередь</button><div id="review"></div></dialog>
+</body>
+</html>

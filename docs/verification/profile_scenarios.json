@@ -1,0 +1,73 @@
+{
+  "synthetic": true,
+  "backend_mode": "provisional_baseline",
+  "feed_requests": 48,
+  "archetypes": 8,
+  "personas": 6,
+  "pd_at_5": 0.20238095238095238,
+  "pd_target": 0.4,
+  "pd_target_met": false,
+  "clone_pd_at_5": 0.0,
+  "clone_stability_target_met": true,
+  "cases": [
+    {
+      "archetype": "CA-01",
+      "status": "provisional",
+      "publishable": false,
+      "trace_steps": 3,
+      "answer_mode": "grounded_context"
+    },
+    {
+      "archetype": "CA-02",
+      "status": "provisional",
+      "publishable": false,
+      "trace_steps": 3,
+      "answer_mode": "grounded_context"
+    },
+    {
+      "archetype": "CA-03",
+      "status": "provisional",
+      "publishable": false,
+      "trace_steps": 3,
+      "answer_mode": "grounded_context"
+    },
+    {
+      "archetype": "CA-04",
+      "status": "provisional",
+      "publishable": false,
+      "trace_steps": 3,
+      "answer_mode": "grounded_context"
+    },
+    {
+      "archetype": "CA-05",
+      "status": "provisional",
+      "publishable": false,
+      "trace_steps": 3,
+      "answer_mode": "grounded_context"
+    },
+    {
+      "archetype": "CA-06",
+      "status": "provisional",
+      "publishable": false,
+      "trace_steps": 3,
+      "answer_mode": "grounded_context"
+    },
+    {
+      "archetype": "CA-07",
+      "status": "provisional",
+      "publishable": false,
+      "trace_steps": 3,
+      "answer_mode": "grounded_context"
+    },
+    {
+      "archetype": "CA-08",
+      "status": "provisional",
+      "publishable": false,
+      "trace_steps": 3,
+      "answer_mode": "grounded_context"
+    }
+  ],
+  "model_calls": 0,
+  "independent_personalization_quality_established": false,
+  "full_case_acceptance": false
+}

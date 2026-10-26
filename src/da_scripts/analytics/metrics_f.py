@@ -229,6 +229,7 @@ def f10_client_type(df: pd.DataFrame) -> pd.DataFrame:
     norm = norm.mask(t.str.contains("действ", na=False), "existing")
     norm = norm.mask(t.str.contains("потенц|новый|prospect", na=False), "potential")
     norm = norm.mask(t.str.contains("existing|current", na=False), "existing")
+    norm = norm.mask(t.eq("client").fillna(False), "existing")
     return pd.DataFrame({"F10_cl_type_raw": df["CL_TYPE"],
                          "F10_cl_type": norm}, index=df.index)
 

@@ -8,7 +8,7 @@ from contextlib import asynccontextmanager
 from datetime import date
 from typing import Iterator, Optional
 
-from fastapi import Depends, FastAPI, Header, HTTPException, Query
+from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
 from pydantic import BaseModel, Field
 
 from . import bank_view as bv
@@ -42,7 +42,9 @@ def get_conn() -> Iterator[sqlite3.Connection]:
         conn.close()
 
 
-def require_admin(x_admin_token: str | None = Header(default=None)) -> None:
+def require_admin(request: Request, x_admin_token: str | None = Header(default=None)) -> None:
+    if getattr(getattr(request.state, "principal", None), "role", None) == "admin":
+        return
     token = os.getenv("NAFA_ADMIN_TOKEN")
     if not token or x_admin_token != token:
         raise HTTPException(401, "admin token required")
@@ -55,16 +57,26 @@ def health(conn: sqlite3.Connection = Depends(get_conn)):
 
 
 @app.get("/clients")
-def clients(limit: int = Query(100, le=1000), offset: int = 0, conn=Depends(get_conn)):
+def clients(request: Request, limit: int = Query(100, ge=1, le=1000), offset: int = Query(0, ge=0), conn=Depends(get_conn)):
+    principal = getattr(request.state, "principal", None)
+    if principal and principal.role == "client":
+        row = conn.execute("SELECT synthetic_u,mainokved_code,region,cl_type FROM clients WHERE synthetic_u=?", (principal.client_id,)).fetchone()
+        if row is None:
+            return []
+        from .util import pseudonym
+        return [dict(client_id=row["synthetic_u"],pseudonym=pseudonym(row["synthetic_u"]),okved=row["mainokved_code"],region=row["region"],cl_type=row["cl_type"])]
     return list_clients(conn, limit, offset)
 
 
 @app.get("/clients/{client_id}/profile")
-def client_profile(client_id: str, conn=Depends(get_conn)):
+def client_profile(client_id: str, request: Request, conn=Depends(get_conn)):
     """Raw record + flags + payment totals. F/G/E metrics are computed by the DA functions on top of this."""
     rec = get_client_record(conn, client_id)
     if not rec:
         raise HTTPException(404, "client not found")
+    if getattr(request.state, "principal", None):
+        allowed = {"synthetic_u","mainokved_code","mainokved_name","region","city","cl_type","flags","payments_summary"}
+        rec = {key:value for key,value in rec.items() if key in allowed}
     return rec
 
 
@@ -73,6 +85,8 @@ class IngestIn(BaseModel):
     url: Optional[str] = None
     title: Optional[str] = None
     published_at: Optional[str] = None
+    client_id: Optional[str] = None
+    shared: bool = False
 
 
 class CardGenerateIn(BaseModel):
@@ -94,12 +108,28 @@ class CardFeedbackIn(BaseModel):
 
 
 @app.post("/events/ingest")
-def events_ingest(body: IngestIn, conn=Depends(get_conn)):
+def events_ingest(body: IngestIn, request: Request, conn=Depends(get_conn)):
     """BYO news (C05): text or URL. URL host must be in byo.allowed_domains."""
     if bool(body.text) == bool(body.url):
         raise HTTPException(422, "provide exactly one of: text, url")
+    principal = getattr(request.state, "principal", None)
+    owner = None
+    if principal:
+        if principal.role == "client":
+            if body.shared or body.client_id not in (None, principal.client_id):
+                raise HTTPException(403, "event ownership denied")
+            owner = principal.client_id
+        else:
+            owner = "*" if body.shared else body.client_id
+            if not owner:
+                raise HTTPException(422, "choose client_id or explicitly share the event")
     try:
-        return byo.ingest_text(conn, body.text, body.title, body.published_at) if body.text else byo.ingest_url(conn, body.url)
+        result = byo.ingest_text(conn, body.text, body.title, body.published_at) if body.text else byo.ingest_url(conn, body.url)
+        if owner:
+            row = conn.execute("SELECT origin FROM documents WHERE doc_id=?",(result["doc_id"],)).fetchone()
+            if row and row["origin"] == "byo":
+                conn.execute("INSERT OR IGNORE INTO pe_event_owners VALUES(?,?)",(result["doc_id"],owner))
+        return result
     except FetchError as e:
         code = 403 if e.error_type in ("domain_not_allowed", "robots_disallowed") else 502
         raise HTTPException(code, f"{e.error_type}: {e.message}")
@@ -114,6 +144,8 @@ def feed(client_id: str, persona: str = "PER-03", as_of: str | None = None, k: i
         return orchestrator.feed(conn, client_id, persona, as_of, k)
     except KeyError as e:
         raise HTTPException(404, str(e))
+    except ValueError as e:
+        raise HTTPException(422, str(e))
 
 
 @app.post("/cards/generate")
@@ -188,9 +220,11 @@ def bank_view_post(rec: bv.BankViewIn, conn=Depends(get_conn)):
 
 
 @app.get("/search/news")
-def api_search_news(q: str, k: int = Query(10, le=50), since: str | None = None, until: str | None = None,
+def api_search_news(request: Request, q: str, k: int = Query(10, ge=1, le=50), since: str | None = None, until: str | None = None,
                     as_of: str | None = None, source_id: list[str] | None = Query(None), conn=Depends(get_conn)):
-    return search_news(conn, q, since=since, until=until, as_of=as_of, source_ids=source_id, k=k)
+    principal = getattr(request.state,"principal",None)
+    client_id = principal.client_id if principal and principal.role=="client" else None
+    return search_news(conn, q, since=since, until=until, as_of=as_of, source_ids=source_id, k=k, client_id=client_id)
 
 
 @app.get("/search/alfa")

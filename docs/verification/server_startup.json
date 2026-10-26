@@ -1,0 +1,18 @@
+{
+  "real_tcp_server": true,
+  "checks": {
+    "tcp_health": true,
+    "ui_served_and_private_api_requires_login": true,
+    "pe_routes_registered": true,
+    "case_registration_requires_admin": true,
+    "trusted_case_registered": true,
+    "mock_source_withheld_before_any_model_call": true,
+    "profile_reachable_feed_rejects_missing_da": true,
+    "missing_da_context_fails_closed": true,
+    "quality_and_budget_reachable": true
+  },
+  "model_calls": 0,
+  "real_llm_quality_tested": false,
+  "automatic_da_case_builder": true,
+  "full_case_acceptance": false
+}

@@ -34,6 +34,7 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("corpus-report")
     c = sub.add_parser("corpus-verify"); c.add_argument("chunk_id"); c.add_argument("--text"); c.add_argument("--numbers-json")
     c = sub.add_parser("corpus-verify-key"); c.add_argument("csv", nargs="?", default=str(ROOT / "data" / "ref" / "key_numbers_to_verify.csv"))
+    c.add_argument("--confirm-reviewed", action="store_true", help="Mark matching chunks manual ONLY after a human reviews their original pages")
     c = sub.add_parser("bankview-seed"); c.add_argument("path", nargs="?", default=str(ROOT / "data" / "bank_view_seed.csv"))
     c = sub.add_parser("bankview-list"); c.add_argument("--indicator"); c.add_argument("--horizon"); c.add_argument("--as-of")
     c = sub.add_parser("bankview-add")
@@ -109,7 +110,7 @@ def main(argv: list[str] | None = None) -> int:
         _p({"verified": verify_chunk(conn, a.chunk_id, a.text, json.loads(a.numbers_json) if a.numbers_json else None)})
     elif a.cmd == "corpus-verify-key":
         from .ingest.alfa_corpus import verify_key_numbers
-        _p(verify_key_numbers(conn, a.csv))
+        _p(verify_key_numbers(conn, a.csv, confirm_review=a.confirm_reviewed))
     elif a.cmd == "bankview-seed":
         _p({"seeded": bv.seed_from_csv(conn, a.path)})
     elif a.cmd == "bankview-list":

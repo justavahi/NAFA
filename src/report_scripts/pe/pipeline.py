@@ -14,7 +14,7 @@ from typing import Literal
 
 from pydantic import Field, ValidationError, model_validator
 
-from .evidence import CompanyFeature, ComputedEvidence, EvidenceLedger, QuotedEvidence, check_card_provenance, quoted_text
+from .evidence import CompanyFeature, ComputedEvidence, EvidenceLedger, QuotedEvidence, UnknownEffect, check_card_provenance, quoted_text
 from .prompts import prepare_request
 from .schemas import Claim, CriticVerdict, EventCore, EventExtraction, Factor, Inference, InsightCard, PersonalOverlay, SCHEMAS, StrictModel
 from .session import PromptSession
@@ -45,8 +45,10 @@ class CaseInput(StrictModel):
                 raise ValueError(f"{ref}: requires numeric value in [0,1]")
         for factor, ref in self.effect_source_ids.items():
             entry = entries.get(ref)
-            if not isinstance(entry, ComputedEvidence) or entry.value not in EFFECTS:
+            if not isinstance(entry, (ComputedEvidence, UnknownEffect)) or entry.value not in EFFECTS:
                 raise ValueError(f"{factor}: requires computed effect sign")
+            if isinstance(entry, UnknownEffect) and entry.factor != factor:
+                raise ValueError("unknown effect belongs to another factor")
             if factor not in self.event.iota:
                 raise ValueError(f"{factor}: effect without extracted event factor")
         docs = {doc.id: doc for doc in self.ledger.documents}
@@ -117,7 +119,7 @@ def check_numeric_tokens(card: InsightCard, ledger: EvidenceLedger) -> list[str]
             doc = next(d for d in ledger.documents if d.id == entry.source.document_id)
             # Page and document date are valid context when attributing bank view.
             return quoted_text(entry,doc)
-        if isinstance(entry, ComputedEvidence):
+        if isinstance(entry, (ComputedEvidence, UnknownEffect)):
             return str(entry.value) + " " + " ".join(text_for(r) for r in entry.input_ids)
         return str(entry.value) if isinstance(entry, CompanyFeature) else ""
 

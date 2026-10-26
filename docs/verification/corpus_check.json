@@ -1,0 +1,172 @@
+{
+  "mode": "offline_cached_extraction",
+  "parsing": {
+    "parsed": [],
+    "skipped": [
+      "DOC-01",
+      "DOC-02",
+      "DOC-03",
+      "DOC-04",
+      "DOC-05",
+      "DOC-06",
+      "DOC-07",
+      "DOC-08",
+      "DOC-09"
+    ],
+    "missing": [
+      "DOC-10"
+    ],
+    "unknown_files": [],
+    "partial": [],
+    "failed": [],
+    "errors": [],
+    "budget_blocked": false
+  },
+  "reference_numbers": {
+    "file": "<repo>/src/store/data/ref/key_numbers_to_verify.csv",
+    "checked": 34,
+    "matched": 34,
+    "mismatches": [],
+    "missing_chunks": [],
+    "verified": true,
+    "human_review_confirmed": false,
+    "scope": "reference-number consistency; not semantic source validation"
+  },
+  "search": {
+    "k": 3,
+    "total": 10,
+    "passed": 10,
+    "hit_rate": 1.0,
+    "acceptance_met": true,
+    "results": [
+      {
+        "query": "ключевая ставка конец 2026 прогноз",
+        "expected": [
+          "DOC-07",
+          "DOC-02"
+        ],
+        "top_k_docs": [
+          "DOC-02",
+          "DOC-02",
+          "DOC-03"
+        ],
+        "pass": true
+      },
+      {
+        "query": "прогноз инфляции 2026 2027",
+        "expected": [
+          "DOC-07",
+          "DOC-02"
+        ],
+        "top_k_docs": [
+          "DOC-02",
+          "DOC-07",
+          "DOC-07"
+        ],
+        "pass": true
+      },
+      {
+        "query": "обзор рынка золота август",
+        "expected": [
+          "DOC-06"
+        ],
+        "top_k_docs": [
+          "DOC-06",
+          "DOC-06",
+          "DOC-06"
+        ],
+        "pass": true
+      },
+      {
+        "query": "годовая инфляция недельная дефляция плодоовощи",
+        "expected": [
+          "DOC-04"
+        ],
+        "top_k_docs": [
+          "DOC-04",
+          "DOC-04",
+          "DOC-04"
+        ],
+        "pass": true
+      },
+      {
+        "query": "оборот розничной торговли потребление на пике",
+        "expected": [
+          "DOC-03"
+        ],
+        "top_k_docs": [
+          "DOC-03",
+          "DOC-05",
+          "DOC-05"
+        ],
+        "pass": true
+      },
+      {
+        "query": "доходность ОФЗ 26254 длинные выпуски",
+        "expected": [
+          "DOC-08",
+          "DOC-01"
+        ],
+        "top_k_docs": [
+          "DOC-01",
+          "DOC-01",
+          "DOC-01"
+        ],
+        "pass": true
+      },
+      {
+        "query": "защитный портфель корпоративные флоутеры",
+        "expected": [
+          "DOC-01"
+        ],
+        "top_k_docs": [
+          "DOC-01",
+          "DOC-01",
+          "DOC-01"
+        ],
+        "pass": true
+      },
+      {
+        "query": "дисконт Urals к Brent цена отсечения",
+        "expected": [
+          "DOC-01"
+        ],
+        "top_k_docs": [
+          "DOC-01",
+          "DOC-01",
+          "DOC-08"
+        ],
+        "pass": true
+      },
+      {
+        "query": "покупки золота мировые центральные банки Китай",
+        "expected": [
+          "DOC-06"
+        ],
+        "top_k_docs": [
+          "DOC-06",
+          "DOC-06",
+          "DOC-06"
+        ],
+        "pass": true
+      },
+      {
+        "query": "корпоративные облигации размещения плавающий купон",
+        "expected": [
+          "DOC-01"
+        ],
+        "top_k_docs": [
+          "DOC-01",
+          "DOC-01",
+          "DOC-01"
+        ],
+        "pass": true
+      }
+    ]
+  },
+  "network_model_calls": 0,
+  "missing_cache_attempts": 0,
+  "parsed_document_count": 9,
+  "human_review_performed": false,
+  "approved_live_vlm_tested": false
+}

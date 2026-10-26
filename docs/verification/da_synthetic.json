@@ -1,0 +1,30 @@
+{
+  "synthetic": true,
+  "pandas_version": "3.0.2",
+  "input_rows": {
+    "clients": 60,
+    "payments": 400,
+    "links": 80
+  },
+  "unique_company_rows": 60,
+  "ambiguous_client_ids": 0,
+  "aligned_unique_feature_keys": true,
+  "exposure_range_check": true,
+  "client_type_counts": {
+    "existing": 48,
+    "potential": 12
+  },
+  "source_sha256": {
+    "df_Uid_data_hack.csv": "176fdc500ee1f82a84fce976afb62144e05a2fffc6e8a7f6808a02ce45322cd7",
+    "df_Payments_data_hack.csv": "f4222a7aeabf1134832bf181ed3def5012fce3e3b91b2df356c93402ff9edf5c",
+    "df_Fid_Uid_link_hack.csv": "bd0c26073a5c48b174eaf089c205c20744b0cea9e114785021ef769e28960da7"
+  },
+  "charts_generated": false,
+  "quality_labels_generated": false,
+  "model_calls": 0,
+  "full_case_acceptance": false,
+  "limitations": [
+    "Revenue units and temporal alignment not confirmed",
+    "Ambiguous IDs deduplicated by first row; must be excluded from real-card acceptance sampling"
+  ]
+}

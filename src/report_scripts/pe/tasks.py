@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from .contracts import BankViewExtraction, Chunk, GroundedExplanation, OfferText
-from .evidence import ComputedEvidence, EvidenceLedger, QuotedEvidence, quoted_text
+from .evidence import ComputedEvidence, EvidenceLedger, QuotedEvidence, UnknownEffect, quoted_text
 from .numbers import unsupported_numeric_tokens
 from .schemas import ChatAnswer, Claim, EventExtraction, InsightCard
 from .session import PromptSession
@@ -18,7 +18,7 @@ def evidence_text(ledger: EvidenceLedger, ids: list[str]) -> str:
         if isinstance(entry, QuotedEvidence):
             doc = docs[entry.source.document_id]
             return quoted_text(entry,doc)
-        if isinstance(entry, ComputedEvidence):
+        if isinstance(entry, (ComputedEvidence, UnknownEffect)):
             return str(entry.value) + " " + " ".join(resolve(i) for i in entry.input_ids)
         return str(entry.value)
     return " ".join(resolve(ref) for ref in ids)

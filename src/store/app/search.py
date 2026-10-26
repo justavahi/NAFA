@@ -21,7 +21,7 @@ def index_chunk(conn: sqlite3.Connection, chunk_id: str, text: str) -> None:
 
 def search_news(conn: sqlite3.Connection, query: str, *, since: str | None = None, until: str | None = None,
                 source_ids: list[str] | None = None, as_of: str | None = None, k: int | None = None,
-                collapse_clusters: bool = True) -> list[dict]:
+                collapse_clusters: bool = True, client_id: str | None = None) -> list[dict]:
     """Tool `search_news`. Dates are UTC strings 'YYYY-MM-DDTHH:MM:SSZ'. `as_of` hides anything published later
     (needed for replaying the state of the world on a past date). Duplicates are collapsed to the cluster representative."""
     q = fts_query(query)
@@ -31,6 +31,9 @@ def search_news(conn: sqlite3.Connection, query: str, *, since: str | None = Non
     sql = ["""SELECT d.*, bm25(news_fts) AS score FROM news_fts JOIN documents d ON d.doc_id=news_fts.doc_id
               WHERE news_fts MATCH ? AND d.ready_at IS NOT NULL"""]
     args: list = [q]
+    if client_id is not None:
+        sql.append("AND (d.origin!='byo' OR EXISTS(SELECT 1 FROM pe_event_owners o WHERE o.doc_id=d.doc_id AND o.client_id IN (?, '*')))")
+        args.append(client_id)
     if since:
         sql.append("AND d.published_at_utc>=?"); args.append(since)
     for bound in (until, as_of):
@@ -52,7 +55,8 @@ def search_news(conn: sqlite3.Connection, query: str, *, since: str | None = Non
             seen.add(cid)
             if reps.get(cid) and reps[cid] != r["doc_id"]:
                 rep = conn.execute("SELECT * FROM documents WHERE doc_id=?", (reps[cid],)).fetchone()
-                if rep and (not as_of or rep["published_at_utc"] <= as_of):
+                visible = rep and (client_id is None or rep["origin"]!="byo" or conn.execute("SELECT 1 FROM pe_event_owners WHERE doc_id=? AND client_id IN (?, '*')",(rep["doc_id"],client_id)).fetchone())
+                if visible and (not as_of or rep["published_at_utc"] <= as_of):
                     r = rep
         out.append({
             "doc_id": r["doc_id"], "source_id": r["source_id"], "title": r["title"], "url": r["url"],

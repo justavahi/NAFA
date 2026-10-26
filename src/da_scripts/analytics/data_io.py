@@ -96,16 +96,15 @@ def dedup_clients(clients: pd.DataFrame) -> pd.DataFrame:
 
     Вызывается ПОСЛЕ профилирования (WP-D1 должен видеть сырые данные),
     но ДО расчётов: дубли меток в индексе ломают reindex/groupby.
-    Список убранных ID печатается и остаётся вопросом организаторам.
+    В журнал попадает только число удалённых строк, без сырых ID (R06).
     """
     ids = clients["SYNTHETIC_U"]
     bad = ids.isna() | ids.isin(["", "nan", "None", "NaN"])
     dup = ids.duplicated(keep="first")
     drop = bad | dup
     if drop.any():
-        dropped_ids = sorted(set(ids[drop]))
         print(f"[DA] Дедупликация клиентов: убрано {int(drop.sum())} строк "
-              f"(пустые/дубли ID, keep=first): {dropped_ids[:10]}")
+              "(пустые/дубли ID, keep=first; идентификаторы скрыты)")
         return clients.loc[~drop].reset_index(drop=True)
     return clients
 

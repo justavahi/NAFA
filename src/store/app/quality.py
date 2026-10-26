@@ -50,6 +50,12 @@ def q24_latency(conn: sqlite3.Connection, days: int = 7) -> list[dict]:
 
 
 def q25_tokens(conn: sqlite3.Connection, days: int = 7) -> dict:
+    from .db import llm_ledger
+    with llm_ledger(conn) as ledger:
+        return _q25_tokens(ledger, days)
+
+
+def _q25_tokens(conn: sqlite3.Connection, days: int) -> dict:
     by_op = [dict(r) for r in conn.execute(
         """SELECT operation, COUNT(*) calls, SUM(cache_hit) cache_hits, SUM(tokens_in) tokens_in, SUM(tokens_out) tokens_out, ROUND(SUM(cost_rub),4) cost_rub
            FROM llm_calls WHERE ts>=? AND status='ok' GROUP BY operation ORDER BY operation""", (_since(days),))]

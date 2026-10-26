@@ -64,6 +64,9 @@ python -m analytics.golden_set --template data/golden_set_seed.csv --out data/an
    цель >= 0.6, иначе пересогласовать правила разметки.
 3. `python -m analytics.golden_set --split data/golden_set.csv --out data` —
    отделит hold-out (эти события НЕ используются при калибровке WP-D8).
+   После разделения `golden_set.csv` содержит только development; все исходные
+   аннотации сохраняются отдельно в `golden_set_all.csv`. В калибровку передавайте
+   development-файл, а не полный архив аннотаций. Нужны минимум два разных события.
 
 ## Контур качества (WP-D9) — что подавать на вход
 

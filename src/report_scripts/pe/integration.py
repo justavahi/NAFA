@@ -5,7 +5,7 @@ import csv
 import re
 from pathlib import Path
 
-from .evidence import CompanyFeature, ComputedEvidence, EvidenceLedger, QuotedEvidence
+from .evidence import CompanyFeature, ComputedEvidence, EvidenceLedger, QuotedEvidence, UnknownEffect
 from .pipeline import CaseInput, card_claims
 from .schemas import InsightCard
 from .tasks import evidence_text
@@ -59,7 +59,7 @@ def quality_trace(card: InsightCard, ledger: EvidenceLedger, *, synthetic: bool 
     def mock(ref):
         entry = entries[ref]
         if isinstance(entry, QuotedEvidence): return docs[entry.source.document_id].is_mock
-        if isinstance(entry, ComputedEvidence): return any(mock(i) for i in entry.input_ids)
+        if isinstance(entry, (ComputedEvidence, UnknownEffect)): return any(mock(i) for i in entry.input_ids)
         return False
     sources = [dict(id=e.id, text=evidence_text(ledger, [e.id]), is_mock=mock(e.id),
                     origin=e.kind, synthetic=synthetic,

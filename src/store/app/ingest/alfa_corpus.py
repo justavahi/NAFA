@@ -431,24 +431,25 @@ def verify_chunk(conn: sqlite3.Connection, chunk_id: str, text: str | None = Non
     return True
 
 
-def verify_key_numbers(conn: sqlite3.Connection, path: str | Path) -> dict:
+def verify_key_numbers(conn: sqlite3.Connection, path: str | Path, *, confirm_review: bool = False) -> dict:
     """WP-B5 acceptance: check a curated list of key financial numbers against the stored chunks.
 
-    CSV columns: chunk_id,value,tolerance,note. A value is accepted if the chunk carries a number
-    within `tolerance` (default exact to 1e-6). Verified chunks get verified_by='manual' and
-    needs_manual_check=0. Any mismatch or unknown chunk is reported, so "no discrepancies" is evidence,
-    not an assertion. Re-runnable: run `python -m app.cli corpus-verify-key <csv>`.
+    Matching CSV numbers is an automated consistency check, not a human review.
+    Only explicit confirm_review after checking original pages may mark a chunk
+    manual, and only when ALL reference rows for that chunk match. Chart estimates
+    are not accepted as confirmed numbers. Unlisted claims still need review.
     """
     path = Path(path)
     checked = matched = 0
     mismatches: list[dict] = []
     missing_chunks: list[str] = []
+    chunk_ok: dict[str, bool] = {}
     with open(path, encoding="utf-8-sig", newline="") as f:
         rows = list(csv.DictReader(f))
     with tx(conn):
         for row in rows:
             cid = (row.get("chunk_id") or "").strip()
-            r = conn.execute("SELECT numbers_json FROM chunks WHERE chunk_id=?", (cid,)).fetchone()
+            r = conn.execute("SELECT numbers_json,block_type FROM chunks WHERE chunk_id=?", (cid,)).fetchone()
             if not r:
                 missing_chunks.append(cid)
                 continue
@@ -456,16 +457,21 @@ def verify_key_numbers(conn: sqlite3.Connection, path: str | Path) -> dict:
             exp = _num(row.get("value"))
             tol = _num(row.get("tolerance")) or 1e-6
             nums = json.loads(r["numbers_json"] or "[]")
-            ok = exp is not None and any(
-                abs(n["value"] - exp) <= tol for n in nums if "value" in n
+            ok = r["block_type"] != "chart_estimate" and exp is not None and any(
+                abs(n["value"] - exp) <= tol for n in nums if "value" in n and n.get("is_fact", True)
             )
+            chunk_ok[cid] = chunk_ok.get(cid, True) and ok
             if ok:
                 matched += 1
-                conn.execute("UPDATE chunks SET verified_by='manual', needs_manual_check=0 WHERE chunk_id=?", (cid,))
             else:
                 mismatches.append({"chunk_id": cid, "expected": exp, "note": row.get("note")})
+        if confirm_review:
+            for cid, ok in chunk_ok.items():
+                if ok:
+                    conn.execute("UPDATE chunks SET verified_by='manual', needs_manual_check=0 WHERE chunk_id=?", (cid,))
     return {"file": str(path), "checked": checked, "matched": matched, "mismatches": mismatches,
-            "missing_chunks": missing_chunks, "verified": matched == checked and checked == len(rows)}
+            "missing_chunks": missing_chunks, "verified": matched == checked and checked == len(rows),
+            "human_review_confirmed": confirm_review, "scope": "reference-number consistency; not semantic source validation"}
 
 
 def corpus_report(conn: sqlite3.Connection) -> dict:

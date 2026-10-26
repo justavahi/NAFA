@@ -69,7 +69,7 @@ python -m app.cli backfill-fx --start 2026-09-25 --end 2026-10-24
 python -m app.cli load-clients --uid clients.csv --links links.csv --payments payments.csv
 python -m app.cli corpus-parse ./data/input/alpha
 python -m app.cli corpus-report
-python -m app.cli corpus-verify-key            # 34 key numbers vs stored chunks
+python -m app.cli corpus-verify-key            # automatic reference-number match; does NOT mark human review
 python -m app.cli bankview-seed data/ref/bank_view_manual.csv
 python -m app.cli bankview-list --indicator key_rate --horizon end_2026
 python -m app.cli search-alfa "ключевая ставка"
@@ -99,6 +99,13 @@ The API schema is checked into `docs/backend/openapi.json` and can be regenerate
 `app.api:app`. Card generation is a deterministic/provisional baseline: it explicitly
 labels where DA-owned scoring functions, a semantic critic, event calendar or validated
 entity matcher are absent. It must not be presented as the final business ranking.
+
+Merged PE integration: from the repository root use `python scripts/run_backend.py`.
+It preserves existing card URLs and installs the PE generator/critic and dialogue.
+It requires a trusted DA `CaseInput`; absent context returns `PE_CASE_NOT_READY`,
+not an unverified fallback. See [backend handoff](../../docs/verification/backend_handoff.md).
+Human PDF review is separate: only use `corpus-verify-key --confirm-reviewed` after
+checking the original pages; mismatching chunks cannot be promoted by that command.
 
 ## Architecture overview
 
@@ -141,3 +148,15 @@ SQLite/FTS + typed read tools -> provisional card/API layer -> trace endpoints
 Re-measure Q-24 (ingestion latency) after scheduled polling has run for a few days; the
 current window reflects a cold-start feed. Do not mark the whole role accepted until the
 evidence in `docs/backend/acceptance_matrix.md` has been collected and reviewed.
+
+
+## Merged application entrypoint (26 October 2026)
+
+For the integrated PE/DA/UI application, use the root README and
+`python scripts/run_backend.py --env-file .local/demo/runtime.env` from the repository root.
+The historical `app.cli serve` / store-local Compose remain API-only baseline tools.
+The root factory now provides automatic new-news extraction and DA context, FM-06..FM-13
+feed ranking, verified generation/chat, session login, client isolation, a browser UI and
+manual PDF review. The earlier integration/UI TODOs above describe the standalone store
+release; current cross-component verification is in `../../docs/verification/merged_audit.md`.
+Passing mocked integration tests does not establish live model quality or full acceptance.

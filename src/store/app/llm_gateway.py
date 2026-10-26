@@ -14,6 +14,7 @@ from dataclasses import dataclass
 import httpx
 
 from .config import get_config, get_models
+from .db import llm_ledger
 from .util import iso, local_tz, now_utc
 
 
@@ -41,6 +42,11 @@ def _today() -> str:
 
 
 def usage_today(conn: sqlite3.Connection) -> dict:
+    with llm_ledger(conn) as ledger:
+        return _usage_today(ledger)
+
+
+def _usage_today(conn: sqlite3.Connection) -> dict:
     """Spend of the current (Moscow) day, excluding cache hits. Drives the soft (80%) and hard (100%) limits."""
     cfg = get_config()
     day = _today()
@@ -62,14 +68,18 @@ def image_message(prompt: str, png_bytes: bytes) -> list[dict]:
 class LLMGateway:
     def __init__(self, conn: sqlite3.Connection, transport: httpx.BaseTransport | None = None, base_url: str | None = None,
                  api_key: str | None = None, sleep=time.sleep):
-        self.conn = conn
+        self._ledger_context = llm_ledger(conn)
+        self.conn = self._ledger_context.__enter__()
         self.base_url = (base_url or os.getenv("LLM_BASE_URL") or "").rstrip("/")
         self.api_key = api_key or os.getenv("LLM_API_KEY") or ""
         self._sleep = sleep
         self._http = httpx.Client(timeout=120, transport=transport)
 
     def close(self) -> None:
-        self._http.close()
+        try:
+            self._http.close()
+        finally:
+            self._ledger_context.__exit__(None, None, None)
 
     # ---------- budget ----------
     def usage_today(self) -> dict:
@@ -80,7 +90,7 @@ class LLMGateway:
 
     # ---------- main call ----------
     def chat(self, *, operation: str, role: str, messages: list[dict], trace_id: str | None = None, max_tokens: int = 2000,
-             temperature: float = 0.0, response_format: dict | None = None, use_cache: bool = True) -> LLMResult:
+             temperature: float = 0.0, response_format: dict | None = None, use_cache: bool = True, request_options: dict | None = None) -> LLMResult:
         models = get_models()
         if role not in models:                                   # whitelist: only models from Appendix 3 are routable
             raise ValueError(f"role '{role}' is not in config/models.yaml")
@@ -88,6 +98,11 @@ class LLMGateway:
         payload = {"model": m["api_name"], "messages": messages, "max_tokens": max_tokens, "temperature": temperature}
         if response_format:
             payload["response_format"] = response_format
+        # PE_REQUEST_OPTIONS_V1: explicit controls, included before cache hashing.
+        if request_options:
+            if set(request_options) - {"reasoning_effort", "reasoning", "thinking"}:
+                raise ValueError("unsupported request option")
+            payload.update(request_options)
         req_hash = hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
 
         if use_cache:
@@ -105,8 +120,9 @@ class LLMGateway:
 
         text, tin, tout = self._post(payload, trace_id, operation, role, m, req_hash)
         cost = tin / 1000 * m.get("p_in_rub_per_1k", 0.0) + tout / 1000 * m.get("p_out_rub_per_1k", 0.0)
-        self.conn.execute("INSERT OR REPLACE INTO llm_cache(request_hash,response,model,created_at) VALUES(?,?,?,?)",
-                          (req_hash, text, m["model"], iso(now_utc())))
+        if text and getattr(self, "_pe_finish_reason", None) != "length":
+            self.conn.execute("INSERT OR REPLACE INTO llm_cache(request_hash,response,model,created_at) VALUES(?,?,?,?)",
+                              (req_hash, text, m["model"], iso(now_utc())))
         self._log(trace_id, operation, role, m["model"], tin, tout, cost, False, "ok", None, req_hash)
         return LLMResult(text, m["model"], tin, tout, cost, False, usage["soft"])
 
@@ -121,12 +137,13 @@ class LLMGateway:
             else:
                 if r.status_code == 200:
                     data = r.json()
-                    content = data["choices"][0]["message"]["content"]
+                    content = data["choices"][0]["message"]["content"] or ""  # PE_RESPONSE_V2: empty reasoning-only response is not SQL NULL
                     if isinstance(content, list):
                         content = "".join(p.get("text", "") for p in content if isinstance(p, dict))
                     usage = data.get("usage") or {}
                     tin = int(usage.get("prompt_tokens") or len(json.dumps(payload["messages"])) // 4)
                     tout = int(usage.get("completion_tokens") or len(content) // 4)
+                    self._pe_finish_reason = data["choices"][0].get("finish_reason")
                     return content, tin, tout
                 last = f"HTTP {r.status_code}"
                 if r.status_code not in (429, 500, 502, 503, 504):

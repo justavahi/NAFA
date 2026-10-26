@@ -1,0 +1,26 @@
+{
+  "real_browser": true,
+  "real_http_server": true,
+  "model_responses": "controlled_test_fixture",
+  "remote_llm_calls": 0,
+  "checks": [
+    "login",
+    "own_company_only",
+    "six_roles",
+    "feed",
+    "byo_extraction_da_card_critic",
+    "grounded_chat",
+    "feedback",
+    "three_deterministic_scenarios",
+    "trace_and_company_evidence",
+    "feedback_reason",
+    "no_model_calls_on_selection",
+    "all_six_role_refreshes",
+    "withheld_error_state",
+    "single_viewport_desktop_and_mobile",
+    "logout",
+    "no_javascript_errors"
+  ],
+  "real_llm_quality_tested": false,
+  "full_case_acceptance": false
+}

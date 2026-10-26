@@ -119,6 +119,13 @@ def run_calibration(components_csv: str | Path, golden_csv: str | Path,
     """WP-D8 целиком; результат — отчёт + предложение весов для weights.yaml."""
     comp = pd.read_csv(components_csv, encoding="utf-8-sig")
     golden = pd.read_csv(golden_csv, encoding="utf-8-sig")
+    # Components may include a complete corpus. Unlabelled/held-out pairs must
+    # not be treated as negative training examples or influence weight fitting.
+    labelled = pd.MultiIndex.from_arrays([golden["client_id"].astype(str), golden["event_id"].astype(str)])
+    keys = pd.MultiIndex.from_arrays([comp["client_id"].astype(str), comp["event_id"].astype(str)])
+    comp = comp.loc[keys.isin(labelled)].copy()
+    if comp.empty:
+        raise ValueError("no development components match the supplied annotations")
     best = calibrate(comp, golden)
     loao = leave_one_archetype_out(comp, golden)
     ci = bootstrap_ci(comp, golden, best["weights"])

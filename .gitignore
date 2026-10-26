@@ -1,0 +1,14 @@
+.DS_Store
+.env
+.venv/
+.local/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.egg-info/
+src/report_scripts/out/
+src/da_scripts/out/
+data_raw/
+df_Uid_data_hack.csv
+df_Uid_payment_hack.csv
+df_Fid_Uid_link_hack.csv

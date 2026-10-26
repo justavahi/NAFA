@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
@@ -14,12 +15,42 @@ SCHEMA = Path(__file__).with_name("schema.sql")
 
 
 def connect(path: str | Path | None = None) -> sqlite3.Connection:
-    conn = sqlite3.connect(str(path or db_path()), timeout=30, isolation_level=None)  # autocommit; we use explicit BEGIN
+    # FastAPI may execute dependency creation, endpoint and cleanup on different
+    # worker threads. Connections remain per request; never share them concurrently.
+    conn = sqlite3.connect(str(path or db_path()), timeout=30, isolation_level=None, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA busy_timeout=30000")
     conn.execute("PRAGMA foreign_keys=ON")
     return conn
+
+
+@contextmanager
+def llm_ledger(conn):
+    """Optional existing shared usage/cache DB; never create a fresh budget ledger."""
+    configured = os.getenv("NAFA_LLM_LEDGER_PATH")
+    if not configured:
+        yield conn
+        return
+    from .config import get_config
+    limit = get_config().get("budget.daily_token_limit")
+    if not isinstance(limit, int) or limit <= 0:
+        raise ValueError("shared LLM ledger requires a positive daily token limit")
+    path = Path(configured).resolve()
+    if not path.is_file():
+        raise ValueError("shared LLM ledger must already exist")
+    current = conn.execute("PRAGMA database_list").fetchone()[2]
+    if current and Path(current).resolve() == path:
+        yield conn
+        return
+    ledger = connect(path)
+    try:
+        tables = {r[0] for r in ledger.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        if not {"llm_calls", "llm_cache"}.issubset(tables):
+            raise ValueError("shared LLM ledger schema is missing")
+        yield ledger
+    finally:
+        ledger.close()
 
 
 @contextmanager

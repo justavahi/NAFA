@@ -11,7 +11,7 @@ import re
 
 from pydantic import Field, model_validator
 
-from .schemas import InsightCard, StrictModel
+from .schemas import Factor, InsightCard, StrictModel
 
 
 class Document(StrictModel):
@@ -56,8 +56,18 @@ class ComputedEvidence(StrictModel):
     calculation_ref: str = Field(min_length=1)
 
 
+class UnknownEffect(StrictModel):
+    """An explicit missing sign rule, never disguised as a DA formula."""
+    id: str = Field(min_length=1)
+    kind: Literal["UNKNOWN_EFFECT"]
+    factor: Factor
+    value: Literal["two_branches"] = "two_branches"
+    input_ids: list[str] = Field(min_length=1)
+    reason: str = Field(min_length=1)
+
+
 Evidence = Annotated[
-    QuotedEvidence | CompanyFeature | ComputedEvidence,
+    QuotedEvidence | CompanyFeature | ComputedEvidence | UnknownEffect,
     Field(discriminator="kind"),
 ]
 
@@ -116,7 +126,7 @@ class EvidenceLedger(StrictModel):
                 return
             visiting.add(entry_id)
             entry = entries[entry_id]
-            if isinstance(entry, ComputedEvidence):
+            if isinstance(entry, (ComputedEvidence, UnknownEffect)):
                 for ref in entry.input_ids:
                     visit(ref)
             visiting.remove(entry_id)
@@ -163,7 +173,7 @@ def check_card_provenance(card: InsightCard, ledger: EvidenceLedger, *, allow_mo
         entry = entries[entry_id]
         if isinstance(entry, QuotedEvidence):
             return docs[entry.source.document_id].is_mock
-        if isinstance(entry, ComputedEvidence):
+        if isinstance(entry, (ComputedEvidence, UnknownEffect)):
             return any(uses_mock(ref) for ref in entry.input_ids)
         return False
 

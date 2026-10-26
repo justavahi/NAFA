@@ -1,0 +1,34 @@
+NAFA merged prototype — third-party dependency inventory
+=======================================================
+
+The repository's LICENSE covers project code. Third-party packages, models and
+input documents retain their own licenses and terms; they are not relicensed by
+the repository license. No model weights are included in this repository.
+
+Runtime versions are locked in src/store/uv.lock and src/report_scripts/uv.lock.
+The unified image installs the store lock and imports the PE and DA source code.
+
+Core runtime:
+- FastAPI, HTTPX, Pydantic, APScheduler, PyYAML: MIT
+- Uvicorn, pandas, NumPy, SciPy, scikit-learn: BSD-style licenses
+- Beautiful Soup: MIT; lxml: BSD-style license, plus its bundled library notices
+- pymorphy3 and Russian dictionaries: retain installed package/dictionary notices
+- PyMuPDF: upstream AGPL/commercial licensing; see its installed distribution
+  and src/store/THIRD_PARTY_NOTICES
+
+Preparation and verification:
+- matplotlib: upstream Matplotlib license and bundled notices
+- tabulate, pytest, uv: retain their upstream licenses
+- Playwright: Apache-2.0; the locally installed browser has separate terms
+- Optional Tesseract OCR/language data: upstream notices, when installed
+
+Full license texts remain in the installed packages' dist-info/licenses or
+equivalent metadata directories and in any bundled browser/system packages.
+The list above is an inventory, not an assertion that all redistribution or
+deployment requirements have been fulfilled. Confirm the licenses of the exact
+distribution when creating the final external deliverable.
+
+Supplied bank PDFs, corpus extraction, CSV data and source articles are input
+materials. Their inclusion here does not grant rights beyond those provided by
+their owners or the case organisers. Secrets and participant CSVs are excluded
+from the Git and Docker contexts.

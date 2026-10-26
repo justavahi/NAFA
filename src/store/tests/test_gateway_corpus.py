@@ -337,4 +337,13 @@ def test_verify_key_numbers_marks_reviewed_and_flags_mismatch(conn, tmp_path):
     res = corpus.verify_key_numbers(conn, csv_path)
     assert res["checked"] == 2 and res["matched"] == 1 and res["verified"] is False
     assert res["mismatches"] == [{"chunk_id": "DOC-02-p1-b1", "expected": 99.9, "note": None}]
+    assert conn.execute("SELECT verified_by FROM chunks WHERE chunk_id='DOC-02-p1-b1'").fetchone()[0] is None
+    # One matching row must never hide another mismatch, even on explicit review.
+    corpus.verify_key_numbers(conn, csv_path, confirm_review=True)
+    assert conn.execute("SELECT verified_by FROM chunks WHERE chunk_id='DOC-02-p1-b1'").fetchone()[0] is None
+    csv_path.write_text("chunk_id,value\nDOC-02-p1-b1,14.0\n", encoding="utf-8")
+    result = corpus.verify_key_numbers(conn, csv_path)
+    assert result["verified"] and not result["human_review_confirmed"]
+    assert conn.execute("SELECT needs_manual_check FROM chunks WHERE chunk_id='DOC-02-p1-b1'").fetchone()[0] == 1
+    corpus.verify_key_numbers(conn, csv_path, confirm_review=True)
     assert conn.execute("SELECT verified_by FROM chunks WHERE chunk_id='DOC-02-p1-b1'").fetchone()[0] == "manual"

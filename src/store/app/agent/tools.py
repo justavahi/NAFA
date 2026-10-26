@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 import sqlite3
 from datetime import date
@@ -17,7 +18,7 @@ from ..util import iso, new_id, now_utc
 
 
 class StrictModel(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
 
 
 class ClientProfileArgs(StrictModel):
@@ -108,6 +109,12 @@ def get_payment_features(conn: sqlite3.Connection, client_id: str) -> dict:
     }
 
 
+def _finite_result(value: float) -> float:
+    if not math.isfinite(value):
+        raise ValueError("scenario calculation overflow; use finite inputs within supported numeric range")
+    return round(value, 2)
+
+
 def compute_scenario(args: dict[str, Any]) -> dict:
     """Deterministic FM-15 calculator; only supplied inputs are used; no LLM arithmetic."""
     a = ScenarioArgs.model_validate(args)
@@ -116,7 +123,7 @@ def compute_scenario(args: dict[str, Any]) -> dict:
         if a.floating_debt_rub is None or a.delta_rate_pp is None:
             raise ValueError("interest_expense requires floating_debt_rub and delta_rate_pp")
         delta = a.floating_debt_rub * (a.delta_rate_pp / 100.0)
-        return {"scenario_type": "interest_expense", "delta_annual_rub": round(delta, 2),
+        return {"scenario_type": "interest_expense", "delta_annual_rub": _finite_result(delta),
                 "formula": "floating_debt_rub * (delta_rate_pp / 100)", "inputs": a.model_dump(exclude_none=True),
                 "unit": "RUB/year", "limitations": "Assumes the full debt reprices for a full year."}
     if kind in {"fx", "fx_result", "fm15_b"}:
@@ -124,7 +131,7 @@ def compute_scenario(args: dict[str, Any]) -> dict:
             raise ValueError("fx scenario requires fx_volume, spot_from, spot_to and direction=receipts|payments")
         sign = 1 if a.direction == "receipts" else -1
         delta = a.fx_volume * (a.spot_to - a.spot_from) * sign
-        return {"scenario_type": "fx_result", "delta_rub": round(delta, 2),
+        return {"scenario_type": "fx_result", "delta_rub": _finite_result(delta),
                 "formula": "fx_volume * (spot_to - spot_from) * k; k=+1 receipts, -1 payments",
                 "inputs": a.model_dump(exclude_none=True), "unit": "RUB",
                 "limitations": "Ignores hedging, taxes and timing differences."}
@@ -132,7 +139,7 @@ def compute_scenario(args: dict[str, Any]) -> dict:
         if None in (a.cogs_rub, a.pass_through, a.delta_inflation_pp):
             raise ValueError("cost_inflation requires cogs_rub, pass_through and delta_inflation_pp")
         delta = a.cogs_rub * a.pass_through * (a.delta_inflation_pp / 100.0)
-        return {"scenario_type": "cost_inflation", "delta_cost_rub": round(delta, 2),
+        return {"scenario_type": "cost_inflation", "delta_cost_rub": _finite_result(delta),
                 "formula": "cogs_rub * pass_through * (delta_inflation_pp / 100)",
                 "inputs": a.model_dump(exclude_none=True), "unit": "RUB",
                 "limitations": "Linear first-order approximation over the supplied pass-through share."}
