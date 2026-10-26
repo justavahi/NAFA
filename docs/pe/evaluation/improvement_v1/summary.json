@@ -1,0 +1,239 @@
+{
+  "protocol_hash": "f5b5aa5dcb1283d81f4327ec3cf77b28925585bf67b07c0017d479d45ec7dbc9",
+  "dataset": {
+    "cases": 60,
+    "source_groups": 10,
+    "clients": 60,
+    "partitions": {
+      "dev": 24,
+      "validation": 18,
+      "test": 18
+    }
+  },
+  "scope": "All new cases are synthetic. 60 variants in 10 story families, not 60 independent real observations.",
+  "production_promoted": false,
+  "test_opened": false,
+  "target_achieved_on_independent_real_data": false,
+  "partitions": {
+    "dev": {
+      "expected_cases": 3,
+      "judges": {
+        "DeepSeek-V4.1-Flash": {
+          "baseline": {
+            "scored": 1,
+            "expected": 3,
+            "failed": 0,
+            "median": 3.8,
+            "mean": 3.8,
+            "share_ge_45": 0.0
+          },
+          "candidate": {
+            "scored": 1,
+            "expected": 3,
+            "failed": 0,
+            "median": 4.0,
+            "mean": 4.0,
+            "share_ge_45": 0.0
+          }
+        },
+        "Kimi-K2.6": {
+          "baseline": {
+            "scored": 0,
+            "expected": 3,
+            "failed": 0,
+            "median": null,
+            "mean": null,
+            "share_ge_45": null
+          },
+          "candidate": {
+            "scored": 0,
+            "expected": 3,
+            "failed": 0,
+            "median": null,
+            "mean": null,
+            "share_ge_45": null
+          }
+        }
+      },
+      "generation": {
+        "baseline": {
+          "attempted": 3,
+          "accepted": 3,
+          "partial": 0,
+          "unknown_count": 20
+        },
+        "candidate": {
+          "attempted": 3,
+          "accepted": 2,
+          "partial": 0,
+          "unknown_count": 18
+        }
+      },
+      "paired": {
+        "NX-00-00": {
+          "completed_orders": 0,
+          "winner": "inconclusive"
+        },
+        "NX-01-01": {
+          "completed_orders": 0,
+          "winner": "inconclusive"
+        },
+        "NX-02-02": {
+          "completed_orders": 0,
+          "winner": "inconclusive"
+        }
+      }
+    },
+    "validation": {
+      "expected_cases": 3,
+      "judges": {
+        "DeepSeek-V4.1-Flash": {
+          "baseline": {
+            "scored": 0,
+            "expected": 3,
+            "failed": 0,
+            "median": null,
+            "mean": null,
+            "share_ge_45": null
+          },
+          "candidate": {
+            "scored": 0,
+            "expected": 3,
+            "failed": 0,
+            "median": null,
+            "mean": null,
+            "share_ge_45": null
+          }
+        },
+        "Kimi-K2.6": {
+          "baseline": {
+            "scored": 0,
+            "expected": 3,
+            "failed": 0,
+            "median": null,
+            "mean": null,
+            "share_ge_45": null
+          },
+          "candidate": {
+            "scored": 0,
+            "expected": 3,
+            "failed": 0,
+            "median": null,
+            "mean": null,
+            "share_ge_45": null
+          }
+        }
+      },
+      "generation": {
+        "baseline": {
+          "attempted": 0,
+          "accepted": 0,
+          "partial": 0,
+          "unknown_count": 0
+        },
+        "candidate": {
+          "attempted": 0,
+          "accepted": 0,
+          "partial": 0,
+          "unknown_count": 0
+        }
+      },
+      "paired": {
+        "NX-04-00": {
+          "completed_orders": 0,
+          "winner": "inconclusive"
+        },
+        "NX-05-01": {
+          "completed_orders": 0,
+          "winner": "inconclusive"
+        },
+        "NX-06-02": {
+          "completed_orders": 0,
+          "winner": "inconclusive"
+        }
+      }
+    },
+    "test": {
+      "expected_cases": 3,
+      "judges": {
+        "DeepSeek-V4.1-Flash": {
+          "baseline": {
+            "scored": 0,
+            "expected": 3,
+            "failed": 0,
+            "median": null,
+            "mean": null,
+            "share_ge_45": null
+          },
+          "candidate": {
+            "scored": 0,
+            "expected": 3,
+            "failed": 0,
+            "median": null,
+            "mean": null,
+            "share_ge_45": null
+          }
+        },
+        "Kimi-K2.6": {
+          "baseline": {
+            "scored": 0,
+            "expected": 3,
+            "failed": 0,
+            "median": null,
+            "mean": null,
+            "share_ge_45": null
+          },
+          "candidate": {
+            "scored": 0,
+            "expected": 3,
+            "failed": 0,
+            "median": null,
+            "mean": null,
+            "share_ge_45": null
+          }
+        }
+      },
+      "generation": {
+        "baseline": {
+          "attempted": 0,
+          "accepted": 0,
+          "partial": 0,
+          "unknown_count": 0
+        },
+        "candidate": {
+          "attempted": 0,
+          "accepted": 0,
+          "partial": 0,
+          "unknown_count": 0
+        }
+      },
+      "paired": {
+        "NX-07-00": {
+          "completed_orders": 0,
+          "winner": "inconclusive"
+        },
+        "NX-08-01": {
+          "completed_orders": 0,
+          "winner": "inconclusive"
+        },
+        "NX-09-02": {
+          "completed_orders": 0,
+          "winner": "inconclusive"
+        }
+      }
+    }
+  },
+  "budget": {
+    "gateway_calls": 25,
+    "measured_tokens": 109304,
+    "pending_reservation": 0,
+    "stopped": null,
+    "limits": {
+      "gateway_calls": 48,
+      "additional_tokens": 180000,
+      "shared_daily_tokens": 3000000,
+      "call_wall_seconds": 120
+    },
+    "cost_rub": null
+  }
+}

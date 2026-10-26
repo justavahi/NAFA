@@ -1,0 +1,92 @@
+{
+  "ledger": {
+    "trace_id": "demo_trace",
+    "client_id": "demo_client",
+    "event_id": "demo_event",
+    "documents": [
+      {
+        "id": "demo_news",
+        "kind": "news",
+        "text": "Учебное событие: регулятор повысил ключевую ставку.",
+        "is_mock": true
+      }
+    ],
+    "entries": [
+      {
+        "id": "N1",
+        "kind": "NEWS_FACT",
+        "source": {
+          "document_id": "demo_news",
+          "start": 0,
+          "end": 51,
+          "quote": "Учебное событие: регулятор повысил ключевую ставку."
+        }
+      },
+      {
+        "id": "C1",
+        "kind": "COMPANY_FEATURE",
+        "client_id": "demo_client",
+        "feature_id": "F-08",
+        "value": "Кредитный продукт отмечен как действующий; размер и тип ставки неизвестны",
+        "source_record_id": "synthetic_row"
+      },
+      {
+        "id": "D_REL",
+        "kind": "COMPUTED_VALUE",
+        "formula_id": "FM-06",
+        "value": 0.5,
+        "input_ids": [
+          "C1",
+          "N1"
+        ],
+        "calculation_ref": "synthetic_not_executed/FM-06"
+      },
+      {
+        "id": "D_CONF",
+        "kind": "COMPUTED_VALUE",
+        "formula_id": "FM-20",
+        "value": 0.5,
+        "input_ids": [
+          "C1",
+          "N1"
+        ],
+        "calculation_ref": "synthetic_not_executed/FM-20"
+      },
+      {
+        "id": "D_SIGN",
+        "kind": "COMPUTED_VALUE",
+        "formula_id": "FM-14",
+        "value": "negative",
+        "input_ids": [
+          "C1",
+          "N1"
+        ],
+        "calculation_ref": "synthetic_not_executed/FM-14"
+      }
+    ]
+  },
+  "event": {
+    "event_type": "ET-01",
+    "entities": [
+      "учебный регулятор"
+    ],
+    "facts": [],
+    "iota": {
+      "RATE": 1.0
+    },
+    "direction": {
+      "RATE": 1
+    },
+    "severity": 3,
+    "geo_scope": "unknown",
+    "horizon": "unknown",
+    "rationale": "Синтетический учебный пример"
+  },
+  "persona": "PER-03",
+  "bank_view_status": "missing",
+  "relevance_id": "D_REL",
+  "confidence_id": "D_CONF",
+  "effect_source_ids": {
+    "RATE": "D_SIGN"
+  }
+}

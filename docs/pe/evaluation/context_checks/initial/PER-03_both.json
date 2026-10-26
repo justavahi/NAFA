@@ -1,0 +1,273 @@
+{
+  "mode": "evaluation",
+  "trace_id": "context_pdf_review",
+  "publishable": false,
+  "status": "needs_fix",
+  "calls": [
+    {
+      "prompt_id": "PRM-05",
+      "version": "3",
+      "attempt": 0,
+      "prompt_hash": "47d6084f13f6c1f0e9f243162667a5978bd153fc26a9dba3f5806df9287c57dc",
+      "requested_model": "GLM-5.3-Flash",
+      "status": "ok",
+      "input_hash": "18c906f4ee931742b790ca9d5ac14df1a8fe8bef52f32eff433683e5a96b5e19",
+      "max_tokens": 4096,
+      "executed_model": "GLM-5.3-Flash",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "cost_rub": null,
+      "cache_hit": true,
+      "response_hash": "362d769c43eeb1c3319670cc0919bc6295d88584c92c224d765e9ef825e0aebe",
+      "elapsed_ms": 3
+    },
+    {
+      "prompt_id": "PRM-06",
+      "version": "7",
+      "attempt": 0,
+      "prompt_hash": "319006c73cd3f999457d683e1caf30de015fc99f4b20c72039d2875d6de1a6cf",
+      "requested_model": "GLM-5.3-Flash",
+      "status": "ok",
+      "input_hash": "b7e99813b2eebba4e1f2a0df7e6f1c65f84900b319f9b3a0667b4ccdc69502e6",
+      "max_tokens": 4096,
+      "executed_model": "GLM-5.3-Flash",
+      "tokens_in": 4916,
+      "tokens_out": 983,
+      "cost_rub": null,
+      "cache_hit": false,
+      "response_hash": "07dae4df1db42187c9e26b6bc1e14c6d2edd9d8391f6befe0b815ee2c01ffa46",
+      "elapsed_ms": 11288
+    },
+    {
+      "prompt_id": "PRM-05",
+      "version": "3",
+      "attempt": 0,
+      "prompt_hash": "47d6084f13f6c1f0e9f243162667a5978bd153fc26a9dba3f5806df9287c57dc",
+      "requested_model": "GLM-5.3-Flash",
+      "status": "ok",
+      "input_hash": "9f449e3bb683643828a1878de24466d7f9b1216cef5cf5d11199dd266c74adab",
+      "max_tokens": 4096,
+      "executed_model": "GLM-5.3-Flash",
+      "tokens_in": 2250,
+      "tokens_out": 477,
+      "cost_rub": null,
+      "cache_hit": false,
+      "response_hash": "d04496da62323c3a3ab4c39c2da9e63bb9892036cc8c845cc7c7f1c11a4758f6",
+      "elapsed_ms": 6901
+    },
+    {
+      "prompt_id": "PRM-06",
+      "version": "7",
+      "attempt": 0,
+      "prompt_hash": "319006c73cd3f999457d683e1caf30de015fc99f4b20c72039d2875d6de1a6cf",
+      "requested_model": "GLM-5.3-Flash",
+      "status": "ok",
+      "input_hash": "e4bb6754587d402f0296f92c675e058493137039c909e53e27a52721701e41d1",
+      "max_tokens": 4096,
+      "executed_model": "GLM-5.3-Flash",
+      "tokens_in": 4895,
+      "tokens_out": 755,
+      "cost_rub": null,
+      "cache_hit": false,
+      "response_hash": "acf06db106de48ddeee2d0e8560bca4aed36e36f446f8372eb616fad165aaeae",
+      "elapsed_ms": 10903
+    }
+  ],
+  "issues": [
+    "core_f1: orphan news fragment; cite it directly in why_you or impact_chain, or omit fact"
+  ],
+  "unknowns": [
+    "Отсутствуют данные о фактическом решении по ставке на заседании 23 октября — это прогноз, а не свершившееся событие.",
+    "Недостаточно данных, чтобы оценить влияние на конкретные компании, их долг или выручку.",
+    "Не указана страница публикации (PUBLICATION), известна только страница банковского документа (стр. 1).",
+    "Решение по ставке 23 октября не принято — это прогноз, а не факт.",
+    "Суммы, сроки и тип ставки обязательств компании неизвестны; нулевой флаг LOA не доказывает отсутствие долга в других банках.",
+    "Доказан только один фактор (RATE), поэтому мультифакторная цепочка не построена.",
+    "Дата клиентских агрегатов неизвестна; влияние на конкретные договоры не подтверждено."
+  ],
+  "card": {
+    "confirmed_facts": [
+      {
+        "id": "core_f1",
+        "text": "Аналитики ожидают сохранения паузы по ключевой ставке на заседании 23 октября и пересматривают прогноз динамики ставки на этот год.",
+        "source_ids": [
+          "FR_8e038eb1e2ed415f0627"
+        ]
+      },
+      {
+        "id": "core_f2",
+        "text": "Прогноз по ставке на конец 2026 года пересмотрен с 13,5% до сохранения текущего значения 14,0% до конца года.",
+        "source_ids": [
+          "FR_956c5cc14210f671223b"
+        ]
+      }
+    ],
+    "why_you": [
+      {
+        "id": "personal_w2",
+        "text": "В продуктовых флагах компании есть кредитный продукт (LOA=0, но LEA=1), при этом суммы, сроки и тип ставки неизвестны, поэтому влияние пересмотра прогноза ставки условно и требует проверки договоров.",
+        "source_ids": [
+          "C_PRODUCTS",
+          "C_LIMITS"
+        ]
+      }
+    ],
+    "bank_view_status": "available",
+    "bank_view_items": [
+      {
+        "id": "core_b1",
+        "text": "Позиция банка (документ BANK_ORIGINAL, от 2026-09-11, стр. 1): ожидается сохранение ставки на уровне 14,0% годовых до конца 2026 года вместо прежнего прогноза 13,5%.",
+        "source_ids": [
+          "B1"
+        ]
+      },
+      {
+        "id": "core_b2",
+        "text": "Позиция банка (документ BANK_ORIGINAL, от 2026-09-11, стр. 1): прогноз по ставке на конец 2027 года остается на уровне 12,0% годовых.",
+        "source_ids": [
+          "B2"
+        ]
+      }
+    ],
+    "model_inference": {
+      "impact_chain": [
+        {
+          "id": "personal_i1",
+          "text": "Событие: аналитики ожидают паузу 23 октября и сохранение ставки 14,0% до конца 2026 года → канал: более длительный период дорогого финансирования → известный признак: у компании есть лизинговый продукт и отрицательный чистый агрегат → условное следствие: давление на стоимость обслуживания обязательств (расчётный знак эффекта — negative).",
+          "source_ids": [
+            "D_RATE",
+            "FR_956c5cc14210f671223b",
+            "C_PRODUCTS",
+            "C_NET"
+          ]
+        }
+      ],
+      "risks": [
+        {
+          "id": "personal_r1",
+          "text": "Если прогноз верен, дорогие деньги сохранятся дольше, чем ожидалось, что при отрицательном чистом агрегате может усилить нагрузку на стоимость финансирования; суммы и ставки договоров неизвестны.",
+          "source_ids": [
+            "D_RATE",
+            "C_LIMITS",
+            "FR_956c5cc14210f671223b"
+          ]
+        }
+      ],
+      "opportunities": [
+        {
+          "id": "personal_o1",
+          "text": "Прогноз снижения ставки на 2027 год до 12,0% сохраняется, то есть удорожание рассматривается как временное — можно заранее обсудить сценарии рефинансирования при смягчении.",
+          "source_ids": [
+            "FR_a29a90219a3ae5b481e1",
+            "B2"
+          ]
+        }
+      ],
+      "actions_or_questions": [
+        {
+          "id": "personal_a1",
+          "text": "Какие действующие договоры финансирования (включая лизинг) имеют плавающую ставку или пересмотр в ближайшие кварталы?",
+          "source_ids": [
+            "C_PRODUCTS",
+            "C_LIMITS"
+          ]
+        },
+        {
+          "id": "personal_a2",
+          "text": "Есть ли у компании планы привлечения нового финансирования до конца 2026 года, которые стоит сверить с ожидаемой ставкой 14,0%?",
+          "source_ids": [
+            "FR_956c5cc14210f671223b",
+            "C_LIMITS"
+          ]
+        }
+      ],
+      "confidence": 0.5
+    },
+    "provenance_labels": {
+      "core_f1": "fact",
+      "core_f2": "fact",
+      "core_b1": "bank_view",
+      "core_b2": "bank_view",
+      "personal_w2": "ai_inference",
+      "personal_i1": "ai_inference",
+      "personal_r1": "ai_inference",
+      "personal_o1": "ai_inference",
+      "personal_a1": "ai_inference",
+      "personal_a2": "ai_inference"
+    },
+    "relevance": 0.3383333333333334,
+    "offer": null,
+    "disclaimer": "Не является индивидуальной инвестиционной рекомендацией",
+    "trace_id": "context_pdf_review"
+  },
+  "critic": null,
+  "repairs": 1,
+  "check_history": [
+    {
+      "cycle": 0,
+      "issues": [
+        "personal_i2: effect differs from computed sign",
+        "personal_i2: missing effect calculation reference",
+        "core_f2: orphan news fragment; cite it directly in why_you or impact_chain, or omit fact"
+      ]
+    },
+    {
+      "cycle": 1,
+      "issues": [
+        "core_f1: orphan news fragment; cite it directly in why_you or impact_chain, or omit fact"
+      ]
+    }
+  ],
+  "discarded_claims": [
+    {
+      "id": "personal_w1",
+      "reason": "not_personalised"
+    }
+  ],
+  "context_ablation": {
+    "role_card": {
+      "persona": "PER-03",
+      "name": "Финансовый директор",
+      "jtbd": "Управлять стоимостью долга, ликвидностью и бюджетом; понимать влияние ставки и курса на план",
+      "key_topics": "Ставка, кредит, курс, covenants, рефинансирование, налоги",
+      "horizon": "недели-кварталы",
+      "weights": {
+        "RATE": 1.0,
+        "FX": 0.9,
+        "INFL": 0.8,
+        "ENERGY": 0.6,
+        "COMMOD": 0.7,
+        "DEMAND": 0.7,
+        "LABOR": 0.6,
+        "CREDIT": 1.0,
+        "BUDGET": 0.7,
+        "REG": 0.8,
+        "GEOPOL": 0.7,
+        "CPTY": 0.8
+      },
+      "reference_sha256": "af1b8cf838c9991384d8d7769ef6c99d17fd5433bdb436d69021ab7d93224606"
+    },
+    "selected_news_ids": [
+      "FR_8e038eb1e2ed415f0627",
+      "FR_956c5cc14210f671223b",
+      "FR_a29a90219a3ae5b481e1"
+    ],
+    "semantic_selection_verified": false
+  },
+  "impacts": [
+    {
+      "id": "personal_i1",
+      "text": "Событие: аналитики ожидают паузу 23 октября и сохранение ставки 14,0% до конца 2026 года → канал: более длительный период дорогого финансирования → известный признак: у компании есть лизинговый продукт и отрицательный чистый агрегат → условное следствие: давление на стоимость обслуживания обязательств (расчётный знак эффекта — negative).",
+      "source_ids": [
+        "D_RATE",
+        "FR_956c5cc14210f671223b",
+        "C_PRODUCTS",
+        "C_NET"
+      ],
+      "factor": "RATE",
+      "effect": "negative"
+    }
+  ],
+  "end_to_end_seconds": 29.108095707953908,
+  "protocol_hash": "334a02a8e5fab8c59589b46d16dee5ae06c8099955e8f57d8af050494dac07c7"
+}

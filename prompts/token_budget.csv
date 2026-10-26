@@ -1,0 +1,21 @@
+prompt_id,version,model,tokens_in,tokens_out,price_in_rub_per_1k,price_out_rub_per_1k,calls_per_day,cost_rub_per_day,measured_at,status,observed_calls,uncached_calls,latency_p50_ms
+PRM-01,1,Gemma 4 26B A4B,2758,343,,,,,2026-10-26,measured_tokens_prices_unknown,3,3,
+PRM-02,1,Gemma 4 26B A4B,967,303,,,,,2026-10-26,measured_tokens_prices_unknown,3,3,4816
+PRM-03,4,Qwen3-VL-30B-A3B-Instruct,2944,918,,,,,2026-10-26,measured_tokens_prices_unknown,3,4,45221
+PRM-04,1,Gemma 4 26B A4B,1092,122,,,,,2026-10-26,measured_tokens_prices_unknown,3,4,2562
+PRM-05,2,DeepSeek-V4.1-Flash,1789,2392,,,,,2026-10-26,measured_tokens_prices_unknown,12,16,18628
+PRM-05,2,GLM-5.3-Flash,1756,351,,,,,2026-10-26,measured_tokens_prices_unknown,16,10,6193
+PRM-06,4,DeepSeek-V4.1-Flash,3496,2565,,,,,2026-10-26,measured_tokens_prices_unknown,14,35,16454
+PRM-06,4,GLM-5.3-Flash,3113,732,,,,,2026-10-26,measured_tokens_prices_unknown,19,25,9456
+PRM-07,4,Kimi-K2.6,3597,5071,,,,,2026-10-26,measured_tokens_prices_unknown,21,11,30555
+PRM-07,4,Qwen3.6 35B A3B,3582,4962,,,,,2026-10-26,measured_tokens_prices_unknown,70,97,41067
+PRM-08,2,Qwen3.6 35B A3B,2772,4554,,,,,2026-10-26,measured_tokens_prices_unknown,50,35,35352
+PRM-09,1,GLM-5.3-Flash,2276,778,,,,,2026-10-26,measured_tokens_prices_unknown,6,6,8228
+PRM-10,1,GLM-5.3-Flash,2201,554,,,,,2026-10-26,measured_tokens_prices_unknown,5,5,8050
+PRM-11,1,Qwen3.6 35B A3B,2286,4292,,,,,2026-10-26,measured_tokens_prices_unknown,9,9,58140
+PRM-12,2,Qwen3.6 35B A3B,2519,4085,,,,,2026-10-26,measured_tokens_prices_unknown,6,6,36606
+PRM-13,1,Qwen3.6 35B A3B,3048,3654,,,,,2026-10-26,measured_tokens_prices_unknown,5,5,51341
+PRM-14,1,Qwen3.6 35B A3B,2160,3894,,,,,2026-10-26,measured_tokens_prices_unknown,6,5,45246
+PRM-15,1,Qwen3.6 35B A3B,1939,2877,,,,,2026-10-26,measured_tokens_prices_unknown,3,3,37199
+PRM-16,1,Kimi-K2.6,3605,3954,,,,,2026-10-26,measured_tokens_prices_unknown,41,28,51074
+PRM-17,1,GLM-5.3-Flash,2616,557,,,,,2026-10-26,measured_tokens_prices_unknown,6,6,6433

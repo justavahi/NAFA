@@ -1,0 +1,22 @@
+{
+  "assistant_visual_review": true,
+  "human_review": false,
+  "source_pdf_sha256": "92a96805f2b720f76bd0c52d2491044812b38401ab62d0f4a9157b4ca81c49bb",
+  "page": 1,
+  "bank_authored": true,
+  "source_transcription": [
+    "Хотя в августе федеральный бюджет сведен с профицитом 0,7 трлн руб., накопленный дефицит бюджета остается 5,8 трлн руб., что существенно выше прогнозов.",
+    "Мы ожидаем сохранения паузы на заседании 23 октября: С учетом риторики ЦБ РФ мы меняем наш взгляд на динамику ключевой ставки на этот год. Если раньше мы ориентировались на ставку на уровне 13,5% на конец 2026 г., то теперь мы ожидаем ее сохранения на текущем значении 14,0% до конца года. При этом наш прогноз по ставке на конец 2027 г. остается на уровне 12,0%."
+  ],
+  "selected_fragment_ids": [
+    "FR_8e038eb1e2ed415f0627",
+    "FR_956c5cc14210f671223b",
+    "FR_a29a90219a3ae5b481e1"
+  ],
+  "issues_in_old_extraction": [
+    "6.0 to 6.1 described as decrease, original says increase",
+    "Budget and forecast combined into one block; these are separate paragraphs in original"
+  ],
+  "original_corpus_modified": false,
+  "truth_independently_verified": false
+}

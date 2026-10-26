@@ -1,0 +1,25 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "doc_id": {
+      "title": "Doc Id",
+      "type": "string"
+    },
+    "page": {
+      "minimum": 1,
+      "title": "Page",
+      "type": "integer"
+    },
+    "image_description": {
+      "default": "",
+      "title": "Image Description",
+      "type": "string"
+    }
+  },
+  "required": [
+    "doc_id",
+    "page"
+  ],
+  "title": "PageInput",
+  "type": "object"
+}

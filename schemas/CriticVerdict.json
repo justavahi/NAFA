@@ -1,0 +1,101 @@
+{
+  "$defs": {
+    "CriticClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "layer": {
+          "enum": [
+            "fact",
+            "bank_view",
+            "ai_inference"
+          ],
+          "title": "Layer",
+          "type": "string"
+        },
+        "verdict": {
+          "enum": [
+            "supported",
+            "unsupported",
+            "contradicted",
+            "outdated"
+          ],
+          "title": "Verdict",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "layer",
+        "verdict",
+        "evidence_ids"
+      ],
+      "title": "CriticClaim",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "claims": {
+      "items": {
+        "$ref": "#/$defs/CriticClaim"
+      },
+      "title": "Claims",
+      "type": "array"
+    },
+    "numbers_check": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Numbers Check",
+      "type": "array"
+    },
+    "coverage_6_questions": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "title": "Coverage 6 Questions",
+      "type": "object"
+    },
+    "overall": {
+      "enum": [
+        "pass",
+        "fix",
+        "retry_search"
+      ],
+      "title": "Overall",
+      "type": "string"
+    },
+    "fix_instructions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Fix Instructions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "claims",
+    "numbers_check",
+    "coverage_6_questions",
+    "overall",
+    "fix_instructions"
+  ],
+  "title": "CriticVerdict",
+  "type": "object"
+}

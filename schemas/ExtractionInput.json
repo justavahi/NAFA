@@ -1,0 +1,85 @@
+{
+  "$defs": {
+    "Document": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "news",
+            "bank"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "as_of": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "As Of"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "is_mock": {
+          "default": false,
+          "title": "Is Mock",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "text"
+      ],
+      "title": "Document",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "document": {
+      "$ref": "#/$defs/Document"
+    },
+    "event_types": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Event Types",
+      "type": "array"
+    }
+  },
+  "required": [
+    "document",
+    "event_types"
+  ],
+  "title": "ExtractionInput",
+  "type": "object"
+}

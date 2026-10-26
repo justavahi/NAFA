@@ -1,0 +1,211 @@
+{
+  "$defs": {
+    "Claim": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "source_ids"
+      ],
+      "title": "Claim",
+      "type": "object"
+    },
+    "DecisionAction": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "resolves": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Resolves",
+          "type": "array"
+        },
+        "check": {
+          "$ref": "#/$defs/EvidenceStep"
+        },
+        "decision_use": {
+          "$ref": "#/$defs/EvidenceStep"
+        }
+      },
+      "required": [
+        "id",
+        "resolves",
+        "check",
+        "decision_use"
+      ],
+      "title": "DecisionAction",
+      "type": "object"
+    },
+    "EvidenceStep": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "maxLength": 350,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "text",
+        "source_ids"
+      ],
+      "title": "EvidenceStep",
+      "type": "object"
+    },
+    "Mechanism": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "factor": {
+          "enum": [
+            "RATE",
+            "FX",
+            "INFL",
+            "ENERGY",
+            "COMMOD",
+            "DEMAND",
+            "LABOR",
+            "CREDIT",
+            "BUDGET",
+            "REG",
+            "GEOPOL",
+            "CPTY"
+          ],
+          "title": "Factor",
+          "type": "string"
+        },
+        "effect": {
+          "pattern": "^(negative|positive|neutral|two_branches)$",
+          "title": "Effect",
+          "type": "string"
+        },
+        "event": {
+          "$ref": "#/$defs/EvidenceStep"
+        },
+        "channel": {
+          "$ref": "#/$defs/EvidenceStep"
+        },
+        "company": {
+          "$ref": "#/$defs/EvidenceStep"
+        },
+        "consequence": {
+          "$ref": "#/$defs/EvidenceStep"
+        },
+        "changes_if": {
+          "$ref": "#/$defs/EvidenceStep"
+        }
+      },
+      "required": [
+        "id",
+        "factor",
+        "effect",
+        "event",
+        "channel",
+        "company",
+        "consequence",
+        "changes_if"
+      ],
+      "title": "Mechanism",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "why_you": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "maxItems": 2,
+      "title": "Why You",
+      "type": "array"
+    },
+    "impact_chain": {
+      "items": {
+        "$ref": "#/$defs/Mechanism"
+      },
+      "maxItems": 3,
+      "minItems": 1,
+      "title": "Impact Chain",
+      "type": "array"
+    },
+    "risks": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "maxItems": 1,
+      "title": "Risks",
+      "type": "array"
+    },
+    "opportunities": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "maxItems": 1,
+      "title": "Opportunities",
+      "type": "array"
+    },
+    "actions_or_questions": {
+      "items": {
+        "$ref": "#/$defs/DecisionAction"
+      },
+      "maxItems": 4,
+      "minItems": 1,
+      "title": "Actions Or Questions",
+      "type": "array"
+    },
+    "unknowns": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unknowns",
+      "type": "array"
+    }
+  },
+  "required": [
+    "why_you",
+    "impact_chain",
+    "risks",
+    "opportunities",
+    "actions_or_questions",
+    "unknowns"
+  ],
+  "title": "InterpretationPlan",
+  "type": "object"
+}

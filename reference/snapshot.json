@@ -1,0 +1,122 @@
+[
+  {
+    "revision": "f844ed647035836f5199f031ca28b22cd4be30e9",
+    "source": "docs/data/metrics_catalog.csv",
+    "target": "reference/metrics_catalog.csv"
+  },
+  {
+    "revision": "f844ed647035836f5199f031ca28b22cd4be30e9",
+    "source": "docs/data/factors.csv",
+    "target": "reference/factors.csv"
+  },
+  {
+    "revision": "f844ed647035836f5199f031ca28b22cd4be30e9",
+    "source": "docs/data/event_types.csv",
+    "target": "reference/event_types.csv"
+  },
+  {
+    "revision": "f844ed647035836f5199f031ca28b22cd4be30e9",
+    "source": "docs/data/golden_set_seed.csv",
+    "target": "reference/golden_set_seed.csv"
+  },
+  {
+    "revision": "f844ed647035836f5199f031ca28b22cd4be30e9",
+    "source": "docs/data/synthetic_archetypes.csv",
+    "target": "reference/synthetic_archetypes.csv"
+  },
+  {
+    "revision": "f844ed647035836f5199f031ca28b22cd4be30e9",
+    "source": "docs/data/persona_weights.csv",
+    "target": "reference/persona_weights.csv"
+  },
+  {
+    "revision": "f844ed647035836f5199f031ca28b22cd4be30e9",
+    "source": "docs/04_TZ_prompt_engineer.md",
+    "target": "reference/pe_requirements.md"
+  },
+  {
+    "revision": "a623ed3e3c73315d2d94d70f11fd37324452dd95",
+    "source": "docs/da/01_metrics_descriptions.md",
+    "target": "reference/da_metrics.md"
+  },
+  {
+    "revision": "a623ed3e3c73315d2d94d70f11fd37324452dd95",
+    "source": "docs/da/02_formulas_and_calculations.md",
+    "target": "reference/da_formulas.md"
+  },
+  {
+    "revision": "a623ed3e3c73315d2d94d70f11fd37324452dd95",
+    "source": "docs/da/03_graphics.md",
+    "target": "reference/da_charts.md"
+  },
+  {
+    "revision": "a623ed3e3c73315d2d94d70f11fd37324452dd95",
+    "source": "docs/assets/charts/CH-06.json",
+    "target": "reference/charts/CH-06.json"
+  },
+  {
+    "revision": "a623ed3e3c73315d2d94d70f11fd37324452dd95",
+    "source": "docs/assets/charts/CH-07.json",
+    "target": "reference/charts/CH-07.json"
+  },
+  {
+    "revision": "a623ed3e3c73315d2d94d70f11fd37324452dd95",
+    "source": "docs/assets/charts/CH-14.json",
+    "target": "reference/charts/CH-14.json"
+  },
+  {
+    "revision": "a623ed3e3c73315d2d94d70f11fd37324452dd95",
+    "source": "docs/assets/charts/CH-15.json",
+    "target": "reference/charts/CH-15.json"
+  },
+  {
+    "revision": "a623ed3e3c73315d2d94d70f11fd37324452dd95",
+    "source": "docs/assets/charts/CH-23.json",
+    "target": "reference/charts/CH-23.json"
+  },
+  {
+    "revision": "a623ed3e3c73315d2d94d70f11fd37324452dd95",
+    "source": "docs/assets/charts/CH-25.json",
+    "target": "reference/charts/CH-25.json"
+  },
+  {
+    "revision": "1e794c8b037b63c4fcbd5c34caeaaf72c8f33f04",
+    "source": "store/data/ref/bank_view_manual.csv",
+    "target": "reference/bank_view_manual.csv"
+  },
+  {
+    "revision": "1e794c8b037b63c4fcbd5c34caeaaf72c8f33f04",
+    "source": "store/data/corpus_extraction/DOC-03/p1.json",
+    "target": "reference/corpus/DOC-03_p1.json"
+  },
+  {
+    "revision": "1e794c8b037b63c4fcbd5c34caeaaf72c8f33f04",
+    "source": "store/data/corpus_extraction/DOC-04/p1.json",
+    "target": "reference/corpus/DOC-04_p1.json"
+  },
+  {
+    "revision": "1e794c8b037b63c4fcbd5c34caeaaf72c8f33f04",
+    "source": "store/data/corpus_extraction/DOC-05/p1.json",
+    "target": "reference/corpus/DOC-05_p1.json"
+  },
+  {
+    "revision": "1e794c8b037b63c4fcbd5c34caeaaf72c8f33f04",
+    "source": "store/data/corpus_extraction/DOC-06/p1.json",
+    "target": "reference/corpus/DOC-06_p1.json"
+  },
+  {
+    "revision": "1e794c8b037b63c4fcbd5c34caeaaf72c8f33f04",
+    "source": "store/data/corpus_extraction/DOC-07/p1.json",
+    "target": "reference/corpus/DOC-07_p1.json"
+  },
+  {
+    "revision": "1e794c8b037b63c4fcbd5c34caeaaf72c8f33f04",
+    "source": "store/data/corpus_extraction/DOC-08/p1.json",
+    "target": "reference/corpus/DOC-08_p1.json"
+  },
+  {
+    "revision": "1e794c8b037b63c4fcbd5c34caeaaf72c8f33f04",
+    "source": "store/data/corpus_extraction/DOC-09/p1.json",
+    "target": "reference/corpus/DOC-09_p1.json"
+  }
+]

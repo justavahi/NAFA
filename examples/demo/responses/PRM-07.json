@@ -1,0 +1,55 @@
+{
+  "claims": [
+    {
+      "id": "core_fact",
+      "text": "Учебное событие: регулятор повысил ключевую ставку.",
+      "layer": "fact",
+      "verdict": "supported",
+      "evidence_ids": [
+        "N1"
+      ]
+    },
+    {
+      "id": "personal_why",
+      "text": "В учебном профиле отмечен кредитный продукт; событие может затрагивать условия финансирования.",
+      "layer": "ai_inference",
+      "verdict": "supported",
+      "evidence_ids": [
+        "N1",
+        "C1"
+      ]
+    },
+    {
+      "id": "personal_impact",
+      "text": "Если стоимость кредита зависит от ключевой ставки, её рост может увеличить расходы; условия договора неизвестны.",
+      "layer": "ai_inference",
+      "verdict": "supported",
+      "evidence_ids": [
+        "N1",
+        "C1",
+        "D_SIGN"
+      ]
+    },
+    {
+      "id": "personal_question",
+      "text": "Стоит проверить тип ставки и дату её пересмотра в кредитном договоре.",
+      "layer": "ai_inference",
+      "verdict": "supported",
+      "evidence_ids": [
+        "C1",
+        "N1"
+      ]
+    }
+  ],
+  "numbers_check": [],
+  "coverage_6_questions": {
+    "what_happened": true,
+    "why_you": true,
+    "implications": true,
+    "actions": true,
+    "bank_view": true,
+    "basis": true
+  },
+  "overall": "pass",
+  "fix_instructions": []
+}

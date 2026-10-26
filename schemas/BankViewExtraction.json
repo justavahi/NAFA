@@ -1,0 +1,97 @@
+{
+  "$defs": {
+    "BankViewRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "indicator": {
+          "title": "Indicator",
+          "type": "string"
+        },
+        "horizon": {
+          "title": "Horizon",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "stance": {
+          "title": "Stance",
+          "type": "string"
+        },
+        "as_of": {
+          "format": "date",
+          "title": "As Of",
+          "type": "string"
+        },
+        "doc_id": {
+          "minLength": 1,
+          "title": "Doc Id",
+          "type": "string"
+        },
+        "page": {
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "quote_span": {
+          "minLength": 1,
+          "title": "Quote Span",
+          "type": "string"
+        },
+        "extraction_method": {
+          "title": "Extraction Method",
+          "type": "string"
+        }
+      },
+      "required": [
+        "indicator",
+        "horizon",
+        "value",
+        "stance",
+        "as_of",
+        "doc_id",
+        "page",
+        "quote_span",
+        "extraction_method"
+      ],
+      "title": "BankViewRecord",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "items": {
+      "items": {
+        "$ref": "#/$defs/BankViewRecord"
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "unknowns": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unknowns",
+      "type": "array"
+    }
+  },
+  "required": [
+    "items",
+    "unknowns"
+  ],
+  "title": "BankViewExtraction",
+  "type": "object"
+}

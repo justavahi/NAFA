@@ -1,0 +1,145 @@
+{
+  "independent_events": 1,
+  "independent_clients": 1,
+  "roles": 3,
+  "production_promoted": false,
+  "human_reviews": 0,
+  "generations": {
+    "PER-03_control": {
+      "status": "evaluated",
+      "partial": true,
+      "issues": [],
+      "repairs": 1,
+      "end_to_end_seconds": 119.97172704094555
+    },
+    "PER-03_role": {
+      "status": "evaluated",
+      "partial": true,
+      "issues": [],
+      "repairs": 0,
+      "end_to_end_seconds": 54.16878991702106
+    },
+    "PER-03_focus": {
+      "status": "needs_fix",
+      "partial": null,
+      "issues": [
+        "personal_i2: effect differs from computed sign",
+        "core_f2: orphan news fragment; cite it directly in why_you or impact_chain, or omit fact"
+      ],
+      "repairs": 1,
+      "end_to_end_seconds": 37.77047812496312
+    },
+    "PER-03_both": {
+      "status": "needs_fix",
+      "partial": null,
+      "issues": [
+        "core_f1: orphan news fragment; cite it directly in why_you or impact_chain, or omit fact"
+      ],
+      "repairs": 1,
+      "end_to_end_seconds": 29.108095707953908
+    },
+    "PER-01_control": {
+      "status": "evaluated",
+      "partial": false,
+      "issues": [],
+      "repairs": 0,
+      "end_to_end_seconds": 69.4589674579911
+    },
+    "PER-01_role": {
+      "status": "evaluated",
+      "partial": true,
+      "issues": [],
+      "repairs": 0,
+      "end_to_end_seconds": 34.83770141704008
+    },
+    "PER-04_control": {
+      "status": "evaluated",
+      "partial": true,
+      "issues": [],
+      "repairs": 0,
+      "end_to_end_seconds": 42.85231437499169
+    },
+    "PER-04_role": {
+      "status": "evaluated",
+      "partial": true,
+      "issues": [],
+      "repairs": 1,
+      "end_to_end_seconds": 72.53018237499055
+    }
+  },
+  "scores": {
+    "PER-03_control_DeepSeek-V4.1-Flash": {
+      "status": "scored",
+      "axes": {
+        "coverage": 4,
+        "mechanisms": 3,
+        "personalization": 4,
+        "actions": 4,
+        "grounding": 4,
+        "overall": 3.8,
+        "notes": [
+          "Карточка корректно разделяет факт новости (N1/FR_*), позицию банка с датой и страницей (B1, B2) и вывод AI (personal_*); provenance_labels соответствуют содержанию.",
+          "Полезный ответ на кейс есть: пересмотр прогноза ставки 14,0% до конца 2026 г. увязан с профилем компании, а неопределённость по долгу и суммам честно обозначена через C_LIMITS и C_PRODUCTS.",
+          "Механизмы: фактически один доказанный причинный канал — стоимость заёмного финансирования (personal_i1 и personal_r1 дублируют одну и ту же цепочку под разными именами). Второй канал (доходные инструменты/депозиты, personal_o1) слабее и условен, но отличен.",
+          "Персонализация опирается на подтверждённые признаки: C_NET (отрицательный), C_SECTOR (оптовая торговля), C_PRODUCTS и C_LIMITS; нулевые флаги LOA/DEP корректно трактуются как неизвестность, а не как отсутствие обязательств.",
+          "Действия (personal_a1, personal_a2) — это проверяемые вопросы, разрешающие развилку: наличие и структура долга в других банках меняет вывод о давлении ставки; команд купить/продать нет.",
+          "Замечание: факты про бюджет (core_f1) приведены, но ни в один канал влияния не встроены и в выводах не используются — декоративны для данного кейса.",
+          "Оценки знака эффекта (D_RATE=negative) и уверенности (D_CONF=0.5) взяты из вычисленных значений, новых чисел эффекта не добавлено."
+        ]
+      },
+      "mean": 3.8,
+      "calls": [
+        {
+          "prompt_id": "PRM-16",
+          "version": "2",
+          "attempt": 0,
+          "prompt_hash": "8bd1649aa7a34e7dc50ab810120bca7aac55b45f08c5bae15a1b8eaf11103360",
+          "requested_model": "DeepSeek-V4.1-Flash",
+          "status": "ok",
+          "input_hash": "9e3a65bd4f258e61c88456ec81829a301d335dce2a1f963b6575f7a3f73fcd0f",
+          "max_tokens": 4096,
+          "executed_model": "DeepSeek-V4.1-Flash",
+          "tokens_in": 4539,
+          "tokens_out": 797,
+          "cost_rub": null,
+          "cache_hit": false,
+          "response_hash": "af1709c010850c44dac852bb27ed0d68c55e832b3d71128d60967b7565f51c85",
+          "elapsed_ms": 9006
+        }
+      ],
+      "protocol_hash": "334a02a8e5fab8c59589b46d16dee5ae06c8099955e8f57d8af050494dac07c7",
+      "card_hash": "73526ab2a78a02894e16ea6a1c215b2e2e2d010fb50d75df49894596eecb2e5e",
+      "scorer_hash": "f5961882897ce0e45b376d1c17ad29285238706a98dc3908568d3b87915d5dba",
+      "scheduling": "registered judge job on a ready card, overlapping generation; same allowance and unchanged rubric"
+    },
+    "PER-03_both_DeepSeek-V4.1-Flash": {
+      "status": "generation_failed",
+      "mean": null
+    },
+    "PER-03_control_Kimi-K2.6": {
+      "status": "error",
+      "mean": null,
+      "error": "Gateway stopped: API call exceeded 180s wall deadline; pending usage unknown",
+      "calls": [
+        {
+          "prompt_id": "PRM-16",
+          "version": "2",
+          "attempt": 0,
+          "prompt_hash": "8bd1649aa7a34e7dc50ab810120bca7aac55b45f08c5bae15a1b8eaf11103360",
+          "requested_model": "Kimi-K2.6",
+          "status": "error",
+          "input_hash": "9e3a65bd4f258e61c88456ec81829a301d335dce2a1f963b6575f7a3f73fcd0f",
+          "max_tokens": 4096,
+          "elapsed_ms": 180007
+        }
+      ]
+    }
+  },
+  "budget": {
+    "id": 1,
+    "calls": 38,
+    "tokens": 182869,
+    "reserved": 0,
+    "stopped": "gateway error; pending usage may be unknown"
+  }
+}

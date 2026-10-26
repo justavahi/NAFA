@@ -1,0 +1,104 @@
+{
+  "case_id": "PARTICIPANT_01",
+  "scope": "Real provided participant aggregates + attributed publication from case bank corpus; not independent confirmation of forecast. Only borrower chosen for this smoke before any scores.",
+  "independent_cases": 1,
+  "production_promoted": false,
+  "variants": {
+    "baseline": {
+      "status": "evaluated",
+      "partial": false,
+      "issues": []
+    },
+    "candidate": {
+      "status": "evaluated",
+      "partial": true,
+      "issues": []
+    }
+  },
+  "scores": {
+    "baseline": {
+      "status": "scored",
+      "axes": {
+        "coverage": 4,
+        "mechanisms": 3,
+        "personalization": 4,
+        "actions": 4,
+        "grounding": 4,
+        "overall": 3.8,
+        "notes": [
+          "Карточка отвечает на ключевой вопрос кейса: связывает повышение прогноза ставки до 14,0% (N1, B1) с условным удорожанием заимствований для действующего клиента с отрицательным чистым результатом (C_TYPE, C_NET) и отдельно проговаривает неизвестность сумм, сроков и типа ставки (C_LIMITS).",
+          "Факт core_f2 о профиците/дефиците бюджета (N1) в карточке не подключён ни к одному каналу влияния — это содержательный пробел, а не ошибка: связь с компанией из данных не выводится.",
+          "Механизм влияния по сути один (стоимость заимствований через RATE); это корректно для имеющихся данных, но не даёт различающихся причинных каналов, поэтому mechanisms ограничен 3.",
+          "Разграничение fact / bank_view / ai_inference выдержано, источник B2 помечен как прогноз, а не факт, знак эффекта и уверенность (D_RATE, D_CONF) приходят из кода и не перепридуманы.",
+          "Действия personal_a1 и personal_a2 — конкретные проверяемые вопросы, ответы на которые меняют условный вывод (потребность в финансировании, доля плавающей ставки), что соответствует требованию формулировать развилки без инвестиционных рекомендаций.",
+          "Существенных искажений или придуманных фактов не обнаружено; условность выводов обозначена честно."
+        ]
+      },
+      "mean": 3.8,
+      "calls": [
+        {
+          "prompt_id": "PRM-16",
+          "version": "2",
+          "attempt": 0,
+          "prompt_hash": "8bd1649aa7a34e7dc50ab810120bca7aac55b45f08c5bae15a1b8eaf11103360",
+          "requested_model": "DeepSeek-V4.1-Flash",
+          "status": "ok",
+          "input_hash": "40049139793ac847c063c9aeab4c406c3cb4a69d1679fb5b4a56e3ecab398d77",
+          "max_tokens": 4096,
+          "executed_model": "DeepSeek-V4.1-Flash",
+          "tokens_in": 4144,
+          "tokens_out": 862,
+          "cost_rub": null,
+          "cache_hit": false,
+          "response_hash": "cecf7f0f25a770cff3f340178b3dd3cd4234b0f6d33636571ad9d20784a64837",
+          "elapsed_ms": 9797
+        }
+      ]
+    },
+    "candidate": {
+      "status": "scored",
+      "axes": {
+        "coverage": 4,
+        "mechanisms": 3,
+        "personalization": 4,
+        "actions": 4,
+        "grounding": 4,
+        "overall": 3.8,
+        "notes": [
+          "Покрытие кейса хорошее: пересмотр прогноза ставки, пауза 23 октября, бюджетный факт и релевантность для клиента-лизингополучателя отражены; неизвестность сумм честно обозначена.",
+          "Использован лишь один содержательный канал (удорожание заимствований при более высокой ставке). Обозначенный в N1 бюджетно-кредитный индикатор спроса как отдельный канал не развит, хотя и не выдуман.",
+          "Персонализация опирается на подтверждённые признаки: C_TYPE=existing, флаг LEA=1.0, C_LIMITS (суммы/тип ставки неизвестны). Отраслевой профиль C_SECTOR (оптовая торговля) не задействован.",
+          "Действия (personal_a1, personal_a2) содержательно меняют развилку: наличие плавающей ставки и потребность в новом финансировании разграничивают сценарии; расчётных команд нет.",
+          "Grounding корректен: факты (N1), позиция банка с датой и страницей (B1/B2), вывод ИИ разграничены; числа 14,0/12,0 и знак negative согласуются с D_RATE. Уверенность 0,5 и условность вывода отражены."
+        ]
+      },
+      "mean": 3.8,
+      "calls": [
+        {
+          "prompt_id": "PRM-16",
+          "version": "2",
+          "attempt": 0,
+          "prompt_hash": "8bd1649aa7a34e7dc50ab810120bca7aac55b45f08c5bae15a1b8eaf11103360",
+          "requested_model": "DeepSeek-V4.1-Flash",
+          "status": "ok",
+          "input_hash": "9ec977cfc5e941947e0b87d207b2924428b5e3a6e68437b1015ddbd85de9409c",
+          "max_tokens": 4096,
+          "executed_model": "DeepSeek-V4.1-Flash",
+          "tokens_in": 4076,
+          "tokens_out": 996,
+          "cost_rub": null,
+          "cache_hit": false,
+          "response_hash": "12c6e1379308244507079324021be81410513f32786572dce9a4ccbdbb646f09",
+          "elapsed_ms": 9616
+        }
+      ]
+    }
+  },
+  "budget": {
+    "id": 1,
+    "calls": 9,
+    "tokens": 51172,
+    "reserved": 0,
+    "stopped": null
+  }
+}

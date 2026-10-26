@@ -1,0 +1,186 @@
+{
+  "$defs": {
+    "Claim": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "source_ids"
+      ],
+      "title": "Claim",
+      "type": "object"
+    },
+    "EventCore": {
+      "additionalProperties": false,
+      "properties": {
+        "confirmed_facts": {
+          "items": {
+            "$ref": "#/$defs/Claim"
+          },
+          "title": "Confirmed Facts",
+          "type": "array"
+        },
+        "bank_view_items": {
+          "items": {
+            "$ref": "#/$defs/Claim"
+          },
+          "title": "Bank View Items",
+          "type": "array"
+        },
+        "common_effects": {
+          "items": {
+            "$ref": "#/$defs/Claim"
+          },
+          "title": "Common Effects",
+          "type": "array"
+        },
+        "unknowns": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unknowns",
+          "type": "array"
+        }
+      },
+      "required": [
+        "confirmed_facts",
+        "bank_view_items",
+        "common_effects",
+        "unknowns"
+      ],
+      "title": "EventCore",
+      "type": "object"
+    },
+    "RoleCard": {
+      "additionalProperties": false,
+      "properties": {
+        "persona": {
+          "title": "Persona",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "jtbd": {
+          "title": "Jtbd",
+          "type": "string"
+        },
+        "key_topics": {
+          "title": "Key Topics",
+          "type": "string"
+        },
+        "horizon": {
+          "title": "Horizon",
+          "type": "string"
+        },
+        "weights": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "maxProperties": 12,
+          "minProperties": 12,
+          "propertyNames": {
+            "enum": [
+              "RATE",
+              "FX",
+              "INFL",
+              "ENERGY",
+              "COMMOD",
+              "DEMAND",
+              "LABOR",
+              "CREDIT",
+              "BUDGET",
+              "REG",
+              "GEOPOL",
+              "CPTY"
+            ]
+          },
+          "title": "Weights",
+          "type": "object"
+        },
+        "reference_sha256": {
+          "title": "Reference Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "persona",
+        "name",
+        "jtbd",
+        "key_topics",
+        "horizon",
+        "weights",
+        "reference_sha256"
+      ],
+      "title": "RoleCard",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "event_core": {
+      "$ref": "#/$defs/EventCore"
+    },
+    "evidence_view": {
+      "additionalProperties": true,
+      "title": "Evidence View",
+      "type": "object"
+    },
+    "persona": {
+      "title": "Persona",
+      "type": "string"
+    },
+    "computed": {
+      "additionalProperties": true,
+      "title": "Computed",
+      "type": "object"
+    },
+    "role_card": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RoleCard"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "selected_news_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Selected News Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "event_core",
+    "evidence_view",
+    "persona",
+    "computed",
+    "selected_news_ids"
+  ],
+  "title": "FocusedPersonalInput",
+  "type": "object"
+}

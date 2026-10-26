@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-26",
+  "overall_acceptance_complete": false,
+  "status": "local_PE_prototype_verified; full acceptance pending",
+  "full_csv_da_processing": true,
+  "llm_population_processing": false,
+  "input_rows": {
+    "clients": 85525,
+    "payments": 1380585,
+    "links": 12514
+  },
+  "unique_companies_after_da_dedup": 85514,
+  "raw_conflicting_client_groups": 1,
+  "client_type_fixed": 41968,
+  "client_type_unknown": 6858,
+  "tests": {
+    "pe_passed": 1107,
+    "da_vectors_passed": 44
+  },
+  "prompt_smoke": {
+    "prompts": 17,
+    "cases_per_prompt": 3,
+    "passed": 51,
+    "scope": "shape and automated task checks; not semantic acceptance"
+  },
+  "synthetic_cards": {
+    "cases": 12,
+    "variants": 2,
+    "accepted": 24,
+    "partial_glm": 1
+  },
+  "real_profiles": {
+    "prepared": 3,
+    "evaluated": 1,
+    "generator_variants": 2,
+    "baseline_score": 3.8,
+    "candidate_score": 3.8,
+    "candidate_partial": true,
+    "independent_human_labels": 0,
+    "scope": "Earlier real-profile smoke v4 versus v6; latest context checks are recorded separately."
+  },
+  "target_median_45_confirmed": false,
+  "production_candidate_promoted": false,
+  "training_performed": false,
+  "remaining": [
+    "representative real-case independent evaluation",
+    "working HTTP/API backend and UI integration",
+    "verified PDF extraction",
+    "RUB tariffs and 400 RUB capacity",
+    "data semantics and temporal alignment"
+  ],
+  "evidence": [
+    "acceptance_results.json",
+    "participant_data/validation_summary.json",
+    "participant_data/real_profile_smoke.json",
+    "improvement_v1/summary.json",
+    "improvement_v2/summary.json",
+    "context_checks/results.json"
+  ],
+  "context_development_checks": {
+    "independent_events": 1,
+    "independent_clients": 1,
+    "roles": 3,
+    "generation_attempts": 10,
+    "accepted_by_code_and_critic": 7,
+    "withheld": 3,
+    "latest_candidate": "role_focus_v2.json / PRM-06 v8",
+    "latest_candidate_status": "evaluated; partial=false",
+    "independent_quality_improvement_established": false,
+    "human_labels": 0,
+    "two_judge_comparison_complete": false,
+    "full_original_ledger_retained_for_critic": true
+  }
+}

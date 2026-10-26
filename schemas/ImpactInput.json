@@ -1,0 +1,217 @@
+{
+  "$defs": {
+    "EventExtraction": {
+      "additionalProperties": false,
+      "properties": {
+        "event_type": {
+          "pattern": "^ET-(0[1-9]|1[0-9]|20)$",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "entities": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Entities",
+          "type": "array"
+        },
+        "facts": {
+          "items": {
+            "$ref": "#/$defs/Fact"
+          },
+          "title": "Facts",
+          "type": "array"
+        },
+        "iota": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "propertyNames": {
+            "enum": [
+              "RATE",
+              "FX",
+              "INFL",
+              "ENERGY",
+              "COMMOD",
+              "DEMAND",
+              "LABOR",
+              "CREDIT",
+              "BUDGET",
+              "REG",
+              "GEOPOL",
+              "CPTY"
+            ]
+          },
+          "title": "Iota",
+          "type": "object"
+        },
+        "direction": {
+          "additionalProperties": {
+            "enum": [
+              -1,
+              0,
+              1
+            ],
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "RATE",
+              "FX",
+              "INFL",
+              "ENERGY",
+              "COMMOD",
+              "DEMAND",
+              "LABOR",
+              "CREDIT",
+              "BUDGET",
+              "REG",
+              "GEOPOL",
+              "CPTY"
+            ]
+          },
+          "title": "Direction",
+          "type": "object"
+        },
+        "severity": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Severity",
+          "type": "integer"
+        },
+        "geo_scope": {
+          "enum": [
+            "national",
+            "regional",
+            "global",
+            "unknown"
+          ],
+          "title": "Geo Scope",
+          "type": "string"
+        },
+        "horizon": {
+          "title": "Horizon",
+          "type": "string"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_type",
+        "entities",
+        "facts",
+        "iota",
+        "direction",
+        "severity",
+        "geo_scope",
+        "horizon",
+        "rationale"
+      ],
+      "title": "EventExtraction",
+      "type": "object"
+    },
+    "Fact": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Date"
+        },
+        "subject": {
+          "title": "Subject",
+          "type": "string"
+        },
+        "source_id": {
+          "minLength": 1,
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_span": {
+          "minLength": 1,
+          "title": "Source Span",
+          "type": "string"
+        },
+        "certainty": {
+          "enum": [
+            "confirmed",
+            "forecast",
+            "opinion"
+          ],
+          "title": "Certainty",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "subject",
+        "source_id",
+        "source_span",
+        "certainty"
+      ],
+      "title": "Fact",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "event": {
+      "$ref": "#/$defs/EventExtraction"
+    },
+    "prototype": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "propertyNames": {
+        "enum": [
+          "RATE",
+          "FX",
+          "INFL",
+          "ENERGY",
+          "COMMOD",
+          "DEMAND",
+          "LABOR",
+          "CREDIT",
+          "BUDGET",
+          "REG",
+          "GEOPOL",
+          "CPTY"
+        ]
+      },
+      "title": "Prototype",
+      "type": "object"
+    }
+  },
+  "required": [
+    "event",
+    "prototype"
+  ],
+  "title": "ImpactInput",
+  "type": "object"
+}

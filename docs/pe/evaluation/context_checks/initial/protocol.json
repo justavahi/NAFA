@@ -1,0 +1,2555 @@
+{
+  "code_hash": "0a5f226945a0764670a30e52fe032535d8a4d445acc754c83568c3ea35f3af87",
+  "runner_hash": "3153faaec54d6c18085bd708456f8fd625c5a5bfad58e4779d7ab2ee802b55cb",
+  "case_hash": "ddc07c8169c18e8c5357b96645ede75e4a777e25b72c3474ab47df28e8d0159d",
+  "profiles": {
+    "control": {
+      "version": "0.2.0",
+      "date": "2026-10-25",
+      "common_system": "common_v2.txt",
+      "prompts": {
+        "PRM-01": {
+          "version": "1",
+          "file": "PRM-01_v1.txt",
+          "input_schema": "ExtractionInput",
+          "schema": "EventExtraction",
+          "role": "extract",
+          "model": "Gemma 4 26B A4B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "N-01",
+            "N-03",
+            "N-04",
+            "N-05"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-02": {
+          "version": "1",
+          "file": "PRM-02_v1.txt",
+          "input_schema": "ImpactInput",
+          "schema": "ImpactVector",
+          "role": "extract",
+          "model": "Gemma 4 26B A4B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "N-02",
+            "N-09",
+            "event_types"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-03": {
+          "version": "4",
+          "file": "PRM-03_v4.txt",
+          "input_schema": "PageInput",
+          "schema": "Chunk",
+          "role": "vlm",
+          "model": "Qwen3-VL-30B-A3B-Instruct",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "B-xx",
+            "M-xx",
+            "DOC-xx"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_manual_source_review_required"
+        },
+        "PRM-04": {
+          "version": "1",
+          "file": "PRM-04_v1.txt",
+          "input_schema": "BankInput",
+          "schema": "BankViewExtraction",
+          "role": "extract",
+          "model": "Gemma 4 26B A4B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "B-01..B-08",
+            "FM-16"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-05": {
+          "version": "2",
+          "file": "PRM-05_v2.txt",
+          "input_schema": "CoreInput",
+          "schema": "EventCore",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "N-xx",
+            "B-xx",
+            "M-xx"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-06": {
+          "version": "7",
+          "file": "PRM-06_v7.txt",
+          "input_schema": "ContextPersonalInput",
+          "schema": "PersonalOverlay",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "F-xx",
+            "G-xx",
+            "E-14",
+            "E-15",
+            "FM-14"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "candidate_not_promoted"
+        },
+        "PRM-07": {
+          "version": "4",
+          "file": "PRM-07_v4.txt",
+          "input_schema": "CriticInput",
+          "schema": "CriticVerdict",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 6144,
+          "temperature": 0.0,
+          "targets": [
+            "Q-01",
+            "Q-03",
+            "Q-09",
+            "FM-16"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-08": {
+          "version": "2",
+          "file": "PRM-08_v2.txt",
+          "input_schema": "ChatInput",
+          "schema": "ChatAnswer",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "M-xx",
+            "B-xx",
+            "FM-15"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-09": {
+          "version": "1",
+          "file": "PRM-09_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "E-01..E-15",
+            "CH-06",
+            "CH-07"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-10": {
+          "version": "1",
+          "file": "PRM-10_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-14",
+            "E-15",
+            "F-09"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-03",
+            "GS-09",
+            "GS-12"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-11": {
+          "version": "1",
+          "file": "PRM-11_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-15"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-12": {
+          "version": "2",
+          "file": "PRM-12_v2.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "CH-08",
+            "CH-09",
+            "CH-10",
+            "CH-14",
+            "CH-15",
+            "CH-23",
+            "CH-25"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-13": {
+          "version": "1",
+          "file": "PRM-13_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-16",
+            "N-12"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-15",
+            "GS-16"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-14": {
+          "version": "1",
+          "file": "PRM-14_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-20",
+            "F-13"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-09",
+            "GS-12"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-15": {
+          "version": "1",
+          "file": "PRM-15_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "OfferText",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "F-08",
+            "F-10"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-16": {
+          "version": "1",
+          "file": "PRM-16_v1.txt",
+          "input_schema": "JudgeInput",
+          "schema": "JudgeScore",
+          "role": "judge",
+          "model": "Kimi-K2.6",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "Q-08"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-17": {
+          "version": "1",
+          "file": "PRM-17_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-22",
+            "FM-23",
+            "GR-01",
+            "GR-02",
+            "CH-21"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-08",
+            "GS-13"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        }
+      },
+      "personalization": {
+        "role_card": false,
+        "fragment_focus": false
+      }
+    },
+    "role": {
+      "version": "0.2.0",
+      "date": "2026-10-25",
+      "common_system": "common_v2.txt",
+      "prompts": {
+        "PRM-01": {
+          "version": "1",
+          "file": "PRM-01_v1.txt",
+          "input_schema": "ExtractionInput",
+          "schema": "EventExtraction",
+          "role": "extract",
+          "model": "Gemma 4 26B A4B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "N-01",
+            "N-03",
+            "N-04",
+            "N-05"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-02": {
+          "version": "1",
+          "file": "PRM-02_v1.txt",
+          "input_schema": "ImpactInput",
+          "schema": "ImpactVector",
+          "role": "extract",
+          "model": "Gemma 4 26B A4B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "N-02",
+            "N-09",
+            "event_types"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-03": {
+          "version": "4",
+          "file": "PRM-03_v4.txt",
+          "input_schema": "PageInput",
+          "schema": "Chunk",
+          "role": "vlm",
+          "model": "Qwen3-VL-30B-A3B-Instruct",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "B-xx",
+            "M-xx",
+            "DOC-xx"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_manual_source_review_required"
+        },
+        "PRM-04": {
+          "version": "1",
+          "file": "PRM-04_v1.txt",
+          "input_schema": "BankInput",
+          "schema": "BankViewExtraction",
+          "role": "extract",
+          "model": "Gemma 4 26B A4B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "B-01..B-08",
+            "FM-16"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-05": {
+          "version": "2",
+          "file": "PRM-05_v2.txt",
+          "input_schema": "CoreInput",
+          "schema": "EventCore",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "N-xx",
+            "B-xx",
+            "M-xx"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-06": {
+          "version": "7",
+          "file": "PRM-06_v7.txt",
+          "input_schema": "ContextPersonalInput",
+          "schema": "PersonalOverlay",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "F-xx",
+            "G-xx",
+            "E-14",
+            "E-15",
+            "FM-14"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "candidate_not_promoted"
+        },
+        "PRM-07": {
+          "version": "4",
+          "file": "PRM-07_v4.txt",
+          "input_schema": "CriticInput",
+          "schema": "CriticVerdict",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 6144,
+          "temperature": 0.0,
+          "targets": [
+            "Q-01",
+            "Q-03",
+            "Q-09",
+            "FM-16"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-08": {
+          "version": "2",
+          "file": "PRM-08_v2.txt",
+          "input_schema": "ChatInput",
+          "schema": "ChatAnswer",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "M-xx",
+            "B-xx",
+            "FM-15"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-09": {
+          "version": "1",
+          "file": "PRM-09_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "E-01..E-15",
+            "CH-06",
+            "CH-07"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-10": {
+          "version": "1",
+          "file": "PRM-10_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-14",
+            "E-15",
+            "F-09"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-03",
+            "GS-09",
+            "GS-12"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-11": {
+          "version": "1",
+          "file": "PRM-11_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-15"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-12": {
+          "version": "2",
+          "file": "PRM-12_v2.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "CH-08",
+            "CH-09",
+            "CH-10",
+            "CH-14",
+            "CH-15",
+            "CH-23",
+            "CH-25"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-13": {
+          "version": "1",
+          "file": "PRM-13_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-16",
+            "N-12"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-15",
+            "GS-16"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-14": {
+          "version": "1",
+          "file": "PRM-14_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-20",
+            "F-13"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-09",
+            "GS-12"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-15": {
+          "version": "1",
+          "file": "PRM-15_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "OfferText",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "F-08",
+            "F-10"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-16": {
+          "version": "1",
+          "file": "PRM-16_v1.txt",
+          "input_schema": "JudgeInput",
+          "schema": "JudgeScore",
+          "role": "judge",
+          "model": "Kimi-K2.6",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "Q-08"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-17": {
+          "version": "1",
+          "file": "PRM-17_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-22",
+            "FM-23",
+            "GR-01",
+            "GR-02",
+            "CH-21"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-08",
+            "GS-13"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        }
+      },
+      "personalization": {
+        "role_card": true,
+        "fragment_focus": false
+      }
+    },
+    "focus": {
+      "version": "0.2.0",
+      "date": "2026-10-25",
+      "common_system": "common_v2.txt",
+      "prompts": {
+        "PRM-01": {
+          "version": "1",
+          "file": "PRM-01_v1.txt",
+          "input_schema": "ExtractionInput",
+          "schema": "EventExtraction",
+          "role": "extract",
+          "model": "Gemma 4 26B A4B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "N-01",
+            "N-03",
+            "N-04",
+            "N-05"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-02": {
+          "version": "1",
+          "file": "PRM-02_v1.txt",
+          "input_schema": "ImpactInput",
+          "schema": "ImpactVector",
+          "role": "extract",
+          "model": "Gemma 4 26B A4B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "N-02",
+            "N-09",
+            "event_types"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-03": {
+          "version": "4",
+          "file": "PRM-03_v4.txt",
+          "input_schema": "PageInput",
+          "schema": "Chunk",
+          "role": "vlm",
+          "model": "Qwen3-VL-30B-A3B-Instruct",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "B-xx",
+            "M-xx",
+            "DOC-xx"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_manual_source_review_required"
+        },
+        "PRM-04": {
+          "version": "1",
+          "file": "PRM-04_v1.txt",
+          "input_schema": "BankInput",
+          "schema": "BankViewExtraction",
+          "role": "extract",
+          "model": "Gemma 4 26B A4B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "B-01..B-08",
+            "FM-16"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-05": {
+          "version": "3",
+          "file": "PRM-05_v3.txt",
+          "input_schema": "ContextCoreInput",
+          "schema": "EventCore",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "N-xx",
+            "B-xx",
+            "M-xx"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "candidate_not_promoted"
+        },
+        "PRM-06": {
+          "version": "7",
+          "file": "PRM-06_v7.txt",
+          "input_schema": "ContextPersonalInput",
+          "schema": "PersonalOverlay",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "F-xx",
+            "G-xx",
+            "E-14",
+            "E-15",
+            "FM-14"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "candidate_not_promoted"
+        },
+        "PRM-07": {
+          "version": "4",
+          "file": "PRM-07_v4.txt",
+          "input_schema": "CriticInput",
+          "schema": "CriticVerdict",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 6144,
+          "temperature": 0.0,
+          "targets": [
+            "Q-01",
+            "Q-03",
+            "Q-09",
+            "FM-16"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-08": {
+          "version": "2",
+          "file": "PRM-08_v2.txt",
+          "input_schema": "ChatInput",
+          "schema": "ChatAnswer",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "M-xx",
+            "B-xx",
+            "FM-15"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-09": {
+          "version": "1",
+          "file": "PRM-09_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "E-01..E-15",
+            "CH-06",
+            "CH-07"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-10": {
+          "version": "1",
+          "file": "PRM-10_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-14",
+            "E-15",
+            "F-09"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-03",
+            "GS-09",
+            "GS-12"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-11": {
+          "version": "1",
+          "file": "PRM-11_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-15"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-12": {
+          "version": "2",
+          "file": "PRM-12_v2.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "CH-08",
+            "CH-09",
+            "CH-10",
+            "CH-14",
+            "CH-15",
+            "CH-23",
+            "CH-25"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-13": {
+          "version": "1",
+          "file": "PRM-13_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-16",
+            "N-12"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-15",
+            "GS-16"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-14": {
+          "version": "1",
+          "file": "PRM-14_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-20",
+            "F-13"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-09",
+            "GS-12"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-15": {
+          "version": "1",
+          "file": "PRM-15_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "OfferText",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "F-08",
+            "F-10"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-16": {
+          "version": "1",
+          "file": "PRM-16_v1.txt",
+          "input_schema": "JudgeInput",
+          "schema": "JudgeScore",
+          "role": "judge",
+          "model": "Kimi-K2.6",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "Q-08"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-17": {
+          "version": "1",
+          "file": "PRM-17_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-22",
+            "FM-23",
+            "GR-01",
+            "GR-02",
+            "CH-21"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-08",
+            "GS-13"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        }
+      },
+      "personalization": {
+        "role_card": false,
+        "fragment_focus": true
+      }
+    },
+    "both": {
+      "version": "0.2.0",
+      "date": "2026-10-25",
+      "common_system": "common_v2.txt",
+      "prompts": {
+        "PRM-01": {
+          "version": "1",
+          "file": "PRM-01_v1.txt",
+          "input_schema": "ExtractionInput",
+          "schema": "EventExtraction",
+          "role": "extract",
+          "model": "Gemma 4 26B A4B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "N-01",
+            "N-03",
+            "N-04",
+            "N-05"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-02": {
+          "version": "1",
+          "file": "PRM-02_v1.txt",
+          "input_schema": "ImpactInput",
+          "schema": "ImpactVector",
+          "role": "extract",
+          "model": "Gemma 4 26B A4B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "N-02",
+            "N-09",
+            "event_types"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-03": {
+          "version": "4",
+          "file": "PRM-03_v4.txt",
+          "input_schema": "PageInput",
+          "schema": "Chunk",
+          "role": "vlm",
+          "model": "Qwen3-VL-30B-A3B-Instruct",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "B-xx",
+            "M-xx",
+            "DOC-xx"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_manual_source_review_required"
+        },
+        "PRM-04": {
+          "version": "1",
+          "file": "PRM-04_v1.txt",
+          "input_schema": "BankInput",
+          "schema": "BankViewExtraction",
+          "role": "extract",
+          "model": "Gemma 4 26B A4B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "B-01..B-08",
+            "FM-16"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-05": {
+          "version": "3",
+          "file": "PRM-05_v3.txt",
+          "input_schema": "ContextCoreInput",
+          "schema": "EventCore",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "N-xx",
+            "B-xx",
+            "M-xx"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "candidate_not_promoted"
+        },
+        "PRM-06": {
+          "version": "7",
+          "file": "PRM-06_v7.txt",
+          "input_schema": "ContextPersonalInput",
+          "schema": "PersonalOverlay",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "F-xx",
+            "G-xx",
+            "E-14",
+            "E-15",
+            "FM-14"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "candidate_not_promoted"
+        },
+        "PRM-07": {
+          "version": "4",
+          "file": "PRM-07_v4.txt",
+          "input_schema": "CriticInput",
+          "schema": "CriticVerdict",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 6144,
+          "temperature": 0.0,
+          "targets": [
+            "Q-01",
+            "Q-03",
+            "Q-09",
+            "FM-16"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-08": {
+          "version": "2",
+          "file": "PRM-08_v2.txt",
+          "input_schema": "ChatInput",
+          "schema": "ChatAnswer",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "M-xx",
+            "B-xx",
+            "FM-15"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-09": {
+          "version": "1",
+          "file": "PRM-09_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "E-01..E-15",
+            "CH-06",
+            "CH-07"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-10": {
+          "version": "1",
+          "file": "PRM-10_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-14",
+            "E-15",
+            "F-09"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-03",
+            "GS-09",
+            "GS-12"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-11": {
+          "version": "1",
+          "file": "PRM-11_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-15"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-12": {
+          "version": "2",
+          "file": "PRM-12_v2.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "CH-08",
+            "CH-09",
+            "CH-10",
+            "CH-14",
+            "CH-15",
+            "CH-23",
+            "CH-25"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-13": {
+          "version": "1",
+          "file": "PRM-13_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-16",
+            "N-12"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-15",
+            "GS-16"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-14": {
+          "version": "1",
+          "file": "PRM-14_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-20",
+            "F-13"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-09",
+            "GS-12"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-15": {
+          "version": "1",
+          "file": "PRM-15_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "OfferText",
+          "role": "general",
+          "model": "Qwen3.6 35B A3B",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "F-08",
+            "F-10"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-16": {
+          "version": "1",
+          "file": "PRM-16_v1.txt",
+          "input_schema": "JudgeInput",
+          "schema": "JudgeScore",
+          "role": "judge",
+          "model": "Kimi-K2.6",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "Q-08"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-04",
+            "GS-06"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        },
+        "PRM-17": {
+          "version": "1",
+          "file": "PRM-17_v1.txt",
+          "input_schema": "ExplanationInput",
+          "schema": "GroundedExplanation",
+          "role": "reasoning",
+          "model": "GLM-5.3-Flash",
+          "max_tokens": 4096,
+          "temperature": 0.0,
+          "targets": [
+            "FM-22",
+            "FM-23",
+            "GR-01",
+            "GR-02",
+            "CH-21"
+          ],
+          "constraints": [
+            "grounded_only",
+            "no_new_factual_numbers",
+            "untrusted_sources",
+            "three_layers"
+          ],
+          "few_shot": [],
+          "eval_cases": [
+            "GS-01",
+            "GS-08",
+            "GS-13"
+          ],
+          "status": "automated_3_of_3_expert_acceptance_separate"
+        }
+      },
+      "personalization": {
+        "role_card": true,
+        "fragment_focus": true
+      }
+    }
+  },
+  "rubric": {
+    "version": "0.2.0",
+    "date": "2026-10-25",
+    "common_system": "common_v2.txt",
+    "prompts": {
+      "PRM-01": {
+        "version": "1",
+        "file": "PRM-01_v1.txt",
+        "input_schema": "ExtractionInput",
+        "schema": "EventExtraction",
+        "role": "extract",
+        "model": "Gemma 4 26B A4B",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "N-01",
+          "N-03",
+          "N-04",
+          "N-05"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-04",
+          "GS-06"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      },
+      "PRM-02": {
+        "version": "1",
+        "file": "PRM-02_v1.txt",
+        "input_schema": "ImpactInput",
+        "schema": "ImpactVector",
+        "role": "extract",
+        "model": "Gemma 4 26B A4B",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "N-02",
+          "N-09",
+          "event_types"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-04",
+          "GS-06"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      },
+      "PRM-03": {
+        "version": "4",
+        "file": "PRM-03_v4.txt",
+        "input_schema": "PageInput",
+        "schema": "Chunk",
+        "role": "vlm",
+        "model": "Qwen3-VL-30B-A3B-Instruct",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "B-xx",
+          "M-xx",
+          "DOC-xx"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-04",
+          "GS-06"
+        ],
+        "status": "automated_3_of_3_manual_source_review_required"
+      },
+      "PRM-04": {
+        "version": "1",
+        "file": "PRM-04_v1.txt",
+        "input_schema": "BankInput",
+        "schema": "BankViewExtraction",
+        "role": "extract",
+        "model": "Gemma 4 26B A4B",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "B-01..B-08",
+          "FM-16"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-04",
+          "GS-06"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      },
+      "PRM-05": {
+        "version": "2",
+        "file": "PRM-05_v2.txt",
+        "input_schema": "CoreInput",
+        "schema": "EventCore",
+        "role": "reasoning",
+        "model": "GLM-5.3-Flash",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "N-xx",
+          "B-xx",
+          "M-xx"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-04",
+          "GS-06"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      },
+      "PRM-06": {
+        "version": "4",
+        "file": "PRM-06_v4.txt",
+        "input_schema": "PersonalInput",
+        "schema": "PersonalOverlay",
+        "role": "reasoning",
+        "model": "GLM-5.3-Flash",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "F-xx",
+          "G-xx",
+          "E-14",
+          "E-15",
+          "FM-14"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-04",
+          "GS-06"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      },
+      "PRM-07": {
+        "version": "4",
+        "file": "PRM-07_v4.txt",
+        "input_schema": "CriticInput",
+        "schema": "CriticVerdict",
+        "role": "general",
+        "model": "Qwen3.6 35B A3B",
+        "max_tokens": 6144,
+        "temperature": 0.0,
+        "targets": [
+          "Q-01",
+          "Q-03",
+          "Q-09",
+          "FM-16"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-04",
+          "GS-06"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      },
+      "PRM-08": {
+        "version": "2",
+        "file": "PRM-08_v2.txt",
+        "input_schema": "ChatInput",
+        "schema": "ChatAnswer",
+        "role": "general",
+        "model": "Qwen3.6 35B A3B",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "M-xx",
+          "B-xx",
+          "FM-15"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-04",
+          "GS-06"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      },
+      "PRM-09": {
+        "version": "1",
+        "file": "PRM-09_v1.txt",
+        "input_schema": "ExplanationInput",
+        "schema": "GroundedExplanation",
+        "role": "reasoning",
+        "model": "GLM-5.3-Flash",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "E-01..E-15",
+          "CH-06",
+          "CH-07"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-04",
+          "GS-06"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      },
+      "PRM-10": {
+        "version": "1",
+        "file": "PRM-10_v1.txt",
+        "input_schema": "ExplanationInput",
+        "schema": "GroundedExplanation",
+        "role": "reasoning",
+        "model": "GLM-5.3-Flash",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "FM-14",
+          "E-15",
+          "F-09"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-03",
+          "GS-09",
+          "GS-12"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      },
+      "PRM-11": {
+        "version": "1",
+        "file": "PRM-11_v1.txt",
+        "input_schema": "ExplanationInput",
+        "schema": "GroundedExplanation",
+        "role": "general",
+        "model": "Qwen3.6 35B A3B",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "FM-15"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-04",
+          "GS-06"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      },
+      "PRM-12": {
+        "version": "2",
+        "file": "PRM-12_v2.txt",
+        "input_schema": "ExplanationInput",
+        "schema": "GroundedExplanation",
+        "role": "general",
+        "model": "Qwen3.6 35B A3B",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "CH-08",
+          "CH-09",
+          "CH-10",
+          "CH-14",
+          "CH-15",
+          "CH-23",
+          "CH-25"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-04",
+          "GS-06"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      },
+      "PRM-13": {
+        "version": "1",
+        "file": "PRM-13_v1.txt",
+        "input_schema": "ExplanationInput",
+        "schema": "GroundedExplanation",
+        "role": "general",
+        "model": "Qwen3.6 35B A3B",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "FM-16",
+          "N-12"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-15",
+          "GS-16"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      },
+      "PRM-14": {
+        "version": "1",
+        "file": "PRM-14_v1.txt",
+        "input_schema": "ExplanationInput",
+        "schema": "GroundedExplanation",
+        "role": "general",
+        "model": "Qwen3.6 35B A3B",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "FM-20",
+          "F-13"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-09",
+          "GS-12"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      },
+      "PRM-15": {
+        "version": "1",
+        "file": "PRM-15_v1.txt",
+        "input_schema": "ExplanationInput",
+        "schema": "OfferText",
+        "role": "general",
+        "model": "Qwen3.6 35B A3B",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "F-08",
+          "F-10"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-04",
+          "GS-06"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      },
+      "PRM-16": {
+        "version": "2",
+        "file": "PRM-16_v2.txt",
+        "input_schema": "JudgeInput",
+        "schema": "JudgeScore",
+        "role": "judge",
+        "model": "Kimi-K2.6",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "Q-08"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-04",
+          "GS-06"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      },
+      "PRM-17": {
+        "version": "1",
+        "file": "PRM-17_v1.txt",
+        "input_schema": "ExplanationInput",
+        "schema": "GroundedExplanation",
+        "role": "reasoning",
+        "model": "GLM-5.3-Flash",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+        "targets": [
+          "FM-22",
+          "FM-23",
+          "GR-01",
+          "GR-02",
+          "CH-21"
+        ],
+        "constraints": [
+          "grounded_only",
+          "no_new_factual_numbers",
+          "untrusted_sources",
+          "three_layers"
+        ],
+        "few_shot": [],
+        "eval_cases": [
+          "GS-01",
+          "GS-08",
+          "GS-13"
+        ],
+        "status": "automated_3_of_3_expert_acceptance_separate"
+      }
+    }
+  },
+  "role_reference_sha256": "af1b8cf838c9991384d8d7769ef6c99d17fd5433bdb436d69021ab7d93224606",
+  "source_pdf_sha256": "92a96805f2b720f76bd0c52d2491044812b38401ab62d0f4a9157b4ca81c49bb",
+  "generation_jobs": [
+    [
+      "PER-03",
+      "control"
+    ],
+    [
+      "PER-03",
+      "role"
+    ],
+    [
+      "PER-03",
+      "focus"
+    ],
+    [
+      "PER-03",
+      "both"
+    ],
+    [
+      "PER-01",
+      "control"
+    ],
+    [
+      "PER-01",
+      "role"
+    ],
+    [
+      "PER-04",
+      "control"
+    ],
+    [
+      "PER-04",
+      "role"
+    ]
+  ],
+  "score_jobs": [
+    [
+      "PER-03",
+      "control",
+      "DeepSeek-V4.1-Flash"
+    ],
+    [
+      "PER-03",
+      "both",
+      "DeepSeek-V4.1-Flash"
+    ],
+    [
+      "PER-03",
+      "control",
+      "Kimi-K2.6"
+    ],
+    [
+      "PER-03",
+      "both",
+      "Kimi-K2.6"
+    ],
+    [
+      "PER-03",
+      "role",
+      "DeepSeek-V4.1-Flash"
+    ],
+    [
+      "PER-03",
+      "focus",
+      "DeepSeek-V4.1-Flash"
+    ],
+    [
+      "PER-01",
+      "control",
+      "DeepSeek-V4.1-Flash"
+    ],
+    [
+      "PER-01",
+      "role",
+      "DeepSeek-V4.1-Flash"
+    ],
+    [
+      "PER-04",
+      "control",
+      "DeepSeek-V4.1-Flash"
+    ],
+    [
+      "PER-04",
+      "role",
+      "DeepSeek-V4.1-Flash"
+    ]
+  ],
+  "selected_news_ids": [
+    "FR_8e038eb1e2ed415f0627",
+    "FR_956c5cc14210f671223b",
+    "FR_a29a90219a3ae5b481e1"
+  ],
+  "limits": {
+    "gateway_calls": 48,
+    "additional_tokens": 250000,
+    "shared_daily_tokens": 3000000,
+    "call_wall_seconds": 180
+  },
+  "independent_events": 1,
+  "independent_clients": 1,
+  "roles": 3,
+  "development_only": true,
+  "production_promoted": false,
+  "human_reviews": 0,
+  "assistant_visual_pdf_review": true,
+  "interpretation": "Attributed bank publication/forecast; no external verification or historical client backtest. Same corrected source for all arms; do not compare with legacy scores as a source-only effect."
+}

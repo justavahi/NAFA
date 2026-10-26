@@ -1,0 +1,45 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "shown": {
+      "title": "Shown",
+      "type": "boolean"
+    },
+    "label": {
+      "const": "Предложение банка",
+      "title": "Label",
+      "type": "string"
+    },
+    "text": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Text"
+    },
+    "source_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Ids",
+      "type": "array"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    }
+  },
+  "required": [
+    "shown",
+    "label",
+    "text",
+    "source_ids",
+    "reason"
+  ],
+  "title": "OfferText",
+  "type": "object"
+}

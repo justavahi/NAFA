@@ -1,0 +1,74 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "iota": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "propertyNames": {
+        "enum": [
+          "RATE",
+          "FX",
+          "INFL",
+          "ENERGY",
+          "COMMOD",
+          "DEMAND",
+          "LABOR",
+          "CREDIT",
+          "BUDGET",
+          "REG",
+          "GEOPOL",
+          "CPTY"
+        ]
+      },
+      "title": "Iota",
+      "type": "object"
+    },
+    "direction": {
+      "additionalProperties": {
+        "enum": [
+          -1,
+          0,
+          1
+        ],
+        "type": "integer"
+      },
+      "propertyNames": {
+        "enum": [
+          "RATE",
+          "FX",
+          "INFL",
+          "ENERGY",
+          "COMMOD",
+          "DEMAND",
+          "LABOR",
+          "CREDIT",
+          "BUDGET",
+          "REG",
+          "GEOPOL",
+          "CPTY"
+        ]
+      },
+      "title": "Direction",
+      "type": "object"
+    },
+    "severity": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Severity",
+      "type": "integer"
+    },
+    "rationale": {
+      "title": "Rationale",
+      "type": "string"
+    }
+  },
+  "required": [
+    "iota",
+    "direction",
+    "severity",
+    "rationale"
+  ],
+  "title": "ImpactVector",
+  "type": "object"
+}

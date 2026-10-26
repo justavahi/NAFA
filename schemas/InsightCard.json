@@ -1,0 +1,171 @@
+{
+  "$defs": {
+    "Claim": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "source_ids"
+      ],
+      "title": "Claim",
+      "type": "object"
+    },
+    "Inference": {
+      "additionalProperties": false,
+      "properties": {
+        "impact_chain": {
+          "items": {
+            "$ref": "#/$defs/Claim"
+          },
+          "title": "Impact Chain",
+          "type": "array"
+        },
+        "risks": {
+          "items": {
+            "$ref": "#/$defs/Claim"
+          },
+          "title": "Risks",
+          "type": "array"
+        },
+        "opportunities": {
+          "items": {
+            "$ref": "#/$defs/Claim"
+          },
+          "title": "Opportunities",
+          "type": "array"
+        },
+        "actions_or_questions": {
+          "items": {
+            "$ref": "#/$defs/Claim"
+          },
+          "title": "Actions Or Questions",
+          "type": "array"
+        },
+        "confidence": {
+          "description": "Copied from code FM-20",
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        }
+      },
+      "required": [
+        "impact_chain",
+        "risks",
+        "opportunities",
+        "actions_or_questions",
+        "confidence"
+      ],
+      "title": "Inference",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "confirmed_facts": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Confirmed Facts",
+      "type": "array"
+    },
+    "why_you": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Why You",
+      "type": "array"
+    },
+    "bank_view_status": {
+      "enum": [
+        "available",
+        "missing",
+        "outdated",
+        "conflict"
+      ],
+      "title": "Bank View Status",
+      "type": "string"
+    },
+    "bank_view_items": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Bank View Items",
+      "type": "array"
+    },
+    "model_inference": {
+      "$ref": "#/$defs/Inference"
+    },
+    "provenance_labels": {
+      "additionalProperties": {
+        "enum": [
+          "fact",
+          "bank_view",
+          "ai_inference"
+        ],
+        "type": "string"
+      },
+      "title": "Provenance Labels",
+      "type": "object"
+    },
+    "relevance": {
+      "description": "Copied from DA code",
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Relevance",
+      "type": "number"
+    },
+    "offer": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Offer"
+    },
+    "disclaimer": {
+      "minLength": 1,
+      "title": "Disclaimer",
+      "type": "string"
+    },
+    "trace_id": {
+      "minLength": 1,
+      "title": "Trace Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "confirmed_facts",
+    "bank_view_status",
+    "bank_view_items",
+    "model_inference",
+    "provenance_labels",
+    "relevance",
+    "disclaimer",
+    "trace_id"
+  ],
+  "title": "InsightCard",
+  "type": "object"
+}

@@ -1,0 +1,73 @@
+{
+  "$defs": {
+    "GroundedClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Ids",
+          "type": "array"
+        },
+        "layer": {
+          "enum": [
+            "fact",
+            "bank_view",
+            "ai_inference"
+          ],
+          "title": "Layer",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "source_ids",
+        "layer"
+      ],
+      "title": "GroundedClaim",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "claims": {
+      "items": {
+        "$ref": "#/$defs/GroundedClaim"
+      },
+      "title": "Claims",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "questions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Questions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "claims",
+    "limitations",
+    "questions"
+  ],
+  "title": "GroundedExplanation",
+  "type": "object"
+}

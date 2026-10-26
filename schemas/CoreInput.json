@@ -1,0 +1,289 @@
+{
+  "$defs": {
+    "Document": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "news",
+            "bank"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "as_of": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "As Of"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "is_mock": {
+          "default": false,
+          "title": "Is Mock",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "text"
+      ],
+      "title": "Document",
+      "type": "object"
+    },
+    "EventExtraction": {
+      "additionalProperties": false,
+      "properties": {
+        "event_type": {
+          "pattern": "^ET-(0[1-9]|1[0-9]|20)$",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "entities": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Entities",
+          "type": "array"
+        },
+        "facts": {
+          "items": {
+            "$ref": "#/$defs/Fact"
+          },
+          "title": "Facts",
+          "type": "array"
+        },
+        "iota": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "propertyNames": {
+            "enum": [
+              "RATE",
+              "FX",
+              "INFL",
+              "ENERGY",
+              "COMMOD",
+              "DEMAND",
+              "LABOR",
+              "CREDIT",
+              "BUDGET",
+              "REG",
+              "GEOPOL",
+              "CPTY"
+            ]
+          },
+          "title": "Iota",
+          "type": "object"
+        },
+        "direction": {
+          "additionalProperties": {
+            "enum": [
+              -1,
+              0,
+              1
+            ],
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "RATE",
+              "FX",
+              "INFL",
+              "ENERGY",
+              "COMMOD",
+              "DEMAND",
+              "LABOR",
+              "CREDIT",
+              "BUDGET",
+              "REG",
+              "GEOPOL",
+              "CPTY"
+            ]
+          },
+          "title": "Direction",
+          "type": "object"
+        },
+        "severity": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Severity",
+          "type": "integer"
+        },
+        "geo_scope": {
+          "enum": [
+            "national",
+            "regional",
+            "global",
+            "unknown"
+          ],
+          "title": "Geo Scope",
+          "type": "string"
+        },
+        "horizon": {
+          "title": "Horizon",
+          "type": "string"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_type",
+        "entities",
+        "facts",
+        "iota",
+        "direction",
+        "severity",
+        "geo_scope",
+        "horizon",
+        "rationale"
+      ],
+      "title": "EventExtraction",
+      "type": "object"
+    },
+    "Fact": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Date"
+        },
+        "subject": {
+          "title": "Subject",
+          "type": "string"
+        },
+        "source_id": {
+          "minLength": 1,
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_span": {
+          "minLength": 1,
+          "title": "Source Span",
+          "type": "string"
+        },
+        "certainty": {
+          "enum": [
+            "confirmed",
+            "forecast",
+            "opinion"
+          ],
+          "title": "Certainty",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "subject",
+        "source_id",
+        "source_span",
+        "certainty"
+      ],
+      "title": "Fact",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "event": {
+      "$ref": "#/$defs/EventExtraction"
+    },
+    "entries": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Entries",
+      "type": "array"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/Document"
+      },
+      "title": "Documents",
+      "type": "array"
+    },
+    "bank_view_status": {
+      "enum": [
+        "available",
+        "missing",
+        "outdated",
+        "conflict"
+      ],
+      "title": "Bank View Status",
+      "type": "string"
+    },
+    "repair_instructions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Repair Instructions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "event",
+    "entries",
+    "documents",
+    "bank_view_status"
+  ],
+  "title": "CoreInput",
+  "type": "object"
+}

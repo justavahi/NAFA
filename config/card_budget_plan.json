@@ -1,0 +1,8 @@
+{
+  "target_rub_per_day": 400,
+  "operations": [
+    {"prompt_id": "PRM-05", "model": "GLM-5.3-Flash", "calls_per_card": 1},
+    {"prompt_id": "PRM-06", "model": "GLM-5.3-Flash", "calls_per_card": 1},
+    {"prompt_id": "PRM-07", "model": "Qwen3.6 35B A3B", "calls_per_card": 1}
+  ]
+}

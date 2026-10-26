@@ -1,0 +1,277 @@
+{
+  "mode": "evaluation",
+  "trace_id": "context_pdf_review",
+  "publishable": false,
+  "status": "needs_fix",
+  "calls": [
+    {
+      "prompt_id": "PRM-05",
+      "version": "3",
+      "attempt": 0,
+      "prompt_hash": "47d6084f13f6c1f0e9f243162667a5978bd153fc26a9dba3f5806df9287c57dc",
+      "requested_model": "GLM-5.3-Flash",
+      "status": "ok",
+      "input_hash": "18c906f4ee931742b790ca9d5ac14df1a8fe8bef52f32eff433683e5a96b5e19",
+      "max_tokens": 4096,
+      "executed_model": "GLM-5.3-Flash",
+      "tokens_in": 2207,
+      "tokens_out": 550,
+      "cost_rub": null,
+      "cache_hit": false,
+      "response_hash": "362d769c43eeb1c3319670cc0919bc6295d88584c92c224d765e9ef825e0aebe",
+      "elapsed_ms": 7509
+    },
+    {
+      "prompt_id": "PRM-06",
+      "version": "7",
+      "attempt": 0,
+      "prompt_hash": "319006c73cd3f999457d683e1caf30de015fc99f4b20c72039d2875d6de1a6cf",
+      "requested_model": "GLM-5.3-Flash",
+      "status": "ok",
+      "input_hash": "6d59827e77769f53c47efa0f605bdf5e1026d0e9b98c0458ba34fa70e0afff5d",
+      "max_tokens": 4096,
+      "executed_model": "GLM-5.3-Flash",
+      "tokens_in": 4673,
+      "tokens_out": 780,
+      "cost_rub": null,
+      "cache_hit": false,
+      "response_hash": "5c647a53e2513229937d9526bab4a10ad08f6ac00df6dfd6cb412a783d96ca5c",
+      "elapsed_ms": 10842
+    },
+    {
+      "prompt_id": "PRM-05",
+      "version": "3",
+      "attempt": 0,
+      "prompt_hash": "47d6084f13f6c1f0e9f243162667a5978bd153fc26a9dba3f5806df9287c57dc",
+      "requested_model": "GLM-5.3-Flash",
+      "status": "ok",
+      "input_hash": "3657c11ea4c03b77221824b24747a3c0f26c2c9a66bd746629027870d3cde618",
+      "max_tokens": 4096,
+      "executed_model": "GLM-5.3-Flash",
+      "tokens_in": 2252,
+      "tokens_out": 528,
+      "cost_rub": null,
+      "cache_hit": false,
+      "response_hash": "6f0ef73c29c6e82d994d8d9d61c4fa81b3ac90b9e04c8a200a7204cc289cae00",
+      "elapsed_ms": 8029
+    },
+    {
+      "prompt_id": "PRM-06",
+      "version": "7",
+      "attempt": 0,
+      "prompt_hash": "319006c73cd3f999457d683e1caf30de015fc99f4b20c72039d2875d6de1a6cf",
+      "requested_model": "GLM-5.3-Flash",
+      "status": "ok",
+      "input_hash": "0495c8d1d128ded025ff39fbb0bdbc2ac6dfb2378fd610643bb49569519449f2",
+      "max_tokens": 4096,
+      "executed_model": "GLM-5.3-Flash",
+      "tokens_in": 4704,
+      "tokens_out": 948,
+      "cost_rub": null,
+      "cache_hit": false,
+      "response_hash": "14d44935f99ae85b76d7460b9a60305b2345c1fcb95b036327933d895962fd96",
+      "elapsed_ms": 11373
+    }
+  ],
+  "issues": [
+    "personal_i2: effect differs from computed sign",
+    "core_f2: orphan news fragment; cite it directly in why_you or impact_chain, or omit fact"
+  ],
+  "unknowns": [
+    "Отсутствует позиция банка о фактическом решении по ставке — пересмотр является прогнозом, а не свершившимся событием.",
+    "Недостаточно данных о причинах пересмотра прогноза помимо упомянутой риторики ЦБ РФ.",
+    "Нет сведений о влиянии события на конкретные компании, их долг, выручку или продукты.",
+    "Пересмотр прогноза является ожиданием аналитиков, а не решением ЦБ; фактическое решение по ставке неизвестно.",
+    "Суммы обязательств, доля плавающей ставки, сроки и графики договоров компании не заданы.",
+    "Кредитный флаг в выгрузке нулевой, но это не доказывает отсутствие обязательств в других банках.",
+    "Данных о влиянии события на выручку и конкретные договоры компании нет; уверенность расчёта умеренная."
+  ],
+  "card": {
+    "confirmed_facts": [
+      {
+        "id": "core_f1",
+        "text": "Аналитики ожидают сохранения паузы по ключевой ставке на заседании 23 октября и пересматривают взгляд на её динамику в 2026 году с учётом риторики ЦБ РФ.",
+        "source_ids": [
+          "FR_8e038eb1e2ed415f0627"
+        ]
+      },
+      {
+        "id": "core_f2",
+        "text": "Прогноз по ставке на конец 2026 года пересмотрен с 13,5% к сохранению текущего значения 14,0% до конца года; прогноз на конец 2027 года остаётся на уровне 12,0%.",
+        "source_ids": [
+          "FR_956c5cc14210f671223b",
+          "FR_a29a90219a3ae5b481e1"
+        ]
+      }
+    ],
+    "why_you": [
+      {
+        "id": "personal_w2",
+        "text": "У компании в выгрузке активны расчётно-кассовое обслуживание и лизинг, при этом кредитный флаг нулевой; расчёт по событию даёт отрицательный знак влияния по фактору ставки, а суммы и типы ставок по договорам неизвестны.",
+        "source_ids": [
+          "C_PRODUCTS",
+          "D_RATE"
+        ]
+      }
+    ],
+    "bank_view_status": "available",
+    "bank_view_items": [
+      {
+        "id": "core_b1",
+        "text": "Позиция банка (документ BANK_ORIGINAL, стр. 1, от 2026-09-11): ожидание сохранения ставки 14,0% годовых до конца 2026 года вместо прежнего прогноза 13,5%.",
+        "source_ids": [
+          "B1"
+        ]
+      },
+      {
+        "id": "core_b2",
+        "text": "Позиция банка (документ BANK_ORIGINAL, стр. 1, от 2026-09-11): прогноз по ставке на конец 2027 года остаётся на уровне 12,0% годовых.",
+        "source_ids": [
+          "B2"
+        ]
+      }
+    ],
+    "model_inference": {
+      "impact_chain": [
+        {
+          "id": "personal_i1",
+          "text": "Пересмотр прогноза в сторону сохранения ставки 14,0% до конца 2026 года означает более длительный период дорогого финансирования; для компании с активным лизингом и отрицательным чистым агрегатом расчёт даёт условное негативное влияние, при этом суммы и ставки договоров неизвестны.",
+          "source_ids": [
+            "D_RATE",
+            "FR_956c5cc14210f671223b",
+            "C_PRODUCTS",
+            "C_NET"
+          ]
+        },
+        {
+          "id": "personal_i2",
+          "text": "Ожидание паузы на ближайшем заседании означает, что изменение ставки в краткосрочной перспективе не предполагается, и последствия пересмотра носят условный характер до фактического решения ЦБ.",
+          "source_ids": [
+            "FR_8e038eb1e2ed415f0627",
+            "D_RATE"
+          ]
+        }
+      ],
+      "risks": [
+        {
+          "id": "personal_r1",
+          "text": "Более длительное сохранение высокой ключевой ставки может означать сохранение дорогого финансирования до конца 2026 года; расчётное влияние по фактору ставки для компании отрицательное, но без данных о суммах и ставках договоров масштаб не определён.",
+          "source_ids": [
+            "D_RATE",
+            "FR_956c5cc14210f671223b",
+            "C_LIMITS"
+          ]
+        }
+      ],
+      "opportunities": [
+        {
+          "id": "personal_o1",
+          "text": "Прогноз по ставке на конец 2027 года остаётся на уровне 12,0%, что при реализации может означать постепенное удешевление финансирования; это прогноз, а не свершившийся факт.",
+          "source_ids": [
+            "FR_a29a90219a3ae5b481e1",
+            "B2"
+          ]
+        }
+      ],
+      "actions_or_questions": [
+        {
+          "id": "personal_a1",
+          "text": "Какие действующие договоры финансирования (лизинг, кредиты в других банках) есть у компании и какая доля ставок в них плавающая?",
+          "source_ids": [
+            "C_PRODUCTS",
+            "C_LIMITS"
+          ]
+        },
+        {
+          "id": "personal_a2",
+          "text": "Планирует ли компания привлекать новое финансирование или рефинансировать существующее в период сохранения высокой ставки?",
+          "source_ids": [
+            "D_RATE",
+            "C_LIMITS"
+          ]
+        }
+      ],
+      "confidence": 0.5
+    },
+    "provenance_labels": {
+      "core_f1": "fact",
+      "core_f2": "fact",
+      "core_b1": "bank_view",
+      "core_b2": "bank_view",
+      "personal_w2": "ai_inference",
+      "personal_i1": "ai_inference",
+      "personal_i2": "ai_inference",
+      "personal_r1": "ai_inference",
+      "personal_o1": "ai_inference",
+      "personal_a1": "ai_inference",
+      "personal_a2": "ai_inference"
+    },
+    "relevance": 0.3383333333333334,
+    "offer": null,
+    "disclaimer": "Не является индивидуальной инвестиционной рекомендацией",
+    "trace_id": "context_pdf_review"
+  },
+  "critic": null,
+  "repairs": 1,
+  "check_history": [
+    {
+      "cycle": 0,
+      "issues": [
+        "core_f1: orphan news fragment; cite it directly in why_you or impact_chain, or omit fact",
+        "core_f2: orphan news fragment; cite it directly in why_you or impact_chain, or omit fact"
+      ]
+    },
+    {
+      "cycle": 1,
+      "issues": [
+        "personal_i2: effect differs from computed sign",
+        "core_f2: orphan news fragment; cite it directly in why_you or impact_chain, or omit fact"
+      ]
+    }
+  ],
+  "discarded_claims": [
+    {
+      "id": "personal_w1",
+      "reason": "not_personalised"
+    },
+    {
+      "id": "personal_w1",
+      "reason": "not_personalised"
+    }
+  ],
+  "context_ablation": {
+    "role_card": null,
+    "selected_news_ids": [
+      "FR_8e038eb1e2ed415f0627",
+      "FR_956c5cc14210f671223b",
+      "FR_a29a90219a3ae5b481e1"
+    ],
+    "semantic_selection_verified": false
+  },
+  "impacts": [
+    {
+      "id": "personal_i1",
+      "text": "Пересмотр прогноза в сторону сохранения ставки 14,0% до конца 2026 года означает более длительный период дорогого финансирования; для компании с активным лизингом и отрицательным чистым агрегатом расчёт даёт условное негативное влияние, при этом суммы и ставки договоров неизвестны.",
+      "source_ids": [
+        "D_RATE",
+        "FR_956c5cc14210f671223b",
+        "C_PRODUCTS",
+        "C_NET"
+      ],
+      "factor": "RATE",
+      "effect": "negative"
+    },
+    {
+      "id": "personal_i2",
+      "text": "Ожидание паузы на ближайшем заседании означает, что изменение ставки в краткосрочной перспективе не предполагается, и последствия пересмотра носят условный характер до фактического решения ЦБ.",
+      "source_ids": [
+        "FR_8e038eb1e2ed415f0627",
+        "D_RATE"
+      ],
+      "factor": "RATE",
+      "effect": "neutral"
+    }
+  ],
+  "end_to_end_seconds": 37.77047812496312,
+  "protocol_hash": "334a02a8e5fab8c59589b46d16dee5ae06c8099955e8f57d8af050494dac07c7"
+}

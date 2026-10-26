@@ -1,0 +1,25 @@
+{
+  "source": "reference/corpus/DOC-07_p1.json",
+  "source_sha256": "c351ff31fd6cf8156fb6cc15b0453d406da47808e6b2d1cd644dd94d77214b76",
+  "source_meta": {
+    "doc_id": "DOC-07",
+    "page": 1,
+    "file_hash": "aadfb015dd1cfe303f3105b2305ffb850fecf03f7ed5fb959add8b662c6e6ac0"
+  },
+  "fragments": 16,
+  "human_reviewed": 0,
+  "automatic_factor_labels": 0,
+  "roles": 6,
+  "source_truth_independently_verified": false,
+  "offsets": "Python Unicode offsets in original block text; end exclusive",
+  "content_type_options": [
+    "event",
+    "forecast",
+    "background",
+    "mixed",
+    "unknown"
+  ],
+  "annotation_instructions": "Do not guess. Keep attribution/date/negation; mark insufficient context. factors: semicolon-separated BA factor IDs. Review original PDF where text is ambiguous.",
+  "live_api_calls": 0,
+  "measured_quality_improvement": null
+}

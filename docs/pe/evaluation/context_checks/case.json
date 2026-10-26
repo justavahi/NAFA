@@ -1,0 +1,224 @@
+{
+  "ledger": {
+    "trace_id": "context_pdf_review",
+    "client_id": "PARTICIPANT_01",
+    "event_id": "DOC07_FORECAST_REVISION",
+    "documents": [
+      {
+        "id": "PUBLICATION",
+        "kind": "news",
+        "text": "Хотя в августе федеральный бюджет сведен с профицитом 0,7 трлн руб., накопленный дефицит бюджета остается 5,8 трлн руб., что существенно выше прогнозов.\nМы ожидаем сохранения паузы на заседании 23 октября: С учетом риторики ЦБ РФ мы меняем наш взгляд на динамику ключевой ставки на этот год. Если раньше мы ориентировались на ставку на уровне 13,5% на конец 2026 г., то теперь мы ожидаем ее сохранения на текущем значении 14,0% до конца года. При этом наш прогноз по ставке на конец 2027 г. остается на уровне 12,0%.",
+        "as_of": "2026-09-11",
+        "page": null,
+        "is_mock": false
+      },
+      {
+        "id": "BANK_ORIGINAL",
+        "kind": "bank",
+        "text": "Мы ожидаем сохранения паузы на заседании 23 октября: С учетом риторики ЦБ РФ мы меняем наш взгляд на динамику ключевой ставки на этот год. Если раньше мы ориентировались на ставку на уровне 13,5% на конец 2026 г., то теперь мы ожидаем ее сохранения на текущем значении 14,0% до конца года. При этом наш прогноз по ставке на конец 2027 г. остается на уровне 12,0%.",
+        "as_of": "2026-09-11",
+        "page": 1,
+        "is_mock": false
+      }
+    ],
+    "entries": [
+      {
+        "id": "N1",
+        "kind": "NEWS_FACT",
+        "source": {
+          "document_id": "PUBLICATION",
+          "start": 0,
+          "end": 516,
+          "quote": "Хотя в августе федеральный бюджет сведен с профицитом 0,7 трлн руб., накопленный дефицит бюджета остается 5,8 трлн руб., что существенно выше прогнозов.\nМы ожидаем сохранения паузы на заседании 23 октября: С учетом риторики ЦБ РФ мы меняем наш взгляд на динамику ключевой ставки на этот год. Если раньше мы ориентировались на ставку на уровне 13,5% на конец 2026 г., то теперь мы ожидаем ее сохранения на текущем значении 14,0% до конца года. При этом наш прогноз по ставке на конец 2027 г. остается на уровне 12,0%."
+        },
+        "number": null,
+        "unit": null
+      },
+      {
+        "id": "C_PRODUCTS",
+        "kind": "COMPANY_FEATURE",
+        "client_id": "PARTICIPANT_01",
+        "feature_id": "F-08",
+        "value": "Продуктовые флаги предоставленной банковской выгрузки: {\"RKO\": 1.0, \"GAR\": 0.0, \"LOA\": 0.0, \"LEA\": 1.0, \"DEP\": 0.0, \"ZPP\": 0.0, \"FACTORING\": 0.0}. Нулевой флаг не доказывает отсутствие обязательств в других банках; суммы, сроки и тип ставки не известны.",
+        "source_record_id": "participant_da:PARTICIPANT_01:F-08"
+      },
+      {
+        "id": "C_SECTOR",
+        "kind": "COMPANY_FEATURE",
+        "client_id": "PARTICIPANT_01",
+        "feature_id": "F-03",
+        "value": "Отраслевой профиль DA: SP-10; основной вид деятельности в выгрузке: Торговля оптовая неспециализированная",
+        "source_record_id": "participant_da:PARTICIPANT_01:F-03"
+      },
+      {
+        "id": "C_TYPE",
+        "kind": "COMPANY_FEATURE",
+        "client_id": "PARTICIPANT_01",
+        "feature_id": "F-10",
+        "value": "existing",
+        "source_record_id": "participant_da:PARTICIPANT_01:F-10"
+      },
+      {
+        "id": "C_COMPLETE",
+        "kind": "COMPANY_FEATURE",
+        "client_id": "PARTICIPANT_01",
+        "feature_id": "F-13",
+        "value": 1.0,
+        "source_record_id": "participant_da:PARTICIPANT_01:F-13"
+      },
+      {
+        "id": "C_NET",
+        "kind": "COMPANY_FEATURE",
+        "client_id": "PARTICIPANT_01",
+        "feature_id": "E-15",
+        "value": -0.3,
+        "source_record_id": "participant_da:PARTICIPANT_01:E-15"
+      },
+      {
+        "id": "C_EXPOSURE",
+        "kind": "COMPANY_FEATURE",
+        "client_id": "PARTICIPANT_01",
+        "feature_id": "E-14",
+        "value": 0.4833333333333334,
+        "source_record_id": "participant_da:PARTICIPANT_01:E-14"
+      },
+      {
+        "id": "C_LIMITS",
+        "kind": "COMPANY_FEATURE",
+        "client_id": "PARTICIPANT_01",
+        "feature_id": "F-13",
+        "value": "Не заданы суммы обязательств, доля плавающей ставки, сроки и графики договоров. Единицы выручки не подтверждены, выручка исключена. Неизвестный CL_TYPE не заменяется догадкой. Дата клиентских агрегатов неизвестна: не является историческим бэктестом.",
+        "source_record_id": "participant_da:PARTICIPANT_01:F-13"
+      },
+      {
+        "id": "B1",
+        "kind": "BANK_VIEW",
+        "source": {
+          "document_id": "BANK_ORIGINAL",
+          "start": 139,
+          "end": 289,
+          "quote": "Если раньше мы ориентировались на ставку на уровне 13,5% на конец 2026 г., то теперь мы ожидаем ее сохранения на текущем значении 14,0% до конца года."
+        },
+        "number": "14.0",
+        "unit": "% годовых"
+      },
+      {
+        "id": "B2",
+        "kind": "BANK_VIEW",
+        "source": {
+          "document_id": "BANK_ORIGINAL",
+          "start": 290,
+          "end": 363,
+          "quote": "При этом наш прогноз по ставке на конец 2027 г. остается на уровне 12,0%."
+        },
+        "number": "12.0",
+        "unit": "% годовых"
+      },
+      {
+        "id": "D_REL",
+        "kind": "COMPUTED_VALUE",
+        "formula_id": "FM-06",
+        "value": 0.3383333333333334,
+        "input_ids": [
+          "N1",
+          "C_EXPOSURE"
+        ],
+        "calculation_ref": "pinned_DA/FM-06; study policy: forecast_direction=+1, cred=.85, precritic=.5; amounts unknown"
+      },
+      {
+        "id": "D_CONF",
+        "kind": "COMPUTED_VALUE",
+        "formula_id": "FM-20",
+        "value": 0.5,
+        "input_ids": [
+          "N1",
+          "C_COMPLETE",
+          "C_LIMITS"
+        ],
+        "calculation_ref": "pinned_DA/FM-20; study policy: forecast_direction=+1, cred=.85, precritic=.5; amounts unknown"
+      },
+      {
+        "id": "D_RATE",
+        "kind": "COMPUTED_VALUE",
+        "formula_id": "FM-14",
+        "value": "negative",
+        "input_ids": [
+          "N1",
+          "C_NET",
+          "C_PRODUCTS"
+        ],
+        "calculation_ref": "pinned_DA/FM-14; study policy: forecast_direction=+1, cred=.85, precritic=.5; amounts unknown"
+      },
+      {
+        "id": "FR_aa6b6e906581ccec895a",
+        "kind": "NEWS_FACT",
+        "source": {
+          "document_id": "PUBLICATION",
+          "start": 0,
+          "end": 152,
+          "quote": "Хотя в августе федеральный бюджет сведен с профицитом 0,7 трлн руб., накопленный дефицит бюджета остается 5,8 трлн руб., что существенно выше прогнозов."
+        },
+        "number": null,
+        "unit": null
+      },
+      {
+        "id": "FR_8e038eb1e2ed415f0627",
+        "kind": "NEWS_FACT",
+        "source": {
+          "document_id": "PUBLICATION",
+          "start": 153,
+          "end": 291,
+          "quote": "Мы ожидаем сохранения паузы на заседании 23 октября: С учетом риторики ЦБ РФ мы меняем наш взгляд на динамику ключевой ставки на этот год."
+        },
+        "number": null,
+        "unit": null
+      },
+      {
+        "id": "FR_956c5cc14210f671223b",
+        "kind": "NEWS_FACT",
+        "source": {
+          "document_id": "PUBLICATION",
+          "start": 292,
+          "end": 442,
+          "quote": "Если раньше мы ориентировались на ставку на уровне 13,5% на конец 2026 г., то теперь мы ожидаем ее сохранения на текущем значении 14,0% до конца года."
+        },
+        "number": null,
+        "unit": null
+      },
+      {
+        "id": "FR_a29a90219a3ae5b481e1",
+        "kind": "NEWS_FACT",
+        "source": {
+          "document_id": "PUBLICATION",
+          "start": 443,
+          "end": 516,
+          "quote": "При этом наш прогноз по ставке на конец 2027 г. остается на уровне 12,0%."
+        },
+        "number": null,
+        "unit": null
+      }
+    ]
+  },
+  "event": {
+    "event_type": "ET-02",
+    "entities": [],
+    "facts": [],
+    "iota": {
+      "RATE": 1.0
+    },
+    "direction": {
+      "RATE": 1
+    },
+    "severity": 3,
+    "geo_scope": "national",
+    "horizon": "конец 2026 года",
+    "rationale": "Пересмотр прогноза банка в сторону более высокой ставки; не факт повышения текущей ставки. Последствия условны."
+  },
+  "persona": "PER-03",
+  "bank_view_status": "available",
+  "relevance_id": "D_REL",
+  "confidence_id": "D_CONF",
+  "effect_source_ids": {
+    "RATE": "D_RATE"
+  }
+}

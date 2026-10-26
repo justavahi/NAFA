@@ -1,0 +1,71 @@
+{
+  "$defs": {
+    "Claim": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "source_ids"
+      ],
+      "title": "Claim",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "confirmed_facts": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Confirmed Facts",
+      "type": "array"
+    },
+    "bank_view_items": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Bank View Items",
+      "type": "array"
+    },
+    "common_effects": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Common Effects",
+      "type": "array"
+    },
+    "unknowns": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unknowns",
+      "type": "array"
+    }
+  },
+  "required": [
+    "confirmed_facts",
+    "bank_view_items",
+    "common_effects",
+    "unknowns"
+  ],
+  "title": "EventCore",
+  "type": "object"
+}

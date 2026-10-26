@@ -1,0 +1,14 @@
+{
+  "source": "https://docs.google.com/document/d/1ly8GsI_-oPnCQWvtZ4nGevnnDP2MGYIfpn2zOUFxZ_4/mobilebasic",
+  "base_urls": ["https://changellenge.up.railway.app/v1", "https://api.alfahack-gateway26.ru/v1"],
+  "daily_shared_budget_rub": 500,
+  "prices_rub_per_token": null,
+  "models": {
+    "Gemma 4 26B A4B": "google/gemma-4-26b-a4b-it",
+    "GLM-5.3-Flash": "z-ai/glm-5.3-flash",
+    "Qwen3.6 35B A3B": "qwen/qwen3.6-35b-a3b",
+    "DeepSeek-V4.1-Flash": "deepseek/deepseek-v4.1-flash",
+    "Qwen3-VL-30B-A3B-Instruct": "qwen/qwen3-vl-30b-a3b-instruct",
+    "Kimi-K2.6": "moonshotai/kimi-k2.6"
+  }
+}

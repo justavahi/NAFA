@@ -1,0 +1,42 @@
+{
+  "independent_events": 1,
+  "independent_clients": 1,
+  "production_promoted": false,
+  "scores": {},
+  "generation": {
+    "status": "needs_fix",
+    "partial": null,
+    "issues": [
+      "personal_i2: effect differs from computed sign",
+      "personal_i2: missing effect calculation reference",
+      "personal_i2: inference cites news outside selected fragments",
+      "personal_o1: inference cites news outside selected fragments"
+    ],
+    "check_history": [
+      {
+        "cycle": 0,
+        "issues": [
+          "core_b1: critic cited unreferenced evidence",
+          "core_b2: critic cited unreferenced evidence"
+        ]
+      },
+      {
+        "cycle": 1,
+        "issues": [
+          "personal_i2: effect differs from computed sign",
+          "personal_i2: missing effect calculation reference",
+          "personal_i2: inference cites news outside selected fragments",
+          "personal_o1: inference cites news outside selected fragments"
+        ]
+      }
+    ],
+    "end_to_end_seconds": 71.49331275001168
+  },
+  "budget": {
+    "id": 1,
+    "calls": 5,
+    "tokens": 26021,
+    "reserved": 0,
+    "stopped": null
+  }
+}
