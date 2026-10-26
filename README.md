@@ -1,6 +1,9 @@
 # ♡ News-AI-Financial-Assistant ♡
 Financial assistant for AlfaBank made by *The Great New Alliance* :3
 
+# Documentation
+all explanations of business logic, architecure, etc are in docs :D
+
 # Roles ┌(;￣◇￣)┘
 |      Nickname      |        Role       |
 |--------------------|-------------------|
